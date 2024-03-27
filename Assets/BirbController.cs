@@ -21,6 +21,7 @@ public class BirbController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            Debug.Log(rb.velocity);
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
