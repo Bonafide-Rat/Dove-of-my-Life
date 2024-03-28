@@ -11,35 +11,32 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    private bool flutterUsed = false;
+    private int jumpCount = 0;
 
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (IsGrounded())
+        {
+            jumpCount = 0;
+            rb.gravityScale = 1;
+        }
+
+        if (Input.GetButtonDown("Jump") && jumpCount == 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             Debug.Log("Spacebar pressed");
-            flutterUsed = false;
+            jumpCount++;
         }
 
-        else if (Input.GetButtonDown("Jump") && !IsGrounded() && !flutterUsed)
+        if (Input.GetButtonDown("Jump") && jumpCount == 1)
         {
-            rb.velocity = new Vector2 (rb.velocity.x, jumpingPower * 0.25f);
+            rb.gravityScale = 2;
+            rb.velocity = new Vector2 (rb.velocity.x, jumpingPower);
             Debug.Log("Flutter jump triggered");
-            flutterUsed = true;
+            jumpCount++;
         }
-
-        /*
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            Debug.Log("Spacebar up");
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.25f);
-            Debug.Log("Spacebar up, velocity: " + rb.velocity);
-        }
-        */
-
 
         Flip();
     }  
