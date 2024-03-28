@@ -13,6 +13,8 @@ public class BirbController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    
+    
 
     void Update()
     {
@@ -21,7 +23,6 @@ public class BirbController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            Debug.Log(rb.velocity);
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -34,7 +35,7 @@ public class BirbController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * speed * Time.deltaTime, rb.velocity.y);
     }
 
     private bool IsGrounded()

@@ -8,11 +8,14 @@ public class Pickup_Throw : MonoBehaviour
     // Start is called before the first frame update
     public Transform pickupPoint;
     public Transform castPoint;
+    public GameObject targetreticle;
     public float pickupRange;
 
     public float throwForceUp;
     public float throwForceForward;
     public float rotationSpeed;
+
+    public bool easyThrowMode = true;
 
     private GameObject grabbedObject;
     private Rigidbody2D birbRB;
@@ -22,6 +25,7 @@ public class Pickup_Throw : MonoBehaviour
     {
         layerIndex = LayerMask.NameToLayer("Object");
         birbRB = GetComponent<Rigidbody2D>();
+        targetreticle.SetActive(false);
     }
 
     // Update is called once per frame
@@ -44,22 +48,45 @@ public class Pickup_Throw : MonoBehaviour
             
         }
         
-        else if (grabbedObject !=null)
+        else if (grabbedObject !=null && easyThrowMode)
         {
-            if (Input.GetButtonDown("Fire1"))
+            Easythrow();
+        }
+        
+        else if (grabbedObject !=null && !easyThrowMode)
+        {
+            if (Input.GetButtonDown("Fire1") && !targetreticle.activeSelf )
             {
+                targetreticle.SetActive(true);
+                Debug.Log(targetreticle.activeSelf);
+            }
+            
+            else if (Input.GetButtonDown("Fire1") && targetreticle.activeSelf)
+            {
+                Vector2 throwDirection = targetreticle.transform.position - transform.position;
+                targetreticle.SetActive(false);
                 grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
                 grabbedObject.GetComponent<Collider2D>().isTrigger = false;
                 grabbedObject.transform.SetParent(null);
-                grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(birbRB.velocity.x * throwForceForward, birbRB.velocity.y + throwForceUp);
+                grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(throwDirection.x * throwForceForward, throwDirection.y + throwForceUp);
                 grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += rotationSpeed;
                 grabbedObject = null;
             }
         }
-        
-        
-        
         //Debug.DrawRay(castPoint.position, transform.right, Color.red, pickupRange);
+    }
+    
+    private void Easythrow()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
+            grabbedObject.GetComponent<Collider2D>().isTrigger = false;
+            grabbedObject.transform.SetParent(null);
+            grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(birbRB.velocity.x * throwForceForward, birbRB.velocity.y + throwForceUp);
+            grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += rotationSpeed;
+            grabbedObject = null;
+        }
     }
 
     
