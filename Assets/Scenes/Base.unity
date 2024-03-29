@@ -941,7 +941,7 @@ MonoBehaviour:
   targetreticle: {fileID: 1958510602}
   pickupRange: 0.23
   throwForceUp: 4
-  throwForceForward: 10
+  throwForceForward: 2
   rotationSpeed: -100
   easyThrowMode: 0
 --- !u!1 &1388662202
@@ -1159,7 +1159,7 @@ Transform:
   m_GameObject: {fileID: 1958510602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.948, y: 0.385, z: 0}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

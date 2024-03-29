@@ -21,11 +21,14 @@ public class Pickup_Throw : MonoBehaviour
     private Rigidbody2D birbRB;
 
     private int layerIndex;
+    private bool aiming;
+    private Vector3 targetResetPos;
     void Start()
     {
         layerIndex = LayerMask.NameToLayer("Object");
         birbRB = GetComponent<Rigidbody2D>();
         targetreticle.SetActive(false);
+        targetResetPos = targetreticle.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -58,6 +61,8 @@ public class Pickup_Throw : MonoBehaviour
             if (Input.GetButtonDown("Fire1") && !targetreticle.activeSelf )
             {
                 targetreticle.SetActive(true);
+                aiming = true;
+                
             }
             
             else if (Input.GetButtonDown("Fire1") && targetreticle.activeSelf)
@@ -69,8 +74,15 @@ public class Pickup_Throw : MonoBehaviour
                 grabbedObject.transform.SetParent(null);
                 grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(throwDirection.x * throwForceForward, throwDirection.y + throwForceUp);
                 grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += rotationSpeed;
+                aiming = false;
+                targetreticle.transform.localPosition = targetResetPos;
                 grabbedObject = null;
             }
+        }
+
+        if (aiming)
+        {
+            targetreticle.transform.RotateAround(transform.position,Vector3.forward,  50f * Time.deltaTime);
         }
         //Debug.DrawRay(castPoint.position, transform.right, Color.red, pickupRange);
     }
