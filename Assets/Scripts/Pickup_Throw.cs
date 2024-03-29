@@ -58,7 +58,6 @@ public class Pickup_Throw : MonoBehaviour
             if (Input.GetButtonDown("Fire1") && !targetreticle.activeSelf )
             {
                 targetreticle.SetActive(true);
-                Debug.Log(targetreticle.activeSelf);
             }
             
             else if (Input.GetButtonDown("Fire1") && targetreticle.activeSelf)
