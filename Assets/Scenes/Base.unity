@@ -940,9 +940,10 @@ MonoBehaviour:
   castPoint: {fileID: 1388662203}
   targetreticle: {fileID: 1958510602}
   pickupRange: 0.23
-  throwForceUp: 4
-  throwForceForward: 2
-  rotationSpeed: -100
+  throwForceUp: 1
+  throwForceForward: 10
+  ringSpin: -100
+  targetMoveSpeed: 35
   easyThrowMode: 0
 --- !u!1 &1388662202
 GameObject:
@@ -1159,7 +1160,7 @@ Transform:
   m_GameObject: {fileID: 1958510602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalPosition: {x: 1.25, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1205,7 +1206,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
   m_Color: {r: 0.17422956, g: 1, b: 0.028000057, a: 1}
   m_FlipX: 0

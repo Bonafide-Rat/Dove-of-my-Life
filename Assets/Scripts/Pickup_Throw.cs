@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Pickup_Throw : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class Pickup_Throw : MonoBehaviour
 
     public float throwForceUp;
     public float throwForceForward;
-    public float rotationSpeed;
+    [FormerlySerializedAs("rotationSpeed")] public float ringSpin;
+    [FormerlySerializedAs("rotationSpeed")] public float targetMoveSpeed;
 
     public bool easyThrowMode = true;
 
@@ -73,7 +75,7 @@ public class Pickup_Throw : MonoBehaviour
                 grabbedObject.GetComponent<Collider2D>().isTrigger = false;
                 grabbedObject.transform.SetParent(null);
                 grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(throwDirection.x * throwForceForward, throwDirection.y + throwForceUp);
-                grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += rotationSpeed;
+                grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
                 aiming = false;
                 targetreticle.transform.localPosition = targetResetPos;
                 grabbedObject = null;
@@ -82,7 +84,17 @@ public class Pickup_Throw : MonoBehaviour
 
         if (aiming)
         {
-            targetreticle.transform.RotateAround(transform.position,Vector3.forward,  50f * Time.deltaTime);
+            if (targetreticle.transform.localPosition.y >= 1)
+            {
+                targetMoveSpeed *= -1;
+            }
+            
+            if (targetreticle.transform.localPosition.y <= -0.65)
+            {
+                
+                targetMoveSpeed *= -1;
+            }
+            targetreticle.transform.RotateAround(transform.position,Vector3.forward,targetMoveSpeed * Time.deltaTime);
         }
         //Debug.DrawRay(castPoint.position, transform.right, Color.red, pickupRange);
     }
@@ -95,7 +107,7 @@ public class Pickup_Throw : MonoBehaviour
             grabbedObject.GetComponent<Collider2D>().isTrigger = false;
             grabbedObject.transform.SetParent(null);
             grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(birbRB.velocity.x * throwForceForward, birbRB.velocity.y + throwForceUp);
-            grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += rotationSpeed;
+            grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
             grabbedObject = null;
         }
     }
