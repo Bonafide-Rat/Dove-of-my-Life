@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && jumpCount == 0)
         {
+            rb.gravityScale = 2;
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             Debug.Log("Spacebar pressed");
             jumpCount++;
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && jumpCount == 1)
         {
-            rb.gravityScale = 2;
+            rb.gravityScale = 3;
             rb.velocity = new Vector2 (rb.velocity.x, jumpingPower);
             Debug.Log("Flutter jump triggered");
             jumpCount++;
