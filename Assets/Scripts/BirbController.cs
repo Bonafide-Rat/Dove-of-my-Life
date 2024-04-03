@@ -1,41 +1,49 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BirbController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private float horizontal;
-    public float speed = 8f;
-    public float jumpingPower = 16f;
+    private float speed = 8f;
+    private float jumpingPower = 8f;
     private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    
-    
+
+    private int jumpCount = 0;
 
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (IsGrounded())
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            jumpCount = 0;
+            rb.gravityScale = 1;
         }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        if (Input.GetButtonDown("Jump") && jumpCount == 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            Debug.Log("Spacebar pressed");
+            jumpCount++;
+        }
+
+        if (Input.GetButtonDown("Jump") && jumpCount == 1)
+        {
+            rb.gravityScale = 2;
+            rb.velocity = new Vector2 (rb.velocity.x, jumpingPower);
+            Debug.Log("Flutter jump triggered");
+            jumpCount++;
         }
 
         Flip();
-    }
+    }  
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed * Time.deltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
     private bool IsGrounded()
