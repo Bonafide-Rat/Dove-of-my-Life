@@ -755,6 +755,7 @@ GameObject:
   - component: {fileID: 1129869998}
   - component: {fileID: 1129869999}
   - component: {fileID: 1129870000}
+  - component: {fileID: 1129870001}
   m_Layer: 0
   m_Name: Birb
   m_TagString: Untagged
@@ -917,8 +918,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418b0d3e5597ef44e8469983933fd80b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 350
-  jumpingPower: 10
   rb: {fileID: 1129869997}
   groundCheck: {fileID: 1004824553}
   groundLayer:
@@ -945,6 +944,22 @@ MonoBehaviour:
   ringSpin: -100
   targetMoveSpeed: 35
   easyThrowMode: 0
+--- !u!114 &1129870001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129869993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca997a965a9a3d144a0538cc1e5bdb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numFollowers: 12
+  baseFollower: {fileID: 2225453488117378758, guid: 29f353dc3a0ac524396c1b7e8e419628, type: 3}
+  savePosTime: 0.01
+  lerpTime: 0.5
 --- !u!1 &1388662202
 GameObject:
   m_ObjectHideFlags: 0
