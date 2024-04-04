@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 1129870001}
   m_Layer: 0
   m_Name: Birb
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -959,7 +959,8 @@ MonoBehaviour:
   numFollowers: 12
   baseFollower: {fileID: 2225453488117378758, guid: 29f353dc3a0ac524396c1b7e8e419628, type: 3}
   savePosTime: 0.01
-  lerpTime: 0.5
+  lerpTime: 0.1
+  followers: []
 --- !u!1 &1388662202
 GameObject:
   m_ObjectHideFlags: 0
