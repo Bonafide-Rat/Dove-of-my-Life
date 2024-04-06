@@ -124,12 +124,9 @@ public class PlayerController : MonoBehaviour
             lastJumpTime = Time.time;
         }
 
-        if (Input.GetButtonUp("Jump"))
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
         {
-            if (rb.velocity.y > 0)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -jumpEndEarlyGravity);
-            }
+            rb.gravityScale = jumpEndEarlyGravity;
 
             jumpHeld = false;
         }
@@ -146,7 +143,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Regular Jump Pressed!");
                 break;
             case 2: // Flutter Jump
-                rb.gravityScale = 4;
+                rb.gravityScale = 3;
                 Debug.Log("Flutter jump pressed!");
                 break;
         }
