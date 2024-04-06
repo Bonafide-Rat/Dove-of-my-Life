@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private float coyoteTime;
     private float jumpBuffer;
     private float lastJumpTime;
+    private bool jumpHeld = false;
+    private float airDeceleration;
     #endregion
 
     // Assign values from stats script
@@ -41,7 +43,8 @@ public class PlayerController : MonoBehaviour
 
         // Jumping variables:
         coyoteTime = stats.CoyoteTime;
-        jumpBuffer = stats.JumpBuffer;  
+        jumpBuffer = stats.JumpBuffer;
+        airDeceleration = stats.AirDeceleration;
     }
 
     void Update()
@@ -57,11 +60,12 @@ public class PlayerController : MonoBehaviour
         HandleGravity();
     }
 
-    #region Player Movement:
+    #region Player Movement
     private void getInput()
     {
         movementInput = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y);
-        // Record the time when jump button is pressed
+        
+        // Record the time when jump button is pressed for the jump buffer
         if (Input.GetButtonDown("Jump"))
         {
             lastJumpTime = Time.time;
@@ -70,26 +74,27 @@ public class PlayerController : MonoBehaviour
 
     private void handleHorizontalMovement()
     {
-        // Handle horizontal movement with acceleration and deceleration.
-        float targetSpeed = movementInput.x * speed;  // Desired speed based on input.
-        // Interpolate currentSpeed towards targetSpeed based on acceleration or deceleration rates.
+        // Check if there is horizontal movement input.
         if (Mathf.Abs(movementInput.x) > 0.01f)
         {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
+            // If there is input, move towards the target speed using the specified acceleration.
+            currentSpeed = Mathf.MoveTowards(currentSpeed, movementInput.x * speed, acceleration * Time.fixedDeltaTime);
         }
         else
         {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, 0, groundDeceleration * Time.fixedDeltaTime);
+            // If there is no input, decelerate towards 0 using either ground or air deceleration.
+            float deceleration = IsGrounded() ? groundDeceleration : airDeceleration;
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0, deceleration * Time.fixedDeltaTime);
         }
 
+        // Apply the calculated horizontal speed and maintain the current vertical speed.
         rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
     }
 
     #endregion
 
     #region Jumping Logic
-    
-    private bool jumpHeld = false;
+
     private void handleJump()
     {
         birdGrounded = IsGrounded();
@@ -126,10 +131,10 @@ public class PlayerController : MonoBehaviour
         switch (jumpType)
         {
             case 1: // Standard Jump
-                rb.gravityScale = 2;
+                //rb.gravityScale = 2;
                 break;
             case 2: // Flutter Jump
-                rb.gravityScale = 4;
+                //rb.gravityScale = 4;
                 break;
         }
         jumpCount = jumpType;
