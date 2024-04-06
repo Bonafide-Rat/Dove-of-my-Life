@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private float lastJumpTime;
     private bool jumpHeld = false;
     private float airDeceleration;
+    private float jumpEndEarlyGravity;
+    private float fallAcceleration;
     #endregion
 
     // Assign values from stats script
@@ -41,10 +43,12 @@ public class PlayerController : MonoBehaviour
         acceleration = stats.Acceleration;
         groundDeceleration = stats.GroundDeceleration;
 
-        // Jumping variables:
+        // Jumping & airtime variables:
         coyoteTime = stats.CoyoteTime;
         jumpBuffer = stats.JumpBuffer;
         airDeceleration = stats.AirDeceleration;
+        fallAcceleration = stats.FallAcceleration;
+        jumpEndEarlyGravity = stats.JumpEndEarlyGravityModifier;
     }
 
     void Update()
@@ -98,29 +102,36 @@ public class PlayerController : MonoBehaviour
     private void handleJump()
     {
         birdGrounded = IsGrounded();
+        bool jumpButtonPressed = Input.GetButtonDown("Jump");
 
         if (birdGrounded)
         {
             lastGroundedTime = Time.time;
-            rb.gravityScale = 1;
-            jumpCount = 0; // Reset jumpCount when grounded
-            jumpHeld = false;
-
-            // Check for buffered jump input
-            if (Time.time - lastJumpTime <= jumpBuffer)
+            if (jumpButtonPressed || (Time.time - lastJumpTime <= jumpBuffer))
             {
                 PerformJump(1);
+                jumpHeld = true;
             }
         }
-        else if (Time.time - lastGroundedTime > coyoteTime)
-        {
-            jumpCount = Mathf.Max(1, jumpCount);
-        }
-
-        // Normal jump input check moved here to avoid duplicating PerformJump calls
-        if (!birdGrounded && Input.GetButtonDown("Jump") && jumpCount < 2 && (Time.time - lastGroundedTime <= coyoteTime))
+        else if (!birdGrounded && jumpButtonPressed && jumpCount < 2 && (Time.time - lastGroundedTime <= coyoteTime || Time.time - lastJumpTime <= jumpBuffer))
         {
             PerformJump(jumpCount + 1);
+            jumpHeld = true;
+        }
+
+        if (jumpButtonPressed) // For jump buffer
+        {
+            lastJumpTime = Time.time;
+        }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            if (rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -jumpEndEarlyGravity);
+            }
+
+            jumpHeld = false;
         }
     }
 
@@ -131,10 +142,12 @@ public class PlayerController : MonoBehaviour
         switch (jumpType)
         {
             case 1: // Standard Jump
-                //rb.gravityScale = 2;
+                rb.gravityScale = 1;
+                Debug.Log("Regular Jump Pressed!");
                 break;
             case 2: // Flutter Jump
-                //rb.gravityScale = 4;
+                rb.gravityScale = 4;
+                Debug.Log("Flutter jump pressed!");
                 break;
         }
         jumpCount = jumpType;
@@ -153,7 +166,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             // Calculate in-air gravity.
-            var inAirGravity = stats.FallAcceleration;
+            float inAirGravity = fallAcceleration;
 
             // Check if the jump has ended early (the player has released the jump button before reaching the apex of the jump).
             if ((!jumpHeld || jumpCount > 0) && rb.velocity.y > 0)
