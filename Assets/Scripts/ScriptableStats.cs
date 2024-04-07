@@ -9,10 +9,10 @@ namespace TarodevController
         public LayerMask PlayerLayer;
 
         [Header("MOVEMENT")] [Tooltip("The top horizontal movement speed")]
-        public float MaxSpeed = 14;
+        public float MaxSpeed = 3;
 
         [Tooltip("The player's capacity to gain horizontal speed")]
-        public float Acceleration = 120;
+        public float Acceleration = 150;
 
         [Tooltip("The pace at which the player comes to a stop")]
         public float GroundDeceleration = 60;

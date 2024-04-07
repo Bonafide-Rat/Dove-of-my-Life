@@ -169,7 +169,8 @@ GameObject:
   - component: {fileID: 496037018}
   - component: {fileID: 496037019}
   - component: {fileID: 496037015}
-  m_Layer: 0
+  - component: {fileID: 496037020}
+  m_Layer: 7
   m_Name: pigeon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,6 +325,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 3.1500006, y: 2.4999998}
   m_Direction: 0
+--- !u!114 &496037020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496037014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca997a965a9a3d144a0538cc1e5bdb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numFollowers: 2
+  baseFollower: {fileID: 2225453488117378758, guid: 29f353dc3a0ac524396c1b7e8e419628, type: 3}
+  lerpTime: 0.5
+  followers: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +352,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -416,6 +434,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f48673be1f03cf4e8a8b509a7d8faa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 496037017}
 --- !u!1 &689131797
 GameObject:
   m_ObjectHideFlags: 0
