@@ -9,7 +9,7 @@ public class BirdFollowers : MonoBehaviour
     
     public float lerpTime = 0.5f;
     public List<GameObject> followers = new List<GameObject>();
-    private bool doMoveFollowers = false;
+    //private bool doMoveFollowers = false;
     // Start is called before the first frame update
     void Start()
     {
