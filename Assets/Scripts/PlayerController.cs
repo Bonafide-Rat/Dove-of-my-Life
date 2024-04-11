@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private float jumpEndEarlyGravity;
     private float fallAcceleration;
     private bool isGliding = false;
+    private bool shiftWasPressed = false;
     #endregion
 
     // Assign values from stats script
@@ -74,15 +75,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             lastJumpTime = Time.time;
+            isGliding = false;
         }
 
-        // Start gliding when 'Shift' is pressed, but not during the initial jump
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !birdGrounded && rb.velocity.y <= 0)
+        bool shiftPressed = Input.GetKeyDown(KeyCode.LeftShift);
+
+        // Toggle gliding on Shift press (only if not grounded to prevent toggling while walking)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !birdGrounded)
         {
-            isGliding = true;
+            isGliding = !isGliding; // Toggle gliding state
         }
-        // Stop gliding when 'Shift' is released or other conditions are met
-        if (Input.GetKeyUp(KeyCode.LeftShift) || birdGrounded)
+
+        // Optionally, reset gliding when grounded or under other conditions
+        if (birdGrounded)
         {
             isGliding = false;
         }
@@ -169,6 +174,7 @@ public class PlayerController : MonoBehaviour
     #region Gravity
     private void HandleGravity()
     {
+        // Case 1 - Gravity when grounded:
         if (birdGrounded && rb.velocity.y <= 0f)
         {
             // When grounded and not moving upwards, apply a grounding force to keep the player on the ground.
@@ -177,13 +183,13 @@ public class PlayerController : MonoBehaviour
             // Reset gravity scale once grounded
             rb.gravityScale = 1;
         }
+        // Case 2 - Gravity when gliding:
         else if (isGliding)
         {
-            // Apply gliding fall speed limit;
-            float glideFallSpeed = fallAcceleration / 4;
-            rb.gravityScale = 0;
-            Debug.Log("Glide fall speed applied");
+            rb.gravityScale = 0.1f;
+            Debug.Log("Glide gravity applied");
         }
+        // Case 3 - Gravity when jump is released early (short jumps):
         else
         {
             // Calculate in-air gravity.
