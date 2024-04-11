@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Regular Jump Pressed!");
                 break;
             case 2: // Flutter Jump
-                rb.gravityScale = 2;
+                rb.gravityScale = 1;
                 Debug.Log("Flutter jump pressed!");
                 break;
         }
@@ -166,9 +166,10 @@ public class PlayerController : MonoBehaviour
             float inAirGravity = fallAcceleration;
 
             // Check if the jump has ended early (the player has released the jump button before reaching the apex of the jump).
-            if ((!jumpHeld || jumpCount > 0) && rb.velocity.y > 0)
+            if ((!jumpHeld && jumpCount > 0) && rb.velocity.y > 0)
             {
                 inAirGravity *= stats.JumpEndEarlyGravityModifier;
+                Debug.Log("inAirGravity/fallAccel changed!");
             }
 
             // Apply gravity towards the max fall speed.
