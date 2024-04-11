@@ -36,11 +36,11 @@ public class Pickup_Throw : MonoBehaviour
             
             else if (Input.GetButtonDown("Fire1") && targetreticle.activeSelf)
             {
-                Vector2 throwDirection = targetreticle.transform.localPosition - transform.position;
+                Vector2 throwDirection = targetreticle.transform.position - transform.position;
                 targetreticle.SetActive(false);
                 grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
                 grabbedObject.GetComponent<Collider2D>().isTrigger = false;
-                grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(throwDirection.x * throwForceForward, throwDirection.y + throwForceUp);
+                grabbedObject.GetComponent<Rigidbody2D>().velocity = throwDirection * throwForceForward;
                 grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
                 aiming = false;
                 targetreticle.transform.localPosition = targetResetPos;

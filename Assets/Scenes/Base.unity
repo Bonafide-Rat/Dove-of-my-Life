@@ -1298,7 +1298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetreticle: {fileID: 1958510602}
   throwForceUp: 1
-  throwForceForward: 1
+  throwForceForward: 10
   ringSpin: -100
   targetMoveSpeed: 55
 --- !u!114 &1129870001
