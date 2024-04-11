@@ -187,10 +187,10 @@ public class PlayerController : MonoBehaviour
         // Case 2 - Gravity when gliding:
         else if (isGliding)
         {
-            // Only apply gliding gravity scale when DESCENDING - preventing players from rocketing upwards with jump + glide
+            // Only apply gliding fall speed when DESCENDING
             if (rb.velocity.y <= 0f)
             {
-                rb.gravityScale = 0.1f;
+                rb.velocity = new Vector2(rb.velocity.x, -stats.GlideFallSpeed);
                 Debug.Log("Glide gravity applied");
             } else {
                 // Does not allow players to apply glide effect when ascending.
