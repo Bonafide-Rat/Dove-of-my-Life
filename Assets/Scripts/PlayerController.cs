@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private float airDeceleration;
     private float jumpEndEarlyGravity;
     private float fallAcceleration;
+    private bool isGliding = false;
     #endregion
 
     // Assign values from stats script
@@ -74,6 +75,18 @@ public class PlayerController : MonoBehaviour
         {
             lastJumpTime = Time.time;
         }
+
+        // Start gliding when 'Shift' is pressed, but not during the initial jump
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !birdGrounded && rb.velocity.y <= 0)
+        {
+            isGliding = true;
+        }
+        // Stop gliding when 'Shift' is released or other conditions are met
+        if (Input.GetKeyUp(KeyCode.LeftShift) || birdGrounded)
+        {
+            isGliding = false;
+        }
+
     }
 
     private void handleHorizontalMovement()
@@ -111,6 +124,7 @@ public class PlayerController : MonoBehaviour
             {
                 PerformJump(1);
                 jumpHeld = true;
+                isGliding = false;
             }
         }
         else if (!birdGrounded && jumpButtonPressed && jumpCount < 2 && (Time.time - lastGroundedTime <= coyoteTime || Time.time - lastJumpTime <= jumpBuffer))
@@ -142,9 +156,9 @@ public class PlayerController : MonoBehaviour
                 rb.gravityScale = 1;
                 Debug.Log("Regular Jump Pressed!");
                 break;
-            case 2: // Flutter Jump
+            case 2: // Double jump
                 rb.gravityScale = 1;
-                Debug.Log("Flutter jump pressed!");
+                Debug.Log("Double jump pressed!");
                 break;
         }
         jumpCount = jumpType;
@@ -159,6 +173,16 @@ public class PlayerController : MonoBehaviour
         {
             // When grounded and not moving upwards, apply a grounding force to keep the player on the ground.
             rb.velocity = new Vector2(rb.velocity.x, stats.GroundingForce);
+
+            // Reset gravity scale once grounded
+            rb.gravityScale = 1;
+        }
+        else if (isGliding)
+        {
+            // Apply gliding fall speed limit;
+            float glideFallSpeed = fallAcceleration / 4;
+            rb.gravityScale = 0;
+            Debug.Log("Glide fall speed applied");
         }
         else
         {
@@ -169,7 +193,7 @@ public class PlayerController : MonoBehaviour
             if ((!jumpHeld && jumpCount > 0) && rb.velocity.y > 0)
             {
                 inAirGravity *= stats.JumpEndEarlyGravityModifier;
-                Debug.Log("inAirGravity/fallAccel changed!");
+                // Debug.Log("inAirGravity/fallAccel changed!");
             }
 
             // Apply gravity towards the max fall speed.
