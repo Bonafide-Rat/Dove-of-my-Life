@@ -140,11 +140,11 @@ public class PlayerController : MonoBehaviour
         {
             case 1: // Standard Jump
                 rb.gravityScale = 1;
-                Debug.Log("Regular Jump Pressed!");
+                //Debug.Log("Regular Jump Pressed!");
                 break;
             case 2: // Flutter Jump
                 rb.gravityScale = 2;
-                Debug.Log("Flutter jump pressed!");
+                //Debug.Log("Flutter jump pressed!");
                 break;
         }
         jumpCount = jumpType;
