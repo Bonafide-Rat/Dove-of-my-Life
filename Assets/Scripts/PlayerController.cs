@@ -167,6 +167,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
         jumpCount = jumpType;
+        isGliding = false;
     }
 
     #endregion
@@ -186,20 +187,25 @@ public class PlayerController : MonoBehaviour
         // Case 2 - Gravity when gliding:
         else if (isGliding)
         {
-            rb.gravityScale = 0.1f;
-            Debug.Log("Glide gravity applied");
+            // Only apply gliding gravity scale when DESCENDING - preventing players from rocketing upwards with jump + glide
+            if (rb.velocity.y <= 0f)
+            {
+                rb.gravityScale = 0.1f;
+                Debug.Log("Glide gravity applied");
+            } else {
+                // Does not allow players to apply glide effect when ascending.
+                isGliding = false;
+            }
         }
         // Case 3 - Gravity when jump is released early (short jumps):
         else
         {
-            // Calculate in-air gravity.
             float inAirGravity = fallAcceleration;
 
             // Check if the jump has ended early (the player has released the jump button before reaching the apex of the jump).
             if ((!jumpHeld && jumpCount > 0) && rb.velocity.y > 0)
             {
                 inAirGravity *= stats.JumpEndEarlyGravityModifier;
-                // Debug.Log("inAirGravity/fallAccel changed!");
             }
 
             // Apply gravity towards the max fall speed.
