@@ -12,6 +12,7 @@ public class FollowerScript : MonoBehaviour
     void Start()
     {
         GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        GetComponent<Collider2D>().enabled = false;
         mainScript = GameObject.FindWithTag("Player").GetComponent<BirdFollowers>();
         followers = BirdFollowers.followers;
         myIndex = followers.IndexOf(gameObject);

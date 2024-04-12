@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
         if (birdGrounded)
         {
             lastGroundedTime = Time.time;
+            //This code: (Time.time - lastJumpTime <= jumpBuffer) causes player to Jump when game is started. 
             if (jumpButtonPressed || (Time.time - lastJumpTime <= jumpBuffer))
             {
                 PerformJump(1);
@@ -159,11 +160,11 @@ public class PlayerController : MonoBehaviour
         {
             case 1: // Standard Jump
                 rb.gravityScale = 1;
-                Debug.Log("Regular Jump Pressed!");
+                //Debug.Log("Regular Jump Pressed!");
                 break;
             case 2: // Double jump
                 rb.gravityScale = 1;
-                Debug.Log("Double jump pressed!");
+                //Debug.Log("Double jump pressed!");
                 break;
         }
         jumpCount = jumpType;

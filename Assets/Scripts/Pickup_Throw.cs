@@ -39,7 +39,7 @@ public class Pickup_Throw : MonoBehaviour
                 Vector2 throwDirection = targetreticle.transform.position - transform.position;
                 targetreticle.SetActive(false);
                 grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
-                grabbedObject.GetComponent<Collider2D>().isTrigger = false;
+                grabbedObject.GetComponent<Collider2D>().enabled = true;
                 grabbedObject.GetComponent<Rigidbody2D>().velocity = throwDirection * throwForceForward;
                 grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
                 aiming = false;
@@ -47,9 +47,8 @@ public class Pickup_Throw : MonoBehaviour
                 BirdFollowers.followers.RemoveAt(0);
                 grabbedObject = null;
             }
-            
-        if (aiming)
-        {
+
+            if (!aiming) return;
             if (targetreticle.transform.localPosition.y >= 1)
             {
                 targetMoveSpeed *= -1;
@@ -61,20 +60,17 @@ public class Pickup_Throw : MonoBehaviour
                 targetMoveSpeed *= -1;
             }
             targetreticle.transform.RotateAround(transform.position,Vector3.forward,targetMoveSpeed * Time.deltaTime);
-        }
-        
+
     }
     
     private void Easythrow()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
-            grabbedObject.GetComponent<Collider2D>().isTrigger = false;
-            grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(birbRB.velocity.x * throwForceForward, birbRB.velocity.y + throwForceUp);
-            grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
-            grabbedObject = null;
-        }
+        if (!Input.GetButtonDown("Fire1")) return;
+        grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        grabbedObject.GetComponent<Collider2D>().isTrigger = false;
+        grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(birbRB.velocity.x * throwForceForward, birbRB.velocity.y + throwForceUp);
+        grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
+        grabbedObject = null;
     }
 
     
