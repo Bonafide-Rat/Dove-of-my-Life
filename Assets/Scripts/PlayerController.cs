@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     private float airDeceleration;
     private float jumpEndEarlyGravity;
     private float fallAcceleration;
+    private bool isGliding = false;
+    private bool shiftWasPressed = false;
     #endregion
 
     // Assign values from stats script
@@ -73,7 +75,23 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             lastJumpTime = Time.time;
+            isGliding = false;
         }
+
+        bool shiftPressed = Input.GetKeyDown(KeyCode.LeftShift);
+
+        // Toggle gliding on Shift press (only if not grounded to prevent toggling while walking)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !birdGrounded)
+        {
+            isGliding = !isGliding; // Toggle gliding state
+        }
+
+        // Optionally, reset gliding when grounded or under other conditions
+        if (birdGrounded)
+        {
+            isGliding = false;
+        }
+
     }
 
     private void handleHorizontalMovement()
@@ -111,6 +129,7 @@ public class PlayerController : MonoBehaviour
             {
                 PerformJump(1);
                 jumpHeld = true;
+                isGliding = false;
             }
         }
         else if (!birdGrounded && jumpButtonPressed && jumpCount < 2 && (Time.time - lastGroundedTime <= coyoteTime || Time.time - lastJumpTime <= jumpBuffer))
@@ -140,14 +159,15 @@ public class PlayerController : MonoBehaviour
         {
             case 1: // Standard Jump
                 rb.gravityScale = 1;
-                //Debug.Log("Regular Jump Pressed!");
+                Debug.Log("Regular Jump Pressed!");
                 break;
-            case 2: // Flutter Jump
-                rb.gravityScale = 2;
-                //Debug.Log("Flutter jump pressed!");
+            case 2: // Double jump
+                rb.gravityScale = 1;
+                Debug.Log("Double jump pressed!");
                 break;
         }
         jumpCount = jumpType;
+        isGliding = false;
     }
 
     #endregion
@@ -155,18 +175,35 @@ public class PlayerController : MonoBehaviour
     #region Gravity
     private void HandleGravity()
     {
+        // Case 1 - Gravity when grounded:
         if (birdGrounded && rb.velocity.y <= 0f)
         {
             // When grounded and not moving upwards, apply a grounding force to keep the player on the ground.
             rb.velocity = new Vector2(rb.velocity.x, stats.GroundingForce);
+
+            // Reset gravity scale once grounded
+            rb.gravityScale = 1;
         }
+        // Case 2 - Gravity when gliding:
+        else if (isGliding)
+        {
+            // Only apply gliding fall speed when DESCENDING
+            if (rb.velocity.y <= 0f)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -stats.GlideFallSpeed);
+                Debug.Log("Glide gravity applied");
+            } else {
+                // Does not allow players to apply glide effect when ascending.
+                isGliding = false;
+            }
+        }
+        // Case 3 - Gravity when jump is released early (short jumps):
         else
         {
-            // Calculate in-air gravity.
             float inAirGravity = fallAcceleration;
 
             // Check if the jump has ended early (the player has released the jump button before reaching the apex of the jump).
-            if ((!jumpHeld || jumpCount > 0) && rb.velocity.y > 0)
+            if ((!jumpHeld && jumpCount > 0) && rb.velocity.y > 0)
             {
                 inAirGravity *= stats.JumpEndEarlyGravityModifier;
             }
