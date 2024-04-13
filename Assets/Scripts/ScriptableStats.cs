@@ -32,6 +32,9 @@ namespace TarodevController
         [Tooltip("The maximum vertical movement speed")]
         public float MaxFallSpeed = 40;
 
+        [Tooltip("The glide fall speed")]
+        public float GlideFallSpeed = 10;
+
         [Tooltip("The player's capacity to gain fall speed. a.k.a. In Air Gravity")]
         public float FallAcceleration = 110;
 
