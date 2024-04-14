@@ -14,6 +14,7 @@ public class Pickup_Throw : MonoBehaviour
     [FormerlySerializedAs("rotationSpeed")] public float targetMoveSpeed;
 
     private GameObject grabbedObject;
+    private Rigidbody2D grabbedObjectRB;
     private Rigidbody2D birbRB;
     private bool aiming;
     private Vector3 targetResetPos;
@@ -30,6 +31,7 @@ public class Pickup_Throw : MonoBehaviour
             if (Input.GetButtonDown("Fire1") && !targetreticle.activeSelf && BirdFollowers.followers.Count > 0)
             {
                 grabbedObject = BirdFollowers.followers[0];
+                grabbedObjectRB = grabbedObject.GetComponent<Rigidbody2D>();
                 targetreticle.SetActive(true);
                 aiming = true;
             }
@@ -38,10 +40,10 @@ public class Pickup_Throw : MonoBehaviour
             {
                 Vector2 throwDirection = targetreticle.transform.position - transform.position;
                 targetreticle.SetActive(false);
-                grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
-                grabbedObject.GetComponent<Collider2D>().enabled = true;
-                grabbedObject.GetComponent<Rigidbody2D>().velocity = throwDirection * throwForceForward;
-                grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
+                grabbedObjectRB.isKinematic = false;
+                //grabbedObjectRB.enabled = true; - Not sure what this is meant to do
+                grabbedObjectRB.velocity = throwDirection * throwForceForward;
+                grabbedObjectRB.angularVelocity += ringSpin;
                 aiming = false;
                 targetreticle.transform.localPosition = targetResetPos;
                 BirdFollowers.followers.RemoveAt(0);
