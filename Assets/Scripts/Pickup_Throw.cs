@@ -67,7 +67,8 @@ public class PickupThrow : MonoBehaviour
         if (!Input.GetButtonDown("Fire1")) return;
         grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
         grabbedObject.GetComponent<Collider2D>().isTrigger = false;
-        grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(birbRB.velocity.x * throwForceForward, birbRB.velocity.y + throwForceUp);
+        var velocity = birbRB.velocity;
+        grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x * throwForceForward, velocity.y + throwForceUp);
         grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
         grabbedObject = null;
     }
