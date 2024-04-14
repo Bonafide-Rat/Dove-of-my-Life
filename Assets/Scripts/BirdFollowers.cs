@@ -34,7 +34,7 @@ public class BirdFollowers : MonoBehaviour
     }
 
 
-    private void AddFollower()
+    public void AddFollower()
     {
         followers.Add(Instantiate(baseFollower, transform.position, Quaternion.identity));
     }

@@ -17,7 +17,7 @@ public class PlatformToggleScript : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Follower":
-                BasicTogglePlatforms();
+                TimerTogglePlatforms();
                 Debug.Log("Hit");
                 break;
         }
@@ -28,5 +28,11 @@ public class PlatformToggleScript : MonoBehaviour
         foreach (var platform in platforms) {
             platform.SetActive(!platform.activeSelf);
         }
+    }
+
+    private void TimerTogglePlatforms()
+    {
+        BasicTogglePlatforms();
+        Invoke(nameof(BasicTogglePlatforms), timer);
     }
 }
