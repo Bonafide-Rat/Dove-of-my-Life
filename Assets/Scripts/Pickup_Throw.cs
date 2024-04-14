@@ -41,6 +41,7 @@ public class PickupThrow : MonoBehaviour
                 //grabbedObjectRB.enabled = true; - Not sure what this is meant to do
                 grabbedObjectRB.velocity = throwDirection * throwForceForward;
                 grabbedObjectRB.angularVelocity += ringSpin;
+                grabbedObject.GetComponent<Collider2D>().enabled = true;
                 aiming = false;
                 targetreticle.transform.localPosition = targetResetPos;
                 BirdFollowers.followers.RemoveAt(0);
