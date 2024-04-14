@@ -7,7 +7,7 @@ public class BirdFollowers : MonoBehaviour
     [SerializeField] private GameObject baseFollower;
     
     public float lerpTime = 0.5f;
-    public static List<GameObject> followers = new List<GameObject>();
+    public static List<GameObject> followers = new();
     //private bool doMoveFollowers = false;
     void Start()
     {
