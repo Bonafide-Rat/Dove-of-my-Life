@@ -9,7 +9,9 @@ public class PlatformToggleScript : MonoBehaviour
     [SerializeField] private float timer;
     void Start()
     {
-        
+        foreach (var platform in platforms) {
+            platform.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
