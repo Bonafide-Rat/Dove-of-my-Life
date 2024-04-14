@@ -1,39 +1,90 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class PickupThrow : MonoBehaviour
-{ // Start is called before the first frame update
-    public GameObject targetreticle;
+public class FollowerManager : MonoBehaviour
+{
+    #region Follower Options
+
+    [SerializeField] private int numFollowers;
+    [SerializeField] private GameObject baseFollower;
+    public float lerpTime = 0.5f;
+    public static List<GameObject> followers = new();
+
+    #endregion
+
+    #region Throw Options
 
     public float throwForceUp;
     public float throwForceForward;
     public float ringSpin;
-    public float targetMoveSpeed;
-
     private GameObject grabbedObject;
     private Rigidbody2D grabbedObjectRB;
     private Rigidbody2D birbRB;
+
+    #endregion
+
+    #region Target Reticle
     private bool aiming;
     private Vector3 targetResetPos;
+    public GameObject targetreticle;
+    public float targetMoveSpeed;
+    #endregion
+    
+
+
     void Start()
     {
         birbRB = GetComponent<Rigidbody2D>();
         targetreticle.SetActive(false);
         targetResetPos = targetreticle.transform.localPosition;
+        
+        for (int i = 0; i < numFollowers; i++)
+        {
+            AddFollower();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         HandleThrowing();
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            AddFollower();
+        }
     }
 
+    void FixedUpdate()
+    {
+        HandleLeadFollow();
+    }
+
+
+    #region Follower Methods
+
+    public void AddFollower()
+    {
+        followers.Add(Instantiate(baseFollower, transform.position, Quaternion.identity));
+    }
+
+    private void HandleLeadFollow()
+    {
+        if (followers.Count > 0 && followers[^1].transform.position != transform.position)
+        {
+            followers[0].transform.position =
+                Vector2.Lerp(followers[0].transform.position, transform.position, lerpTime);
+        }
+    }
+
+    #endregion
+
+    #region Throw Methods
 
     private void HandleThrowing()
     {
-        if (Input.GetButtonDown("Fire1") && !targetreticle.activeSelf && BirdFollowers.followers.Count > 0)
+        if (Input.GetButtonDown("Fire1") && !targetreticle.activeSelf && followers.Count > 0)
         {
-            grabbedObject = BirdFollowers.followers[0];
+            grabbedObject = followers[0];
             grabbedObjectRB = grabbedObject.GetComponent<Rigidbody2D>();
             targetreticle.SetActive(true);
             aiming = true;
@@ -50,7 +101,7 @@ public class PickupThrow : MonoBehaviour
             grabbedObject.GetComponent<Collider2D>().enabled = true;
             aiming = false;
             targetreticle.transform.localPosition = targetResetPos;
-            BirdFollowers.followers.RemoveAt(0);
+            followers.RemoveAt(0);
             grabbedObject = null;
         }
 
@@ -79,5 +130,5 @@ public class PickupThrow : MonoBehaviour
         grabbedObject = null;
     }
 
-    
+    #endregion
 }

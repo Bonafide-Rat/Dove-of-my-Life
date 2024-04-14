@@ -921,6 +921,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3793255477427341264, guid: ca7c43b37d0de674399ffcd5fac4b2ce, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3793255477427341264, guid: ca7c43b37d0de674399ffcd5fac4b2ce, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10756, guid: 0000000000000000e000000000000000, type: 0}
@@ -1366,10 +1370,9 @@ GameObject:
   - component: {fileID: 1129869995}
   - component: {fileID: 1129869994}
   - component: {fileID: 1129869997}
-  - component: {fileID: 1129870000}
-  - component: {fileID: 1129870001}
   - component: {fileID: 1129870002}
   - component: {fileID: 1129870003}
+  - component: {fileID: 1129870004}
   m_Layer: 0
   m_Name: Birb
   m_TagString: Player
@@ -1475,38 +1478,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1129870000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129869993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d750368c3f5d854d9d01483647badd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetreticle: {fileID: 1958510602}
-  throwForceUp: 1
-  throwForceForward: 10
-  ringSpin: -100
-  targetMoveSpeed: 55
---- !u!114 &1129870001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129869993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca997a965a9a3d144a0538cc1e5bdb8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numFollowers: 5
-  baseFollower: {fileID: 2225453488117378758, guid: 29f353dc3a0ac524396c1b7e8e419628, type: 3}
-  lerpTime: 0.2
 --- !u!114 &1129870002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1560,6 +1531,26 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1.5}
   m_Direction: 0
+--- !u!114 &1129870004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129869993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d0a3a054e566f4cb0f3288fb020f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numFollowers: 5
+  baseFollower: {fileID: 2225453488117378758, guid: 29f353dc3a0ac524396c1b7e8e419628, type: 3}
+  lerpTime: 0.2
+  throwForceUp: 1
+  throwForceForward: 10
+  ringSpin: -100
+  targetreticle: {fileID: 1958510602}
+  targetMoveSpeed: 55
 --- !u!4 &1218327649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6872074516045241944, guid: ca7c43b37d0de674399ffcd5fac4b2ce, type: 3}
@@ -2070,7 +2061,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platforms:
   - {fileID: 667150264}
-  timer: 5
+  timer: 3
+  isTimed: 0
 --- !u!61 &1678899506
 BoxCollider2D:
   m_ObjectHideFlags: 0
