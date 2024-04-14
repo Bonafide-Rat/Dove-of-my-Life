@@ -9,7 +9,7 @@ public class FollowerPickup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<BirdFollowers>().AddFollower();
+            other.GetComponent<FollowerManager>().AddFollower();
             Destroy(gameObject);
         }
     }
