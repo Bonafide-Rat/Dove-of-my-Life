@@ -7,6 +7,7 @@ public class PlatformToggleScript : MonoBehaviour
 {
     [SerializeField] private List<GameObject> platforms;
     [SerializeField] private float timer;
+    [SerializeField] private bool isTimed;
     void Start()
     {
         foreach (var platform in platforms) {
@@ -16,12 +17,16 @@ public class PlatformToggleScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        switch (other.gameObject.tag)
+        if (other.CompareTag("Follower"))
         {
-            case "Follower":
+            if (isTimed)
+            {
+                TimerTogglePlatforms();
+            }
+            else
+            {
                 BasicTogglePlatforms();
-                Debug.Log("Hit");
-                break;
+            }
         }
     }
 
