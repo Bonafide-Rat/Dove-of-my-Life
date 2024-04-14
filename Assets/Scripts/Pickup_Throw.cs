@@ -10,8 +10,8 @@ public class PickupThrow : MonoBehaviour
     [FormerlySerializedAs("rotationSpeed")] public float ringSpin;
     [FormerlySerializedAs("rotationSpeed")] public float targetMoveSpeed;
 
-    private GameObject followerToBeThrown;
-    private Rigidbody2D followerToBeThrownRB;
+    private GameObject grabbedObject;
+    private Rigidbody2D grabbedObjectRB;
     private Rigidbody2D birbRB;
     private bool aiming;
     private Vector3 targetResetPos;
@@ -27,8 +27,8 @@ public class PickupThrow : MonoBehaviour
     {
             if (Input.GetButtonDown("Fire1") && !targetreticle.activeSelf && BirdFollowers.followers.Count > 0)
             {
-                followerToBeThrown = BirdFollowers.followers[0];
-                followerToBeThrownRB = followerToBeThrown.GetComponent<Rigidbody2D>();
+                grabbedObject = BirdFollowers.followers[0];
+                grabbedObjectRB = grabbedObject.GetComponent<Rigidbody2D>();
                 targetreticle.SetActive(true);
                 aiming = true;
             }
@@ -37,15 +37,14 @@ public class PickupThrow : MonoBehaviour
             {
                 Vector2 throwDirection = targetreticle.transform.position - transform.position;
                 targetreticle.SetActive(false);
-                followerToBeThrownRB.isKinematic = false;
+                grabbedObjectRB.isKinematic = false;
                 //grabbedObjectRB.enabled = true; - Not sure what this is meant to do
-                followerToBeThrown.GetComponent<Collider2D>().enabled = true;
-                followerToBeThrownRB.velocity = throwDirection * throwForceForward;
-                followerToBeThrownRB.angularVelocity += ringSpin;
+                grabbedObjectRB.velocity = throwDirection * throwForceForward;
+                grabbedObjectRB.angularVelocity += ringSpin;
                 aiming = false;
                 targetreticle.transform.localPosition = targetResetPos;
                 BirdFollowers.followers.RemoveAt(0);
-                followerToBeThrown = null;
+                grabbedObject = null;
             }
 
             if (!aiming) return;
@@ -56,6 +55,7 @@ public class PickupThrow : MonoBehaviour
             
             if (targetreticle.transform.localPosition.y <= -0.65)
             {
+                
                 targetMoveSpeed *= -1;
             }
             targetreticle.transform.RotateAround(transform.position,Vector3.forward,targetMoveSpeed * Time.deltaTime);
@@ -65,11 +65,12 @@ public class PickupThrow : MonoBehaviour
     private void Easythrow()
     {
         if (!Input.GetButtonDown("Fire1")) return;
-        followerToBeThrown.GetComponent<Rigidbody2D>().isKinematic = false;
-        followerToBeThrown.GetComponent<Collider2D>().isTrigger = false;
-        followerToBeThrown.GetComponent<Rigidbody2D>().velocity = new Vector2(birbRB.velocity.x * throwForceForward, birbRB.velocity.y + throwForceUp);
-        followerToBeThrown.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
-        followerToBeThrown = null;
+        grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        grabbedObject.GetComponent<Collider2D>().isTrigger = false;
+        var velocity = birbRB.velocity;
+        grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x * throwForceForward, velocity.y + throwForceUp);
+        grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
+        grabbedObject = null;
     }
 
     

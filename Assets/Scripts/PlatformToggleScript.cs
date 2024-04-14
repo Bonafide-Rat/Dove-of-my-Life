@@ -19,7 +19,7 @@ public class PlatformToggleScript : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Follower":
-                TimerTogglePlatforms();
+                BasicTogglePlatforms();
                 Debug.Log("Hit");
                 break;
         }
