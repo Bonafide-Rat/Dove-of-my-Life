@@ -26,7 +26,7 @@ public class FollowerScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (followers.Count>0)
+        if (followers.Count > 0)
         { 
             if (myIndex > 0)
             {

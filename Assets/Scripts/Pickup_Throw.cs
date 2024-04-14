@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Pickup_Throw : MonoBehaviour
+public class PickupThrow : MonoBehaviour
 { // Start is called before the first frame update
     public GameObject targetreticle;
 

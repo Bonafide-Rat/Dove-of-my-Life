@@ -25,19 +25,8 @@ public class PlatformToggleScript : MonoBehaviour
 
     private void BasicTogglePlatforms()
     {
-        if (!platforms[0].activeSelf)
-        {
-            foreach (var platform in platforms)
-            {
-                platform.SetActive(true);   
-            }
-        }
-        else
-        {
-            foreach (var platform in platforms)
-            {
-                platform.SetActive(false);   
-            }
+        foreach (var platform in platforms) {
+            platform.SetActive(!platform.activeSelf);
         }
     }
 }
