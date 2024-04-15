@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class GoalScript : MonoBehaviour
 {
+    [SerializeField] private GameObject endEffects;
     // Start is called before the first frame update
     void Start()
     {
-        
+        endEffects.SetActive(false);
     }
 
     // Update is called once per frame
@@ -21,7 +22,7 @@ public class GoalScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("You Win");
+            endEffects.SetActive(true);
             Destroy(gameObject);
         }
     }
