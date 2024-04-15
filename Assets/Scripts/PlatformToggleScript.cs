@@ -8,7 +8,7 @@ public class PlatformToggleScript : MonoBehaviour
     [SerializeField] private List<GameObject> platforms;
     [SerializeField] private float timer;
     [SerializeField] private bool isTimed;
-    void Start()
+    void Awake()
     {
         foreach (var platform in platforms) {
             platform.SetActive(false);
@@ -30,6 +30,11 @@ public class PlatformToggleScript : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void BasicTogglePlatforms()
     {
         foreach (var platform in platforms) {
@@ -41,5 +46,18 @@ public class PlatformToggleScript : MonoBehaviour
     {
         BasicTogglePlatforms();
         Invoke(nameof(BasicTogglePlatforms), timer);
+    }
+
+    private void FlashTimerPlatforms()
+    {
+        foreach (var platform in platforms)
+        {
+            if (platform.activeSelf)
+            {
+                var platformColour = platform.GetComponent<SpriteRenderer>().color;
+                platformColour.a = Mathf.Lerp(1, 0, 10);
+                platform.GetComponent<SpriteRenderer>().color = platformColour;
+            }
+        }
     }
 }

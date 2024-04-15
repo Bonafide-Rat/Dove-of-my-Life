@@ -38,7 +38,7 @@ public class FollowerManager : MonoBehaviour
         birbRB = GetComponent<Rigidbody2D>();
         targetreticle.SetActive(false);
         targetResetPos = targetreticle.transform.localPosition;
-        
+        followers.Clear();
         for (int i = 0; i < numFollowers; i++)
         {
             AddFollower();
