@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private float lastGroundedTime;
     private float coyoteTime;
     private float jumpBuffer;
-    private float lastJumpTime;
+    private float lastJumpTime = -1000f;
     private bool jumpHeld = false;
     private float airDeceleration;
     private float jumpEndEarlyGravity;
