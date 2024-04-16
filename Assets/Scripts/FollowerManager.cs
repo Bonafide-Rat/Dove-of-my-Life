@@ -31,6 +31,10 @@ public class FollowerManager : MonoBehaviour
     public float targetMoveSpeed;
     #endregion
     
+    public List<UniqueFollower> uniqueFollowers = new();
+    private UniqueFollower activeFollower;
+    [SerializeField] private GameObject uniqueFollowerPeg;
+    
 
 
     void Start()
@@ -39,6 +43,7 @@ public class FollowerManager : MonoBehaviour
         targetreticle.SetActive(false);
         targetResetPos = targetreticle.transform.localPosition;
         followers.Clear();
+        activeFollower = uniqueFollowers[0];
         for (int i = 0; i < numFollowers; i++)
         {
             AddFollower();
@@ -48,6 +53,7 @@ public class FollowerManager : MonoBehaviour
     private void Update()
     {
         HandleThrowing();
+        HandleUseAbility();
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             AddFollower();
@@ -57,6 +63,7 @@ public class FollowerManager : MonoBehaviour
     void FixedUpdate()
     {
         HandleLeadFollow();
+        HandleFollowBird();
     }
 
 
@@ -128,6 +135,26 @@ public class FollowerManager : MonoBehaviour
         grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x * throwForceForward, velocity.y + throwForceUp);
         grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
         grabbedObject = null;
+    }
+
+    #endregion
+
+    #region Unique Follower Methods
+
+    private void HandleUseAbility()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            activeFollower.UseAbility();
+        }
+    }
+
+    private void HandleFollowBird()
+    {
+        if (uniqueFollowers.Count > 0 && uniqueFollowers[^1].transform.position != uniqueFollowerPeg.transform.position)
+        {
+            uniqueFollowers[0].transform.position = Vector2.Lerp(uniqueFollowers[0].transform.position, uniqueFollowerPeg.transform.position, lerpTime);
+        }
     }
 
     #endregion
