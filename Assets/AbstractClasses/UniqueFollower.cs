@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,31 @@ public abstract class UniqueFollower : MonoBehaviour
     public float throwPowerUp;
     [Tooltip("Time until follower returns to player")]
     public float cooldown;
+    
+    [Tooltip("Identifier, used for comparisons in other scripts. Must be all lowercase.")]
+    public string name;
 
     private Rigidbody2D rb;
-    private Collider2D collider;
+    private new Collider2D collider;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
+        DisableRbAndCollider();  
+    }
 
     public void Throw()
     {
+        rb.isKinematic = false;
+        collider.enabled = true;
         rb.velocity = new Vector2(throwPowerForward, throwPowerUp);
+    }
+
+    public void DisableRbAndCollider()
+    {
+        collider.enabled = false;
+        rb.isKinematic = true;
     }
     public abstract void UseAbility();
 }
