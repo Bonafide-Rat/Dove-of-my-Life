@@ -17,19 +17,29 @@ public abstract class UniqueFollower : MonoBehaviour
 
     private Rigidbody2D rb;
     private new Collider2D collider;
+    private Vector2 throwAngle;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
+        throwAngle = new Vector2(throwPowerForward, throwPowerUp);
         DisableRbAndCollider();  
+    }
+
+    private void Update()
+    {
+        if (!playerFacingRight())
+        {
+            throwAngle *= -1;
+        }
     }
 
     public void Throw()
     {
         rb.isKinematic = false;
         collider.enabled = true;
-        rb.velocity = new Vector2(throwPowerForward, throwPowerUp);
+        rb.velocity = throwAngle;
     }
 
     public void DisableRbAndCollider()
@@ -38,4 +48,13 @@ public abstract class UniqueFollower : MonoBehaviour
         rb.isKinematic = true;
     }
     public abstract void UseAbility();
+
+    private bool playerFacingRight()
+    {
+        if (rb.velocity.x > 0f)
+        {
+            return true;
+        }
+        return false;
+    }
 }

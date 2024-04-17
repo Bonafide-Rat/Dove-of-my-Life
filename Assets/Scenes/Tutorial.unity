@@ -3127,7 +3127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPowerForward: 10
   throwPowerUp: 5
-  cooldown: 2
+  cooldown: 2.04
   name: test1
 --- !u!61 &1204761762
 BoxCollider2D:

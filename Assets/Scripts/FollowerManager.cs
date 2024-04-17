@@ -222,6 +222,7 @@ public class FollowerManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         followerToAdd.DisableRbAndCollider();
         uniqueFollowers.Add(followerToAdd);
+        UpdateActiveFollower();
     }
     #endregion
 }
