@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private float jumpEndEarlyGravity;
     private float fallAcceleration;
     private bool isGliding = false;
-    private bool shiftWasPressed = false;
+    // private bool shiftWasPressed = false;
     #endregion
 
     // Assign values from stats script

@@ -17,8 +17,8 @@ MonoBehaviour:
     m_Bits: 128
   MaxSpeed: 4
   Acceleration: 150
-  GroundDeceleration: 280
-  AirDeceleration: 250
+  GroundDeceleration: 300
+  AirDeceleration: 300
   GroundingForce: -1.5
   GrounderDistance: 0.05
   JumpPower: 17

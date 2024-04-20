@@ -12,8 +12,8 @@ public class FollowerScript : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         
         mainScript = GameObject.FindWithTag("Player").GetComponent<BirdFollowers>();
-        followers = mainScript.followers;
-        myIndex = followers.IndexOf(gameObject);
+        // followers = mainScript.followers;
+        // myIndex = followers.IndexOf(gameObject);
     }
 
     // Update is called once per frame
