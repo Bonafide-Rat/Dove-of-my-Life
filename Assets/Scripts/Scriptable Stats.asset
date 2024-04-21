@@ -26,5 +26,5 @@ MonoBehaviour:
   GlideFallSpeed: 3
   FallAcceleration: 25
   JumpEndEarlyGravityModifier: 5
-  CoyoteTime: 0.25
+  CoyoteTime: 0.3
   JumpBuffer: 0.2
