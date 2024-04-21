@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FollowerManager : MonoBehaviour
@@ -31,6 +32,14 @@ public class FollowerManager : MonoBehaviour
     public float targetMoveSpeed;
     #endregion
     
+    public List<UniqueFollower> uniqueFollowers = new();
+    private UniqueFollower activeFollower;
+    [SerializeField] private GameObject uniqueFollowerPeg;
+    private GameObject followerOne;
+    private GameObject followerTwo;
+    private GameObject followerThree;
+    private GameObject followerFour;
+    
 
 
     void Start()
@@ -39,6 +48,8 @@ public class FollowerManager : MonoBehaviour
         targetreticle.SetActive(false);
         targetResetPos = targetreticle.transform.localPosition;
         followers.Clear();
+        AssignFollowerObjects();
+        UpdateActiveFollower();
         for (int i = 0; i < numFollowers; i++)
         {
             AddFollower();
@@ -48,6 +59,8 @@ public class FollowerManager : MonoBehaviour
     private void Update()
     {
         HandleThrowing();
+        HandleUseAbility();
+        HandleCycleFollowers();
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             AddFollower();
@@ -57,6 +70,7 @@ public class FollowerManager : MonoBehaviour
     void FixedUpdate()
     {
         HandleLeadFollow();
+        HandleFollowBird();
     }
 
 
@@ -130,5 +144,85 @@ public class FollowerManager : MonoBehaviour
         grabbedObject = null;
     }
 
+    #endregion
+
+    #region Unique Follower Methods
+
+    private void HandleUseAbility()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            activeFollower.Throw();
+            activeFollower.UseAbility();
+            StartCoroutine(Cooldown(activeFollower.cooldown, activeFollower));
+            uniqueFollowers.Remove(activeFollower);
+            if (uniqueFollowers.Any())
+            {
+                UpdateActiveFollower();
+            }
+        }
+    }
+
+    private void HandleFollowBird()
+    {
+        if (uniqueFollowers.Any() && uniqueFollowers[^1].transform.position != uniqueFollowerPeg.transform.position)
+        {
+            foreach (var uniqueFollower in uniqueFollowers)
+            {
+                var targetPos = new Vector3(uniqueFollowerPeg.transform.position.x - uniqueFollowers.IndexOf(uniqueFollower), uniqueFollowerPeg.transform.position.y,0);
+                uniqueFollower.transform.position = Vector2.Lerp(uniqueFollower.transform.position, targetPos, lerpTime);
+            }
+        }
+    }
+
+    private void HandleCycleFollowers()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            CycleFollowerForward();
+        }
+    }
+    private void UpdateActiveFollower()
+    {
+        activeFollower = uniqueFollowers[0];
+    }
+
+    private void AssignFollowerObjects()
+    {
+        foreach (var follower in uniqueFollowers)
+        {
+            switch (follower.name)
+            {
+                case "test1":
+                    followerOne = follower.gameObject;
+                    break;
+                case "test2":
+                    followerTwo = follower.gameObject;
+                    break;
+            }
+        }
+    }
+
+    private void CycleFollowerForward()
+    {
+        int lastIndex = uniqueFollowers.Count - 1;
+        UniqueFollower lastItem = uniqueFollowers[lastIndex]; // Store the last item
+
+        for (int i = lastIndex; i > 0; i--)
+        {
+            uniqueFollowers[i] = uniqueFollowers[i - 1]; // Shift elements forward by one
+        }
+
+        uniqueFollowers[0] = lastItem;
+        UpdateActiveFollower();
+    }
+
+    IEnumerator Cooldown(float waitTime, UniqueFollower followerToAdd)
+    {
+        yield return new WaitForSeconds(waitTime);
+        followerToAdd.DisableRbAndCollider();
+        uniqueFollowers.Add(followerToAdd);
+        UpdateActiveFollower();
+    }
     #endregion
 }
