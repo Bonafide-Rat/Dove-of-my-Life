@@ -64,7 +64,17 @@ public class FollowerManager : MonoBehaviour
 
     public void AddFollower()
     {
-        followers.Add(Instantiate(baseFollower, transform.position, Quaternion.identity));
+        GameObject follower = Instantiate(baseFollower, transform.position, Quaternion.identity);
+        SpriteRenderer spriteRenderer = follower.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sortingLayerName = "Midground"; // Ensuring the follower is visible
+        } else {
+            Debug.Log("The follower prefab does not have a Sprite Renderer component.");
+        }
+
+        followers.Add(follower);
     }
 
     private void HandleLeadFollow()
