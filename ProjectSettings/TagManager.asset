@@ -7,6 +7,7 @@ TagManager:
   - Follower
   - Magpie
   - Environment
+  - Ring
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Environment
   - Magpie
   - Player
-  - 
+  - Ring
   - 
   - 
   - 
