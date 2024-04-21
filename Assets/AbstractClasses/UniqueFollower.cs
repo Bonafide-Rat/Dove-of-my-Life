@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class UniqueFollower : MonoBehaviour
 {
@@ -13,11 +14,12 @@ public abstract class UniqueFollower : MonoBehaviour
     public float cooldown;
     
     [Tooltip("Identifier, used for comparisons in other scripts. Must be all lowercase.")]
-    public string name;
+    public string followerName;
 
     private Rigidbody2D rb;
     private new Collider2D collider;
     private Vector2 throwAngle;
+    public bool throwable;
 
     private void Start()
     {

@@ -7,6 +7,8 @@ public class GameManagerScript : MonoBehaviour
     public GameObject gameOverUi;
     public GameObject levelPassedUi;
 
+    public static bool playerInCover;
+
     // Start is called before the first frame update
     void Start()
     {

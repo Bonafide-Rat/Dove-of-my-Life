@@ -79,6 +79,7 @@ public class FollowerManager : MonoBehaviour
     public void AddFollower()
     {
         followers.Add(Instantiate(baseFollower, transform.position, Quaternion.identity));
+        Debug.Log("Added");
     }
 
     private void HandleLeadFollow()
@@ -152,7 +153,10 @@ public class FollowerManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire2"))
         {
-            activeFollower.Throw();
+            if (activeFollower.throwable)
+            {
+                activeFollower.Throw();
+            }
             activeFollower.UseAbility();
             StartCoroutine(Cooldown(activeFollower.cooldown, activeFollower));
             uniqueFollowers.Remove(activeFollower);
@@ -184,14 +188,17 @@ public class FollowerManager : MonoBehaviour
     }
     private void UpdateActiveFollower()
     {
-        activeFollower = uniqueFollowers[0];
+        if (uniqueFollowers.Any())
+        {
+            activeFollower = uniqueFollowers[0];
+        }
     }
 
     private void AssignFollowerObjects()
     {
         foreach (var follower in uniqueFollowers)
         {
-            switch (follower.name)
+            switch (follower.followerName)
             {
                 case "test1":
                     followerOne = follower.gameObject;
