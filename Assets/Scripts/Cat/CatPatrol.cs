@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CatPatrol : MonoBehaviour
@@ -45,6 +46,15 @@ public class CatPatrol : MonoBehaviour
             }
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player")) // Assuming the player has a tag of "Player"
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reloads the current scene
+        }
+    }
+
 
     private void flip()
     {
