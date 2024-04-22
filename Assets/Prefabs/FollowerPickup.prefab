@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8137530638129262652}
   - component: {fileID: 8137530638129262653}
   - component: {fileID: 8137530638129262651}
-  - component: {fileID: 961831583533350509}
   - component: {fileID: -7489471793018033055}
+  - component: {fileID: 1432671137668570495}
   m_Layer: 0
   m_Name: FollowerPickup
   m_TagString: Follower
@@ -132,18 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.15, y: 2.5}
   m_EdgeRadius: 0
---- !u!114 &961831583533350509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8137530638129262648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b36dc069e3e7bd94f94942377239fdab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &-7489471793018033055
 AudioSource:
   m_ObjectHideFlags: 0
@@ -156,7 +144,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 633af7016b5668442bc9996403cb515a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -240,3 +228,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1432671137668570495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137530638129262648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36dc069e3e7bd94f94942377239fdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

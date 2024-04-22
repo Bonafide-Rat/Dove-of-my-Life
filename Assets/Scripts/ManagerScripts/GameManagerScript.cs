@@ -16,6 +16,7 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerInCover = false;
         gameOverUi.SetActive(false);
         levelPassedUi.SetActive(false);
         maxScore = GameObject.FindGameObjectsWithTag("Follower").Length - GameObject.FindGameObjectsWithTag("PlatformTrigger").Length ;
