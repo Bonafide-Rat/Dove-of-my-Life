@@ -4242,8 +4242,8 @@ GameObject:
   - component: {fileID: 1894971364}
   - component: {fileID: 1894971368}
   - component: {fileID: 1894971361}
-  - component: {fileID: 1894971360}
   - component: {fileID: 1894971369}
+  - component: {fileID: 1894971360}
   m_Layer: 0
   m_Name: Birb
   m_TagString: Player
@@ -4373,7 +4373,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 318d40511b764554da04f427fe67e2b7, type: 3}
-  m_Color: {r: 0.5, g: 0.4457547, b: 0.4457547, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

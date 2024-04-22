@@ -10,6 +10,7 @@ public class Cover : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameManagerScript.playerInCover = true;
+            other.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f,0.3f,1);
             Debug.Log(GameManagerScript.playerInCover);
         }
     }
@@ -19,6 +20,7 @@ public class Cover : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameManagerScript.playerInCover = false;
+            other.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
             Debug.Log(GameManagerScript.playerInCover);
         }
     }
