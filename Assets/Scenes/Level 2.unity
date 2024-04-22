@@ -2881,7 +2881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1224193040
 Transform:
   m_ObjectHideFlags: 0
@@ -4464,8 +4464,6 @@ MonoBehaviour:
   ringSpin: -100
   targetreticle: {fileID: 486133342}
   targetMoveSpeed: 50
-  uniqueFollowers: []
-  uniqueFollowerPeg: {fileID: 0}
 --- !u!1 &1905397092
 GameObject:
   m_ObjectHideFlags: 0

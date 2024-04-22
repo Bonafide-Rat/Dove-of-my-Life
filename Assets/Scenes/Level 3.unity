@@ -4242,7 +4242,6 @@ GameObject:
   - component: {fileID: 1894971364}
   - component: {fileID: 1894971368}
   - component: {fileID: 1894971361}
-  - component: {fileID: 1894971369}
   - component: {fileID: 1894971360}
   m_Layer: 0
   m_Name: Birb
@@ -4422,18 +4421,6 @@ MonoBehaviour:
   ringSpin: -100
   targetreticle: {fileID: 486133342}
   targetMoveSpeed: 50
---- !u!114 &1894971369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894971359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830f624758e0b43f994657bf0b5ea1c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1900705215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6872074516045241944, guid: ca7c43b37d0de674399ffcd5fac4b2ce, type: 3}
