@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class FollowerScript : MonoBehaviour
+public class FollowersScript : MonoBehaviour
 {
     private List<GameObject> followers;
     private FollowerManager mainScript;
