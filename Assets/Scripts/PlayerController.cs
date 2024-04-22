@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private float jumpEndEarlyGravity;
     private float fallAcceleration;
     private bool isGliding = false;
-    private bool shiftWasPressed = false;
+    // private bool shiftWasPressed = false;
     #endregion
 
     // Assign values from stats script
@@ -189,15 +189,7 @@ public class PlayerController : MonoBehaviour
         // Case 2 - Gravity when gliding:
         else if (isGliding)
         {
-            // Only apply gliding fall speed when DESCENDING
-            if (rb.velocity.y <= 0f)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, -stats.GlideFallSpeed);
-                Debug.Log("Glide gravity applied");
-            } else {
-                // Does not allow players to apply glide effect when ascending.
-                isGliding = false;
-            }
+            rb.velocity = new Vector2(rb.velocity.x, -stats.GlideFallSpeed);
         }
         // Case 3 - Gravity when jump is released early (short jumps):
         else
