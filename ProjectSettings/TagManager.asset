@@ -8,6 +8,8 @@ TagManager:
   - Magpie
   - Environment
   - Ring
+  - MagpieBoundary
+  - PlatformTrigger
   layers:
   - Default
   - TransparentFX

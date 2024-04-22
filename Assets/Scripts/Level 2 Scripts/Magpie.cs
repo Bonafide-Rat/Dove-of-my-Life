@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MagpieController : MonoBehaviour
 {
@@ -8,20 +9,28 @@ public class MagpieController : MonoBehaviour
     private bool snatched = false;
     public GameObject startPos;
     private bool sniffingPlayer;
+    private bool startedMoving;
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            StartMagpie();
+        }
     }
 
     private void Update()
     {
-        if (!snatched && !sniffingPlayer)
+        if (startedMoving)
         {
-            // Calculate the movement vector
-            Vector3 movement = Vector3.right * speed * Time.deltaTime;
+            if (!snatched && !sniffingPlayer)
+            {
+                // Calculate the movement vector
+                Vector3 movement = Vector3.right * speed * Time.deltaTime;
 
-            // Update the position of the GameObject
-            transform.position += movement;
+                // Update the position of the GameObject
+                transform.position += movement;
+            }
         }
     }
 
@@ -33,7 +42,7 @@ public class MagpieController : MonoBehaviour
             gameManager.gameOver();
         }
         
-        else if (!snatched && collider.CompareTag("Player") && GameManagerScript.playerInCover)
+        else if (!snatched && collider.CompareTag("Player") && GameManagerScript.playerInCover || collider.CompareTag("MagpieBoundary"))
         {
             Debug.Log(startPos.transform.position);
             sniffingPlayer = true;
@@ -47,5 +56,10 @@ public class MagpieController : MonoBehaviour
         transform.position = startPos.transform.position;
         yield return new WaitForSeconds(5);
         sniffingPlayer = false;
+    }
+
+    public void StartMagpie()
+    {
+        startedMoving = true;
     }
 }
