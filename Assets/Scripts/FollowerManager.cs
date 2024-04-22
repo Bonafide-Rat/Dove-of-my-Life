@@ -10,6 +10,7 @@ public class FollowerManager : MonoBehaviour
     [SerializeField] private GameObject baseFollower;
     public float lerpTime = 0.5f;
     public static List<GameObject> followers = new();
+    public static int followerCount;
 
     #endregion
 
@@ -75,6 +76,7 @@ public class FollowerManager : MonoBehaviour
         }
 
         followers.Add(follower);
+        followerCount = followers.Count;
     }
 
     private void HandleLeadFollow()
@@ -112,6 +114,7 @@ public class FollowerManager : MonoBehaviour
             aiming = false;
             targetreticle.transform.localPosition = targetResetPos;
             followers.RemoveAt(0);
+            followerCount = followers.Count;
             grabbedObject = null;
         }
 
