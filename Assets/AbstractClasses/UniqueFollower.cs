@@ -10,7 +10,6 @@ namespace AbstractClasses
         public float throwPowerUp;
         [Tooltip("Time until follower returns to player")]
         public float cooldown;
-    
         [Tooltip("Identifier, used for comparisons in other scripts. Must be all lowercase.")]
         public string followerName;
 
@@ -30,10 +29,10 @@ namespace AbstractClasses
 
         private void Update()
         {
-            if (!playerFacingRight())
-            {
-                throwAngle *= -1;
-            }
+            // if (!PlayerController.isFacingRight)
+            // {
+            //     throwAngle.x *= 1;
+            // }
         }
 
         public void Throw()
@@ -47,9 +46,6 @@ namespace AbstractClasses
         {
             collider.enabled = false;
             rb.isKinematic = true;
-            
-            Debug.Log(collider.enabled);
-            Debug.Log(rb.isKinematic);
         }
         public abstract void UseAbility();
 
