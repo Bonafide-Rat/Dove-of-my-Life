@@ -13,6 +13,6 @@ public class Bouncy : UniqueFollower
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        
+        Rb.AddForce(Vector2.up * 100);
     }
 }

@@ -8,10 +8,12 @@ public class FollowersScript : MonoBehaviour
 {
     private List<GameObject> followers;
     private FollowerManager mainScript;
-    private int myIndex;// Start is called before the first frame update
+    private int myIndex;
+    
+    // Start is called before the first frame update
     void Start()
     {
-        GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        //GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         GetComponent<Collider2D>().enabled = false;
         mainScript = GameObject.FindWithTag("Player").GetComponent<FollowerManager>();
         followers = FollowerManager.followers;

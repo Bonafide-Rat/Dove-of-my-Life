@@ -8,6 +8,7 @@ public class PlatformToggleScript : MonoBehaviour
     [SerializeField] private List<GameObject> platforms;
     [SerializeField] private float timer;
     [SerializeField] private bool isTimed;
+    private bool isTriggered;
     void Awake()
     {
         foreach (var platform in platforms) {
@@ -23,11 +24,11 @@ public class PlatformToggleScript : MonoBehaviour
             {
                 TimerTogglePlatforms();
             }
-            else
+            else if (!isTriggered)
             {
                 BasicTogglePlatforms();
+                LevelManager.AddScore(1);
             }
-            
             Destroy(other.gameObject);
         }
     }
@@ -42,12 +43,19 @@ public class PlatformToggleScript : MonoBehaviour
         foreach (var platform in platforms) {
             platform.SetActive(!platform.activeSelf);
         }
+
+        isTriggered = true;
     }
 
     private void TimerTogglePlatforms()
     {
+        if (!isTriggered)
+        {
+            LevelManager.AddScore(1);
+        }
         BasicTogglePlatforms();
         Invoke(nameof(BasicTogglePlatforms), timer);
+        isTriggered = true;
     }
 
     private void FlashTimerPlatforms()

@@ -10,6 +10,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject levelPassedUi;
     public TextMeshProUGUI scoreText;
     private int maxScore;
+    
 
     public static bool playerInCover;
 

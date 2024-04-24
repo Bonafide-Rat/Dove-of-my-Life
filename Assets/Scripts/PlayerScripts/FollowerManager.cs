@@ -14,6 +14,7 @@ public class FollowerManager : MonoBehaviour
     public float lerpTime = 0.5f;
     public static List<GameObject> followers = new();
     public static int followerCount;
+    [SerializeField]private GameObject followerPeg;
 
     #endregion
 
@@ -88,7 +89,7 @@ public class FollowerManager : MonoBehaviour
         if (followers.Count > 0 && followers[^1].transform.position != transform.position)
         {
             followers[0].transform.position =
-                Vector2.Lerp(followers[0].transform.position, transform.position, lerpTime);
+                Vector2.Lerp(followers[0].transform.position, followerPeg.transform.position, lerpTime);
         }
     }
 

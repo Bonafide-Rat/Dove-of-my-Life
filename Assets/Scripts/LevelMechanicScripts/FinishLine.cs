@@ -19,9 +19,13 @@ public class FinishLine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     { 
-        if (collider.CompareTag("Player"))
+        if (collider.CompareTag("Player") && LevelManager.CurrentScore == LevelManager.TargetScore)
         {
             gameManager.LevelPassed();
+        }
+        else
+        {
+            Debug.Log("Need " + (LevelManager.TargetScore - LevelManager.CurrentScore) + "more pollinations.");
         }
     }
 }
