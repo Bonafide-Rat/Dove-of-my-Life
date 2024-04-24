@@ -25,7 +25,7 @@ public class FinishLine : MonoBehaviour
         }
         else
         {
-            Debug.Log("Need " + (LevelManager.TargetScore - LevelManager.CurrentScore) + "more pollinations.");
+            Debug.Log("Need " + (LevelManager.TargetScore - LevelManager.CurrentScore) + " more pollinations.");
         }
     }
 }

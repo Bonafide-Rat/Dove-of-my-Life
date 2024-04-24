@@ -9,25 +9,27 @@ public class PlatformToggleScript : MonoBehaviour
     [SerializeField] private float timer;
     [SerializeField] private bool isTimed;
     private bool isTriggered;
+    private Animator animator;
     void Awake()
     {
         foreach (var platform in platforms) {
             platform.SetActive(false);
         }
+
+        animator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Follower"))
         {
-            if (isTimed)
+            if (isTimed && !animator.GetBool("UndoPlatform"))
             {
                 TimerTogglePlatforms();
             }
-            else if (!isTriggered)
+            else
             {
-                BasicTogglePlatforms();
-                LevelManager.AddScore(1);
+                BasicPlatforms();
             }
             Destroy(other.gameObject);
         }
@@ -38,12 +40,23 @@ public class PlatformToggleScript : MonoBehaviour
         
     }
 
-    private void BasicTogglePlatforms()
+    private void BasicPlatforms()
+    {
+        if (!isTriggered)
+        {
+            TogglePlatforms();
+            animator.SetTrigger("Triggered");
+            animator.SetBool("BasicPlatform", true);
+            LevelManager.AddScore(1);
+        }
+    }
+
+    private void TogglePlatforms()
     {
         foreach (var platform in platforms) {
             platform.SetActive(!platform.activeSelf);
         }
-
+        animator.SetBool("UndoPlatform", false);
         isTriggered = true;
     }
 
@@ -53,8 +66,10 @@ public class PlatformToggleScript : MonoBehaviour
         {
             LevelManager.AddScore(1);
         }
-        BasicTogglePlatforms();
-        Invoke(nameof(BasicTogglePlatforms), timer);
+        TogglePlatforms();
+        animator.SetTrigger("Triggered");
+        animator.SetBool("UndoPlatform", true);
+        Invoke(nameof(TogglePlatforms), timer);
         isTriggered = true;
     }
 

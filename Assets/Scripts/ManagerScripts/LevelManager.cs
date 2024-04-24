@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
     public static int TargetScore;
     [SerializeField]private int setTargetScore;
+    [SerializeField] private TextMeshProUGUI scoretext;
 
     public static int CurrentScore;
     // Start is called before the first frame update
@@ -13,12 +15,13 @@ public class LevelManager : MonoBehaviour
     {
         TargetScore = setTargetScore;
         CurrentScore = 0;
+        UpdateUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateUI();
     }
 
     public static void AddScore(int amount)
@@ -27,7 +30,10 @@ public class LevelManager : MonoBehaviour
         {
             CurrentScore += amount;
         }
-        
-        Debug.Log("Current Score: " + CurrentScore + "/" + TargetScore);
+    }
+
+    private void UpdateUI()
+    {
+        scoretext.text = $"{CurrentScore}/{TargetScore}";
     }
 }
