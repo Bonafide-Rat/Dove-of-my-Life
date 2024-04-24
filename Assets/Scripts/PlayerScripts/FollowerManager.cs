@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AbstractClasses;
 using UnityEngine;
 
 public class FollowerManager : MonoBehaviour
@@ -40,8 +42,6 @@ public class FollowerManager : MonoBehaviour
     private GameObject followerTwo;
     private GameObject followerThree;
     private GameObject followerFour;
-    
-
 
     void Start()
     {
@@ -224,6 +224,14 @@ public class FollowerManager : MonoBehaviour
 
         uniqueFollowers[0] = lastItem;
         UpdateActiveFollower();
+    }
+
+    private void SpawnUniqueFollowers()
+    {
+        foreach (var follower in uniqueFollowers)
+        {
+            Instantiate(follower);
+        }
     }
 
     IEnumerator Cooldown(float waitTime, UniqueFollower followerToAdd)
