@@ -25,6 +25,16 @@ public class FollowersScript : MonoBehaviour
         myIndex = followers.IndexOf(gameObject);
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Destroy(gameObject);
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
