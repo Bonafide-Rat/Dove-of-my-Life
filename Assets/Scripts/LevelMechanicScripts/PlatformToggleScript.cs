@@ -31,7 +31,6 @@ public class PlatformToggleScript : MonoBehaviour
             {
                 BasicPlatforms();
             }
-            Destroy(other.gameObject);
         }
     }
 
