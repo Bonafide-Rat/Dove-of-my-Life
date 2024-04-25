@@ -3646,8 +3646,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1894971366}
   moveSpeed: 5
-  CameraMoving: 0
-  moveInput: 0
+  maxCameraY: 7
+  minCameraY: -7
   rb: {fileID: 1894971364}
   groundCheck: {fileID: 972375794}
   groundLayer:

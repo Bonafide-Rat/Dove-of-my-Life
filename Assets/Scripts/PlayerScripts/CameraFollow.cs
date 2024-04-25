@@ -11,9 +11,10 @@ public class CameraFollow : MonoBehaviour
 
 
     public float moveSpeed = 10f; // Speed of camera movement
-
-    [SerializeField] private bool CameraMoving = false;
-    [SerializeField] private float moveInput;
+    public float maxCameraY = 10f; // Maximum Y position of the camera
+    public float minCameraY = -10f; // Minimum Y position of the camera
+    private bool CameraMoving = false;
+    private float moveInput;
     
 
 
@@ -53,9 +54,8 @@ public class CameraFollow : MonoBehaviour
 
     private void ManualLook()
     {
-        // Calculate the new position of the camera
         Vector3 newPosition = transform.position + Vector3.up * moveInput * moveSpeed * Time.deltaTime;
-        // Update the position of the camera
+        newPosition.y = Mathf.Clamp(newPosition.y, minCameraY, maxCameraY);
         transform.position = newPosition;
     }
 
