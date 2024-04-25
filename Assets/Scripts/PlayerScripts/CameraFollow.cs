@@ -13,7 +13,6 @@ public class CameraFollow : MonoBehaviour
     public float moveSpeed = 10f; // Speed of camera movement
     public float maxCameraY = 10f; // Maximum Y position of the camera
     public float minCameraY = -10f; // Minimum Y position of the camera
-    private bool CameraMoving = false;
     private float moveInput;
     
 
