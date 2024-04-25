@@ -2008,7 +2008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 675175022}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PickupPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3075,7 +3075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1004824553}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3243,7 +3243,7 @@ GameObject:
   - component: {fileID: 1129870002}
   - component: {fileID: 1129870003}
   - component: {fileID: 1129870004}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Birb
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3684,7 +3684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1388662203}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CastPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4449,7 +4449,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1814902896}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FollowerPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9545,7 +9545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1919326819}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UniqueFollowerPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10004,7 +10004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1958510603}
   - component: {fileID: 1958510604}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
