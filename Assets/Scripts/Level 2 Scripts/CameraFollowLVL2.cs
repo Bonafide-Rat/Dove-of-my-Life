@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollowLVL2 : MonoBehaviour
 {
     private Vector3 offset = new Vector3(0f, 0f, -10f);
     private float smoothTime = 0.25f;
@@ -11,8 +11,6 @@ public class CameraFollow : MonoBehaviour
 
 
     public float moveSpeed = 10f; // Speed of camera movement
-    public float maxCameraY = 10f; // Maximum Y position of the camera
-    public float minCameraY = -10f; // Minimum Y position of the camera
 
     private float moveInput;
     
@@ -55,7 +53,7 @@ public class CameraFollow : MonoBehaviour
     private void ManualLook()
     {
         Vector3 newPosition = transform.position + Vector3.up * moveInput * moveSpeed * Time.deltaTime;
-        newPosition.y = Mathf.Clamp(newPosition.y, minCameraY, maxCameraY);
+        //newPosition.y = Mathf.Clamp(newPosition.y, minCameraY, maxCameraY);
         transform.position = newPosition;
     }
 
