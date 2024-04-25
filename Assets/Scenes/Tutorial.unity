@@ -1400,6 +1400,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1129869995}
+  moveSpeed: 10
+  maxCameraY: 10
+  minCameraY: -10
+  rb: {fileID: 1129869997}
+  groundCheck: {fileID: 1004824553}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
