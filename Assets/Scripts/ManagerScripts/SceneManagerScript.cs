@@ -24,6 +24,7 @@ public class SceneManagerScript : MonoBehaviour
 
     private void ReloadScene()
     {
+        PlayerController.isFacingRight = true;
         SceneManager.LoadScene(currSceneIndex);
     }
 }

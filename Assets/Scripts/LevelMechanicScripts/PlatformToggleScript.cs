@@ -9,11 +9,21 @@ public class PlatformToggleScript : MonoBehaviour
     [SerializeField] private float timer;
     [SerializeField] private bool isTimed;
     private bool isTriggered;
+    [SerializeField]private bool isMakeAppear;
     private Animator animator;
     void Awake()
     {
-        foreach (var platform in platforms) {
-            platform.SetActive(false);
+        if (isMakeAppear)
+        {
+            foreach (var platform in platforms) {
+                platform.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (var platform in platforms) {
+                platform.SetActive(true);
+            }
         }
 
         animator = GetComponent<Animator>();
@@ -52,8 +62,21 @@ public class PlatformToggleScript : MonoBehaviour
 
     private void TogglePlatforms()
     {
-        foreach (var platform in platforms) {
-            platform.SetActive(!platform.activeSelf);
+        
+        if (isTimed && !isMakeAppear)
+        {
+            foreach (var platform in platforms)
+            {
+                Debug.Log(platform.GetComponent<Animator>());
+                platform.GetComponent<Collider2D>().enabled = !platform.GetComponent<Collider2D>().enabled; 
+                platform.GetComponent<Animator>().SetBool("Triggered",!platform.GetComponent<Animator>().GetBool("Triggered"));
+            }
+        }
+        else
+        {
+            foreach (var platform in platforms) {
+                platform.SetActive(!platform.activeSelf);
+            }
         }
         animator.SetBool("UndoPlatform", false);
         isTriggered = true;
@@ -65,23 +88,10 @@ public class PlatformToggleScript : MonoBehaviour
         {
             LevelManager.AddScore(1);
         }
-        TogglePlatforms();
-        animator.SetTrigger("Triggered");
-        animator.SetBool("UndoPlatform", true);
-        Invoke(nameof(TogglePlatforms), timer);
+            TogglePlatforms();
+            animator.SetTrigger("Triggered");
+            animator.SetBool("UndoPlatform", true);
+            Invoke(nameof(TogglePlatforms), timer);
         isTriggered = true;
-    }
-
-    private void FlashTimerPlatforms()
-    {
-        foreach (var platform in platforms)
-        {
-            if (platform.activeSelf)
-            {
-                var platformColour = platform.GetComponent<SpriteRenderer>().color;
-                platformColour.a = Mathf.Lerp(1, 0, 10);
-                platform.GetComponent<SpriteRenderer>().color = platformColour;
-            }
-        }
     }
 }
