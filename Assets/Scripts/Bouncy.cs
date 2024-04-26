@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using AbstractClasses;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Bouncy : UniqueFollower
 {
@@ -15,5 +16,6 @@ public class Bouncy : UniqueFollower
     private void OnCollisionEnter2D(Collision2D other)
     {
        Rb.AddForce(Vector2.up * upOnBounce, ForceMode2D.Impulse);
+       Rb.AddForce(Vector2.right * Random.Range(-10f,10f), ForceMode2D.Impulse);
     }
 }

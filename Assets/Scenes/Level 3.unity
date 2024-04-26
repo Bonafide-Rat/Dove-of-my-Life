@@ -291,11 +291,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3028002709878632454, guid: 3a4668211050d7c469d3e38f2068ebc6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3028002709878632454, guid: 3a4668211050d7c469d3e38f2068ebc6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.98
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3028002709878632454, guid: 3a4668211050d7c469d3e38f2068ebc6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53553,7 +53553,7 @@ MonoBehaviour:
   cooldown: 5
   followerName: bounce
   throwable: 1
-  upOnBounce: 25
+  upOnBounce: 15
 --- !u!4 &594507955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2735902183925791939, guid: 7691a2a225837494f877451cf104fa6d, type: 3}
@@ -54511,7 +54511,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915773832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 159, y: 3.2, z: -1.6993403}
+  m_LocalPosition: {x: 142.7, y: 3.2, z: -1.6993403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55094,7 +55094,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131205256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 173.48146, y: 12.008642, z: -0.47258025}
+  m_LocalPosition: {x: 160.49, y: 16.67, z: -0.47258025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
