@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float acceleration;
     private float currentSpeed;
     private float groundDeceleration;
-    public bool isFacingRight = true;
+    public static bool isFacingRight = true;
     private Vector2 movementInput;
 
     [SerializeField] private Rigidbody2D rb;

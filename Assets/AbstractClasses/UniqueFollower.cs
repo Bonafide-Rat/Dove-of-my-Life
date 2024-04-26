@@ -23,7 +23,7 @@ namespace AbstractClasses
         {
             Rb = GetComponent<Rigidbody2D>();
             collider = GetComponent<Collider2D>();
-            throwAngle = new Vector2(throwPowerForward, throwPowerUp);
+            
             DisableRbAndCollider();  
         }
 
@@ -36,10 +36,14 @@ namespace AbstractClasses
         {
             Rb.isKinematic = false;
             collider.enabled = true;
-            // if (!PlayerController.isFacingRight)
-            // {
-            //     throwAngle.x *= -1;
-            // }
+            if (PlayerController.isFacingRight)
+            {
+                throwAngle = new Vector2(throwPowerForward, throwPowerUp);
+            }
+            else
+            {
+                throwAngle = new Vector2(-throwPowerForward, throwPowerUp);
+            }
             Rb.velocity = throwAngle;
         }
 
@@ -48,15 +52,7 @@ namespace AbstractClasses
             collider.enabled = false;
             Rb.isKinematic = true;
         }
-        public abstract void UseAbility();
 
-        private bool playerFacingRight()
-        {
-            if (Rb.velocity.x > 0f)
-            {
-                return true;
-            }
-            return false;
-        }
+        public abstract void UseAbility();
     }
 }
