@@ -20,9 +20,7 @@ public class GameManagerScript : MonoBehaviour
         playerInCover = false;
         gameOverUi.SetActive(false);
         levelPassedUi.SetActive(false);
-        maxScore = GameObject.FindGameObjectsWithTag("Follower").Length - GameObject.FindGameObjectsWithTag("PlatformTrigger").Length ;
         Time.timeScale = 1;
-        Debug.Log(maxScore);
     }
 
     // Update is called once per frame

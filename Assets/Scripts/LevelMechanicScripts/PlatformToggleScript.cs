@@ -63,13 +63,25 @@ public class PlatformToggleScript : MonoBehaviour
     private void TogglePlatforms()
     {
         
-        if (isTimed && !isMakeAppear)
+        if (isTimed)
         {
-            foreach (var platform in platforms)
+            if (!isMakeAppear)
             {
-                Debug.Log(platform.GetComponent<Animator>());
-                platform.GetComponent<Collider2D>().enabled = !platform.GetComponent<Collider2D>().enabled; 
-                platform.GetComponent<Animator>().SetBool("Triggered",!platform.GetComponent<Animator>().GetBool("Triggered"));
+                foreach (var platform in platforms)
+                {
+                    Debug.Log(platform.GetComponent<Animator>());
+                    platform.GetComponent<Collider2D>().enabled = !platform.GetComponent<Collider2D>().enabled; 
+                    platform.GetComponent<Animator>().SetBool("Triggered",!platform.GetComponent<Animator>().GetBool("Triggered"));
+                }
+            }
+            else
+            {
+                foreach (var platform in platforms)
+                {
+                    Debug.Log(platform.GetComponent<Animator>());
+                    platform.SetActive(!platform.activeSelf);
+                    platform.GetComponent<Animator>().SetBool("Triggered",!platform.GetComponent<Animator>().GetBool("Triggered"));
+                }
             }
         }
         else
