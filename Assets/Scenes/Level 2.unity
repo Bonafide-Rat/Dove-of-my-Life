@@ -1651,7 +1651,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 76, y: 11, z: 0}
+  - first: {x: 73, y: 11, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 38
@@ -1661,7 +1661,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 77, y: 11, z: 0}
+  - first: {x: 74, y: 11, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 37
@@ -16266,16 +16266,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 0, y: 0, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 43
-      m_TileSpriteIndex: 109
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: 1, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -19226,7 +19216,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 76, y: 9, z: 0}
+  - first: {x: 73, y: 9, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 31
@@ -19236,7 +19226,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 77, y: 9, z: 0}
+  - first: {x: 74, y: 9, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 32
@@ -19636,7 +19626,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 76, y: 10, z: 0}
+  - first: {x: 73, y: 10, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 30
@@ -19646,7 +19636,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 77, y: 10, z: 0}
+  - first: {x: 74, y: 10, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 29
@@ -25784,7 +25774,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 6465b9e268449fa4ab5340e9c6cad37c, type: 2}
   - m_RefCount: 27
     m_Data: {fileID: 11400000, guid: 7a278acc3f9bdf243b65705de99f1e87, type: 2}
-  - m_RefCount: 17
+  - m_RefCount: 16
     m_Data: {fileID: 11400000, guid: 98547b78ea32af24693c2c45b1725cd6, type: 2}
   - m_RefCount: 13
     m_Data: {fileID: 11400000, guid: d0ebbb1bccda5cd409af8e7d81fc0fe6, type: 2}
@@ -26151,7 +26141,7 @@ Tilemap:
     m_Data: {fileID: -527139642, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
   - m_RefCount: 10
     m_Data: {fileID: -1388144603, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
-  - m_RefCount: 17
+  - m_RefCount: 16
     m_Data: {fileID: 1582398075, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1057490739, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
@@ -26168,7 +26158,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: -908188752, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 1693
+  - m_RefCount: 1692
     m_Data:
       e00: 1
       e01: 0
@@ -26187,7 +26177,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 1693
+  - m_RefCount: 1692
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -27134,7 +27124,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Don't let the magpie get the ring.\nR - Restart.\n "
+  m_text: "Run\nR - Restart.\n "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
