@@ -39612,6 +39612,7 @@ MonoBehaviour:
   cooldown: 10
   followerName: bounce
   throwable: 1
+  upOnBounce: 0
 --- !u!1 &762406057 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3766860903443968419, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
@@ -68551,7 +68552,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741826
+      m_AllTileFlags: 2147483650
   - first: {x: -56, y: 11, z: 0}
     second:
       serializedVersion: 2
@@ -73451,7 +73452,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741826
+      m_AllTileFlags: 2147483650
   - first: {x: -51, y: 18, z: 0}
     second:
       serializedVersion: 2
@@ -78361,7 +78362,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741826
+      m_AllTileFlags: 2147483650
   - first: {x: -12, y: 29, z: 0}
     second:
       serializedVersion: 2
@@ -78461,7 +78462,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741826
+      m_AllTileFlags: 2147483650
   - first: {x: 1, y: 29, z: 0}
     second:
       serializedVersion: 2
@@ -79221,7 +79222,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741826
+      m_AllTileFlags: 2147483650
   - first: {x: -114, y: 33, z: 0}
     second:
       serializedVersion: 2
@@ -79931,7 +79932,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741826
+      m_AllTileFlags: 2147483650
   - first: {x: -1, y: 48, z: 0}
     second:
       serializedVersion: 2
@@ -80284,8 +80285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1894971366}
   moveSpeed: 10
-  maxCameraY: 10
-  minCameraY: -10
+  maxCameraY: 100
+  minCameraY: -100
   rb: {fileID: 0}
   groundCheck: {fileID: 972375794}
   groundLayer:
