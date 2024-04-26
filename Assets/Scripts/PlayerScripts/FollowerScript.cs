@@ -9,6 +9,7 @@ public class FollowersScript : MonoBehaviour
     private List<GameObject> followers;
     private FollowerManager mainScript;
     private int myIndex;
+    private float jitterMagnitude = 1f;
     
     // Start is called before the first frame update
     void Start()
@@ -38,12 +39,10 @@ public class FollowersScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (followers.Count > 0)
-        { 
-            if (myIndex > 0)
-            {
-                transform.position = Vector2.Lerp(transform.position,followers[myIndex - 1].transform.position,mainScript.lerpTime);
-            }
+        if (followers.Count <= 0) return;
+        if (myIndex > 0)
+        {
+            transform.position = Vector2.Lerp(transform.position,followers[myIndex - 1].transform.position + new Vector3(Random.Range(-jitterMagnitude, jitterMagnitude),Random.Range(-jitterMagnitude, jitterMagnitude) ),mainScript.lerpTime);
         }
     }
 }
