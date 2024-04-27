@@ -177,8 +177,8 @@ public class FollowerManager : MonoBehaviour
         {
             foreach (var uniqueFollower in uniqueFollowers)
             {
-                //var targetPos = new Vector3(uniqueFollowerPeg.transform.position.x - uniqueFollowers.IndexOf(uniqueFollower), uniqueFollowerPeg.transform.position.y,0);
-                var targetPos = transform.position;
+                var targetPos = new Vector3(uniqueFollowerPeg.transform.position.x - uniqueFollowers.IndexOf(uniqueFollower), uniqueFollowerPeg.transform.position.y,0);
+                //var targetPos = transform.position;
                 uniqueFollower.transform.position = Vector2.Lerp(uniqueFollower.transform.position, targetPos, lerpTime);
                 Debug.Log($"Lerping towards: {uniqueFollowerPeg.transform.position}");
             }
@@ -241,6 +241,7 @@ public class FollowerManager : MonoBehaviour
     IEnumerator Cooldown(float waitTime, UniqueFollower followerToAdd)
     {
         yield return new WaitForSeconds(waitTime);
+        followerToAdd.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         uniqueFollowers.Add(followerToAdd);
         UpdateActiveFollower();
         followerToAdd.DisableRbAndCollider();
