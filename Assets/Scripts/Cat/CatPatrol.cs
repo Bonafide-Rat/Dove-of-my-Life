@@ -46,10 +46,12 @@ public class CatPatrol : MonoBehaviour
             }
         }
     }
+    
+    
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player")) // Assuming the player has a tag of "Player"
+        if (other.gameObject.CompareTag("Player") && !GameManagerScript.playerInCover) // Assuming the player has a tag of "Player"
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reloads the current scene
             Debug.Log("player");    
