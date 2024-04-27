@@ -11,7 +11,6 @@ public class Cover : MonoBehaviour
         {
             GameManagerScript.playerInCover = true;
             other.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f,0.3f,1);
-            other.gameObject.GetComponent<Collider2D>().excludeLayers = 1 << 11;
             Debug.Log(GameManagerScript.playerInCover);
         }
     }
@@ -22,7 +21,6 @@ public class Cover : MonoBehaviour
         {
             GameManagerScript.playerInCover = false;
             other.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-            other.gameObject.GetComponent<Collider2D>().includeLayers = 1 << 11;
             Debug.Log(GameManagerScript.playerInCover);
         }
     }
