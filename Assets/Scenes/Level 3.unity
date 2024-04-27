@@ -53550,7 +53550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPowerForward: 20
   throwPowerUp: 10
-  cooldown: 5
+  cooldown: 3
   followerName: bounce
   throwable: 1
   upOnBounce: 15
