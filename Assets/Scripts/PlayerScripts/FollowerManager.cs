@@ -154,7 +154,7 @@ public class FollowerManager : MonoBehaviour
 
     private void HandleUseAbility()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && activeFollower != null)
         {
             if (activeFollower.throwable)
             {
@@ -163,6 +163,7 @@ public class FollowerManager : MonoBehaviour
             activeFollower.UseAbility();
             StartCoroutine(Cooldown(activeFollower.cooldown, activeFollower));
             uniqueFollowers.Remove(activeFollower);
+            activeFollower = null;
             if (uniqueFollowers.Any())
             {
                 UpdateActiveFollower();
@@ -177,7 +178,9 @@ public class FollowerManager : MonoBehaviour
             foreach (var uniqueFollower in uniqueFollowers)
             {
                 var targetPos = new Vector3(uniqueFollowerPeg.transform.position.x - uniqueFollowers.IndexOf(uniqueFollower), uniqueFollowerPeg.transform.position.y,0);
+                //var targetPos = transform.position;
                 uniqueFollower.transform.position = Vector2.Lerp(uniqueFollower.transform.position, targetPos, lerpTime);
+                Debug.Log($"Lerping towards: {uniqueFollowerPeg.transform.position}");
             }
         }
     }
@@ -238,9 +241,10 @@ public class FollowerManager : MonoBehaviour
     IEnumerator Cooldown(float waitTime, UniqueFollower followerToAdd)
     {
         yield return new WaitForSeconds(waitTime);
-        followerToAdd.DisableRbAndCollider();
+        followerToAdd.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         uniqueFollowers.Add(followerToAdd);
         UpdateActiveFollower();
+        followerToAdd.DisableRbAndCollider();
     }
     #endregion
 }

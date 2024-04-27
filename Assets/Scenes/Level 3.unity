@@ -291,11 +291,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3028002709878632454, guid: 3a4668211050d7c469d3e38f2068ebc6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3028002709878632454, guid: 3a4668211050d7c469d3e38f2068ebc6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.98
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3028002709878632454, guid: 3a4668211050d7c469d3e38f2068ebc6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53550,10 +53550,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPowerForward: 20
   throwPowerUp: 10
-  cooldown: 5
+  cooldown: 3
   followerName: bounce
   throwable: 1
-  upOnBounce: 25
+  upOnBounce: 15
 --- !u!4 &594507955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2735902183925791939, guid: 7691a2a225837494f877451cf104fa6d, type: 3}
@@ -54309,11 +54309,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2735902183925791939, guid: 61598105bced194479812d8cfc7f2437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.2414627
+      value: 3.7
       objectReference: {fileID: 0}
     - target: {fileID: 2735902183925791939, guid: 61598105bced194479812d8cfc7f2437, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6586418
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 2735902183925791939, guid: 61598105bced194479812d8cfc7f2437, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54511,7 +54511,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915773832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 159, y: 3.2, z: -1.6993403}
+  m_LocalPosition: {x: 142.7, y: 3.2, z: -1.6993403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55094,7 +55094,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131205256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 173.48146, y: 12.008642, z: -0.47258025}
+  m_LocalPosition: {x: 160.49, y: 16.67, z: -0.47258025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -81102,16 +81102,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741826
-  - first: {x: -56, y: 8, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 16
-      m_TileSpriteIndex: 10
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741826
   - first: {x: -54, y: 8, z: 0}
     second:
       serializedVersion: 2
@@ -94216,7 +94206,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 3892
+  - m_RefCount: 3891
     m_Data: {fileID: 11400000, guid: 6729aeaf01e2b3d48b4c120dfce994d1, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -94239,8 +94229,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -2038662834, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 7
     m_Data: {fileID: 687524931, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
   - m_RefCount: 118
@@ -94258,7 +94248,7 @@ Tilemap:
   - m_RefCount: 3
     m_Data: {fileID: 516454853, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 3892
+  - m_RefCount: 3891
     m_Data:
       e00: 1
       e01: 0
@@ -94277,7 +94267,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 3892
+  - m_RefCount: 3891
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -96096,7 +96086,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894971359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -76.7, y: -1.7, z: 0}
+  m_LocalPosition: {x: -78.6, y: -2.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -96121,9 +96111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d0a3a054e566f4cb0f3288fb020f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numFollowers: 0
+  numFollowers: 10
   baseFollower: {fileID: 2225453488117378758, guid: 29f353dc3a0ac524396c1b7e8e419628, type: 3}
-  lerpTime: 0.7
+  lerpTime: 0.06
   followerPeg: {fileID: 360474713}
   throwForceUp: 1
   throwForceForward: 10
