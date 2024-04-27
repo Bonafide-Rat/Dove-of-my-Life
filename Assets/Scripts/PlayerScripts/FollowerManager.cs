@@ -180,7 +180,6 @@ public class FollowerManager : MonoBehaviour
                 var targetPos = new Vector3(uniqueFollowerPeg.transform.position.x - uniqueFollowers.IndexOf(uniqueFollower), uniqueFollowerPeg.transform.position.y,0);
                 //var targetPos = transform.position;
                 uniqueFollower.transform.position = Vector2.Lerp(uniqueFollower.transform.position, targetPos, lerpTime);
-                Debug.Log($"Lerping towards: {uniqueFollowerPeg.transform.position}");
             }
         }
     }
