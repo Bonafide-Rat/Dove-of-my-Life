@@ -16,7 +16,9 @@ public class ButtonController : MonoBehaviour
         
     }
 
-    public void RestartLevel() {
+    public void RestartLevel()
+    {
+        PlayerController.isFacingRight = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
