@@ -16,7 +16,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   MaxSpeed: 4
-  Acceleration: 150
+  Acceleration: 75
   GroundDeceleration: 300
   AirDeceleration: 350
   GroundingForce: -1.5

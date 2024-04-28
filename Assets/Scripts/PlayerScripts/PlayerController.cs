@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     // private bool shiftWasPressed = false;
     #endregion
 
+    private bool insideAreaEffector = false;
+
     // Assign values from stats script
     private void Awake()
     {
@@ -64,14 +66,20 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         handleHorizontalMovement();
-        HandleGravity();
+        // HandleGravity();
+
+        if (!insideAreaEffector)
+        {
+            HandleGravity();
+        }
+
     }
 
     #region Player Movement
     private void getInput()
     {
         movementInput = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y);
-        
+
         // Record the time when jump button is pressed for the jump buffer
         if (Input.GetButtonDown("Jump"))
         {
@@ -213,6 +221,23 @@ public class PlayerController : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("WindZone"))
+        {
+            insideAreaEffector = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("WindZone"))
+        {
+            insideAreaEffector = false;
+        }
+    }
+
     #endregion
 
     private void Flip()

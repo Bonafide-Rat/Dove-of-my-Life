@@ -10,6 +10,7 @@ TagManager:
   - Ring
   - MagpieBoundary
   - PlatformTrigger
+  - WindZone
   layers:
   - Default
   - TransparentFX
