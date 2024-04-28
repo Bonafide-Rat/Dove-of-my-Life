@@ -109,6 +109,7 @@ public class FollowerManager : MonoBehaviour
             
         else if (Input.GetButtonDown("Fire1") && targetreticle.activeSelf)
         {
+            grabbedObject.transform.position = transform.position;
             Vector2 throwDirection = targetreticle.transform.position - transform.position;
             targetreticle.SetActive(false);
             grabbedObjectRB.isKinematic = false;
