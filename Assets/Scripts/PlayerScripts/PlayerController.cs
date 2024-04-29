@@ -130,30 +130,31 @@ public class PlayerController : MonoBehaviour
     {
         birdGrounded = IsGrounded();
         bool jumpButtonPressed = Input.GetButtonDown("Jump");
+        
+        if (jumpButtonPressed) // For jump buffer
+        {
+            lastJumpTime = Time.time;
+        }
 
         if (birdGrounded)
         {
             lastGroundedTime = Time.time;
             //This code: (Time.time - lastJumpTime <= jumpBuffer) causes player to Jump when game is started. 
-            if (jumpButtonPressed || (Time.time - lastJumpTime <= jumpBuffer))
+            if (jumpButtonPressed || Time.time - lastJumpTime <= jumpBuffer)
             {
-                Debug.Log("Jump1");
                 PerformJump(1);
                 jumpHeld = true;
                 isGliding = false;
             }
         }
-        else if (!birdGrounded && jumpButtonPressed && jumpCount < 2 || jumpButtonPressed && (Time.time - lastGroundedTime <= coyoteTime || Time.time - lastJumpTime <= jumpBuffer))
+        else if (!birdGrounded && jumpButtonPressed && jumpCount < 2 || 
+                 (jumpButtonPressed && Time.time - lastGroundedTime <= coyoteTime))
         {
-            Debug.Log("Coyote: " + lastGroundedTime);
             PerformJump(jumpCount + 1);
             jumpHeld = true;
         }
 
-        if (jumpButtonPressed) // For jump buffer
-        {
-            lastJumpTime = Time.time;
-        }
+       
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
         {
@@ -176,6 +177,9 @@ public class PlayerController : MonoBehaviour
             case 2: // Double jump
                 rb.gravityScale = 1;
                 //Debug.Log("Double jump pressed!");
+                break;
+            default:
+                Debug.Log("Not a Jump");
                 break;
         }
         jumpCount = jumpType;

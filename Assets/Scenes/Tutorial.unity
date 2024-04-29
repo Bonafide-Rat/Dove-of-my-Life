@@ -1401,8 +1401,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1129869995}
   moveSpeed: 10
-  maxCameraY: 10
-  minCameraY: -10
+  maxCameraY: 100
+  minCameraY: -100
   rb: {fileID: 1129869997}
   groundCheck: {fileID: 1004824553}
   groundLayer:
@@ -3371,7 +3371,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 0d7c58a1e0f023f44b898633872ab975, type: 2}
-  isFacingRight: 1
   rb: {fileID: 1129869997}
   groundCheck: {fileID: 1004824553}
   groundLayer:
