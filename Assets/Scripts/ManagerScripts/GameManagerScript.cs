@@ -17,6 +17,7 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerController.isFacingRight = true;
         playerInCover = false;
         gameOverUi.SetActive(false);
         levelPassedUi.SetActive(false);
