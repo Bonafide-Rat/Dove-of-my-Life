@@ -137,13 +137,15 @@ public class PlayerController : MonoBehaviour
             //This code: (Time.time - lastJumpTime <= jumpBuffer) causes player to Jump when game is started. 
             if (jumpButtonPressed || (Time.time - lastJumpTime <= jumpBuffer))
             {
+                Debug.Log("Jump1");
                 PerformJump(1);
                 jumpHeld = true;
                 isGliding = false;
             }
         }
-        else if (!birdGrounded && jumpButtonPressed && jumpCount < 2 && (Time.time - lastGroundedTime <= coyoteTime || Time.time - lastJumpTime <= jumpBuffer))
+        else if (!birdGrounded && jumpButtonPressed && jumpCount < 2 || jumpButtonPressed && (Time.time - lastGroundedTime <= coyoteTime || Time.time - lastJumpTime <= jumpBuffer))
         {
+            Debug.Log("Coyote: " + lastGroundedTime);
             PerformJump(jumpCount + 1);
             jumpHeld = true;
         }
