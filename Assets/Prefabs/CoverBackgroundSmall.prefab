@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1411752512052500888}
   - component: {fileID: 5116220607332891502}
   - component: {fileID: 4309725415806016982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CoverTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 2425846892854137494}
   - component: {fileID: 2425846892854137480}
   - component: {fileID: 2425846892854137483}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CoverBackgroundSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3827429552173169760}
   - component: {fileID: 4034386153304607422}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
