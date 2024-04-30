@@ -77,7 +77,6 @@ public class PlatformToggleScript : MonoBehaviour
             {
                 foreach (var platform in platforms)
                 {
-                    Debug.Log(platform.GetComponent<Animator>());
                     platform.SetActive(!platform.activeSelf);
                     platform.GetComponent<Animator>().SetBool("Triggered",!platform.GetComponent<Animator>().GetBool("Triggered"));
                 }

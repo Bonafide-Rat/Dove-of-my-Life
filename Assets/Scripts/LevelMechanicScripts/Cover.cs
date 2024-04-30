@@ -11,7 +11,6 @@ public class Cover : MonoBehaviour
         {
             GameManagerScript.playerInCover = true;
             other.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f,0.3f,1);
-            Debug.Log(GameManagerScript.playerInCover);
         }
     }
 
