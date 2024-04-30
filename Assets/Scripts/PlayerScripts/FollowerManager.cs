@@ -44,10 +44,9 @@ public class FollowerManager : MonoBehaviour
     public List<UniqueFollower> uniqueFollowers = new();
     private UniqueFollower activeFollower;
     [SerializeField] private GameObject uniqueFollowerPeg;
-    private GameObject followerOne;
-    private GameObject followerTwo;
-    private GameObject followerThree;
-    private GameObject followerFour;
+    
+    public float radius = 5.0f; // Radius of the circular path
+    public float rotationSpeed = 90.0f;
 
     void Start()
     {
@@ -56,7 +55,6 @@ public class FollowerManager : MonoBehaviour
         cachedTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlatformTrigger"));
         targetResetPos = targetreticle.transform.localPosition;
         followers.Clear();
-        AssignFollowerObjects();
         UpdateActiveFollower();
         for (int i = 0; i < numFollowers; i++)
         {
@@ -137,27 +135,37 @@ public class FollowerManager : MonoBehaviour
     {
         if (!aiming) return;
         Vector3 targetVector = GetNearestTarget().transform.position - transform.position;
-        Debug.DrawLine(transform.position,GetNearestTarget().transform.position,Color.red);
+        // Debug.DrawLine(transform.position,GetNearestTarget().transform.position,Color.red);
+        //
+        // targetreticle.transform.RotateAround(transform.position,Vector3.forward,targetMoveSpeed * Time.deltaTime);
+        //
+        // float angle = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
+        //
+        // // Ensure the child aims at the target
+        // targetreticle.transform.rotation = Quaternion.Euler(0, 0, angle);
         
-        float currentAngle = Vector3.SignedAngle(Vector3.right, targetreticle.transform.localPosition, Vector3.forward);
         
-        // Calculate the angle to the target
-        float angleToTarget = Vector3.SignedAngle(Vector3.right, targetVector, Vector3.forward);
-        
-        // Adjust the buffers to converge toward the target angle
-        topTargetBuffer = Mathf.MoveTowards(topTargetBuffer, angleToTarget, convergenceRate * Time.deltaTime);
-        bottomTargetBuffer = Mathf.MoveTowards(bottomTargetBuffer, angleToTarget, convergenceRate * Time.deltaTime);
-        if (currentAngle >= topTargetBuffer)
-        {
-            targetMoveSpeed *= -1;
-        }
-            
-        if (currentAngle <= bottomTargetBuffer)
-        {
-                
-            targetMoveSpeed *= -1;
-        }
-        targetreticle.transform.RotateAround(transform.position,Vector3.forward,targetMoveSpeed * Time.deltaTime);
+        // Get the vector from parent to target
+
+        // Calculate the closest point on the circle to the target
+        Vector3 closestPointOnCircle = transform.position + targetVector.normalized * radius;
+
+        // Calculate the current position on the circle
+        Vector3 currentPosition = targetreticle.transform.position - transform.position;
+
+        // Calculate the angle between the current position and the closest point on the circle
+        float angle = Mathf.Atan2(closestPointOnCircle.y, closestPointOnCircle.x) - Mathf.Atan2(currentPosition.y, currentPosition.x);
+
+        // Ensure the angle is within 0 to 360 degrees
+        if (angle < 0) angle += 2 * Mathf.PI;
+
+        // Rotate the child to the closest point on the circle
+        float step = rotationSpeed * Time.deltaTime;
+        float newAngle = Mathf.MoveTowardsAngle(Mathf.Rad2Deg * Mathf.Atan2(currentPosition.y, currentPosition.x), Mathf.Rad2Deg * Mathf.Atan2(closestPointOnCircle.y, closestPointOnCircle.x), step);
+
+        // Set the new position of the child on the circular path
+        float radians = Mathf.Deg2Rad * newAngle;
+        targetreticle.transform.position = transform.position + new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0) * radius;
     }
 
     private GameObject GetNearestTarget()
@@ -224,22 +232,7 @@ public class FollowerManager : MonoBehaviour
             activeFollower = uniqueFollowers[0];
         }
     }
-
-    private void AssignFollowerObjects()
-    {
-        foreach (var follower in uniqueFollowers)
-        {
-            switch (follower.followerName)
-            {
-                case "test1":
-                    followerOne = follower.gameObject;
-                    break;
-                case "test2":
-                    followerTwo = follower.gameObject;
-                    break;
-            }
-        }
-    }
+    
 
     private void CycleFollowerForward()
     {

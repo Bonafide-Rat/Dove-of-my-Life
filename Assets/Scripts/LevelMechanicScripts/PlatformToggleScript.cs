@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlatformToggleScript : MonoBehaviour
@@ -13,7 +15,7 @@ public class PlatformToggleScript : MonoBehaviour
     private Animator animator;
     void Awake()
     {
-        if (isMakeAppear)
+        if (isMakeAppear && platforms.Any())
         {
             foreach (var platform in platforms) {
                 platform.SetActive(false);
