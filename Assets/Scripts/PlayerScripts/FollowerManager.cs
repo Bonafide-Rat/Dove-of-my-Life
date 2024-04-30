@@ -157,10 +157,6 @@ public class FollowerManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire2") && activeFollower != null)
         {
-            if (activeFollower.throwable)
-            {
-                activeFollower.Throw();
-            }
             activeFollower.UseAbility();
             StartCoroutine(Cooldown(activeFollower.cooldown, activeFollower));
             uniqueFollowers.Remove(activeFollower);

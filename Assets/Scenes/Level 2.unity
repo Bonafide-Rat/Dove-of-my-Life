@@ -8790,7 +8790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fff1059642e2db47b93f018696aa3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 5
   gameManager: {fileID: 1689121424}
   startPos: {fileID: 366612611}
 --- !u!61 &1224193045
@@ -9582,7 +9582,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

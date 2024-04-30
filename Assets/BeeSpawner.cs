@@ -37,7 +37,6 @@ public class BeeSpawner : MonoBehaviour
         
         if (spawnedPickup == null && currentTimeLeft <= 0)
         {
-            Debug.Log("CanSpawn");
             spawnedPickup = Instantiate(pickupToSpawn, spawnPos, Quaternion.identity);
             currentTimeLeft = spawnTimeBetween;
         }

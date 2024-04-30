@@ -69,7 +69,6 @@ public class PlatformToggleScript : MonoBehaviour
             {
                 foreach (var platform in platforms)
                 {
-                    Debug.Log(platform.GetComponent<Animator>());
                     platform.GetComponent<Collider2D>().enabled = !platform.GetComponent<Collider2D>().enabled; 
                     platform.GetComponent<Animator>().SetBool("Triggered",!platform.GetComponent<Animator>().GetBool("Triggered"));
                 }

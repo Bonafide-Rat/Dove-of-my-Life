@@ -10,7 +10,7 @@ public class Bouncy : UniqueFollower
     [SerializeField]private float upOnBounce;
     public override void UseAbility()
     {
-       Debug.Log("Used");
+       Throw();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
