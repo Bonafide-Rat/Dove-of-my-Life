@@ -108645,6 +108645,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: radius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: convergenceRate
       value: 0.1
       objectReference: {fileID: 0}
