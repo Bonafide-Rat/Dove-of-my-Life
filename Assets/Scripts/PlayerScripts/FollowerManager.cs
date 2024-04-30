@@ -34,6 +34,11 @@ public class FollowerManager : MonoBehaviour
     private Vector3 targetResetPos;
     public GameObject targetreticle;
     public float targetMoveSpeed;
+    [SerializeField] private float bottomTargetBuffer;
+    [SerializeField] private float topTargetBuffer;
+    [SerializeField] private float convergenceRate;
+    private List<GameObject> cachedTargets = new();
+    private GameObject nearestTarget;
     #endregion
     
     public List<UniqueFollower> uniqueFollowers = new();
@@ -48,6 +53,7 @@ public class FollowerManager : MonoBehaviour
     {
         birbRB = GetComponent<Rigidbody2D>();
         targetreticle.SetActive(false);
+        cachedTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlatformTrigger"));
         targetResetPos = targetreticle.transform.localPosition;
         followers.Clear();
         AssignFollowerObjects();
@@ -99,7 +105,7 @@ public class FollowerManager : MonoBehaviour
 
     private void HandleThrowing()
     {
-        if (Input.GetButtonDown("Fire1") && !targetreticle.activeSelf && followers.Count > 0)
+        if (Input.GetButton("Fire1") && !targetreticle.activeSelf && followers.Count > 0)
         {
             grabbedObject = followers[0];
             grabbedObjectRB = grabbedObject.GetComponent<Rigidbody2D>();
@@ -107,7 +113,7 @@ public class FollowerManager : MonoBehaviour
             aiming = true;
         }
             
-        else if (Input.GetButtonDown("Fire1") && targetreticle.activeSelf)
+        else if (Input.GetButtonUp("Fire1") && targetreticle.activeSelf)
         {
             grabbedObject.transform.position = transform.position;
             Vector2 throwDirection = targetreticle.transform.position - transform.position;
@@ -123,30 +129,53 @@ public class FollowerManager : MonoBehaviour
             followerCount = followers.Count;
             grabbedObject = null;
         }
+        HandleAim();
+    }
 
+
+    private void HandleAim()
+    {
         if (!aiming) return;
-        if (targetreticle.transform.localPosition.y >= 1)
+        Vector3 targetVector = GetNearestTarget().transform.position - transform.position;
+        Debug.DrawLine(transform.position,GetNearestTarget().transform.position,Color.red);
+        
+        float currentAngle = Vector3.SignedAngle(Vector3.right, targetreticle.transform.localPosition, Vector3.forward);
+        
+        // Calculate the angle to the target
+        float angleToTarget = Vector3.SignedAngle(Vector3.right, targetVector, Vector3.forward);
+        
+        // Adjust the buffers to converge toward the target angle
+        topTargetBuffer = Mathf.MoveTowards(topTargetBuffer, angleToTarget, convergenceRate * Time.deltaTime);
+        bottomTargetBuffer = Mathf.MoveTowards(bottomTargetBuffer, angleToTarget, convergenceRate * Time.deltaTime);
+        if (currentAngle >= topTargetBuffer)
         {
             targetMoveSpeed *= -1;
         }
             
-        if (targetreticle.transform.localPosition.y <= -0.65)
+        if (currentAngle <= bottomTargetBuffer)
         {
                 
             targetMoveSpeed *= -1;
         }
         targetreticle.transform.RotateAround(transform.position,Vector3.forward,targetMoveSpeed * Time.deltaTime);
     }
-    
-    private void Easythrow()
+
+    private GameObject GetNearestTarget()
     {
-        if (!Input.GetButtonDown("Fire1")) return;
-        grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
-        grabbedObject.GetComponent<Collider2D>().isTrigger = false;
-        var velocity = birbRB.velocity;
-        grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x * throwForceForward, velocity.y + throwForceUp);
-        grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
-        grabbedObject = null;
+        nearestTarget = null;
+        float shortestDistance = float.MaxValue;
+        Vector3 currentPosition = transform.position;
+
+        foreach (var target in cachedTargets)
+        {
+            float distance = Vector3.Distance(currentPosition, target.transform.position);
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                nearestTarget = target;
+            }
+        }
+        return nearestTarget;
     }
 
     #endregion
