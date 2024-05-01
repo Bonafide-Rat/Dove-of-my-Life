@@ -134,38 +134,20 @@ public class FollowerManager : MonoBehaviour
     private void HandleAim()
     {
         if (!aiming) return;
-        Vector3 targetVector = GetNearestTarget().transform.position - transform.position;
-        // Debug.DrawLine(transform.position,GetNearestTarget().transform.position,Color.red);
+        Vector3 targetVector = (GetNearestTarget().transform.position - transform.position).normalized;
+        Debug.DrawLine(transform.position, GetNearestTarget().transform.position, Color.red);
         //
-        // targetreticle.transform.RotateAround(transform.position,Vector3.forward,targetMoveSpeed * Time.deltaTime);
-        //
-        // float angle = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
-        //
-        // // Ensure the child aims at the target
-        // targetreticle.transform.rotation = Quaternion.Euler(0, 0, angle);
+        //targetreticle.transform.RotateAround(transform.position, Vector3.forward, targetMoveSpeed * Time.deltaTime);
+        float currentAngle = 0f;
+        float orbitSpeed = 10f;
+        float orbitRadius = 2f;
+        float angleToTarget = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
+        currentAngle = angleToTarget;
         
+        Vector3 offset = new Vector3(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad), 0) * orbitRadius;
         
-        // Get the vector from parent to target
-
-        // Calculate the closest point on the circle to the target
-        Vector3 closestPointOnCircle = transform.position + targetVector.normalized * radius;
-
-        // Calculate the current position on the circle
-        Vector3 currentPosition = targetreticle.transform.position - transform.position;
-
-        // Calculate the angle between the current position and the closest point on the circle
-        float angle = Mathf.Atan2(closestPointOnCircle.y, closestPointOnCircle.x) - Mathf.Atan2(currentPosition.y, currentPosition.x);
-
-        // Ensure the angle is within 0 to 360 degrees
-        if (angle < 0) angle += 2 * Mathf.PI;
-
-        // Rotate the child to the closest point on the circle
-        float step = rotationSpeed * Time.deltaTime;
-        float newAngle = Mathf.MoveTowardsAngle(Mathf.Rad2Deg * Mathf.Atan2(currentPosition.y, currentPosition.x), Mathf.Rad2Deg * Mathf.Atan2(closestPointOnCircle.y, closestPointOnCircle.x), step);
-
-        // Set the new position of the child on the circular path
-        float radians = Mathf.Deg2Rad * newAngle;
-        targetreticle.transform.position = transform.position + new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0) * radius;
+        // Update the child's position based on the calculated offset
+        targetreticle.transform.position = transform.position + offset;
     }
 
     private GameObject GetNearestTarget()
