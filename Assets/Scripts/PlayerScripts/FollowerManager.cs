@@ -33,12 +33,14 @@ public class FollowerManager : MonoBehaviour
     private bool aiming;
     private Vector3 targetResetPos;
     public GameObject targetreticle;
-    public float targetMoveSpeed;
-    [SerializeField] private float bottomTargetBuffer;
-    [SerializeField] private float topTargetBuffer;
-    [SerializeField] private float convergenceRate;
     private List<GameObject> cachedTargets = new();
     private GameObject nearestTarget;
+    float currentAngle = 0f;
+    [SerializeField] private float orbitSpeed = 10f;
+    [SerializeField] private float orbitRadius = 2f;
+    [SerializeField] private float aimTime;
+    private float aimTimeCache;
+    private bool lockedOn;
     #endregion
     
     public List<UniqueFollower> uniqueFollowers = new();
@@ -54,6 +56,7 @@ public class FollowerManager : MonoBehaviour
         targetreticle.SetActive(false);
         cachedTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlatformTrigger"));
         targetResetPos = targetreticle.transform.localPosition;
+        aimTimeCache = aimTime;
         followers.Clear();
         UpdateActiveFollower();
         for (int i = 0; i < numFollowers; i++)
@@ -126,6 +129,8 @@ public class FollowerManager : MonoBehaviour
             followers.RemoveAt(0);
             followerCount = followers.Count;
             grabbedObject = null;
+            lockedOn = false;
+            aimTime = aimTimeCache;
         }
         HandleAim();
     }
@@ -134,19 +139,24 @@ public class FollowerManager : MonoBehaviour
     private void HandleAim()
     {
         if (!aiming) return;
+        aimTime -= Time.deltaTime;
+        if (aimTime <= 0)
+        {
+            lockedOn = true;
+            Debug.Log("Locked");
+        }
         Vector3 targetVector = (GetNearestTarget().transform.position - transform.position).normalized;
         Debug.DrawLine(transform.position, GetNearestTarget().transform.position, Color.red);
-        //
-        //targetreticle.transform.RotateAround(transform.position, Vector3.forward, targetMoveSpeed * Time.deltaTime);
-        float currentAngle = 0f;
-        float orbitSpeed = 10f;
-        float orbitRadius = 2f;
-        float angleToTarget = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
-        currentAngle = angleToTarget;
-        
+        if (lockedOn)
+        {
+            float angleToTarget = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
+            currentAngle = angleToTarget;
+        }
+        else
+        {
+            currentAngle += orbitSpeed * Time.deltaTime;
+        }
         Vector3 offset = new Vector3(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad), 0) * orbitRadius;
-        
-        // Update the child's position based on the calculated offset
         targetreticle.transform.position = transform.position + offset;
     }
 
