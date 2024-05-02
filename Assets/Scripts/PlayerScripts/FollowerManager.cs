@@ -156,15 +156,14 @@ public class FollowerManager : MonoBehaviour
         }
         Vector3 targetVector = (GetNearestTarget().transform.position - transform.position).normalized;
         Debug.DrawLine(transform.position, GetNearestTarget().transform.position, Color.red);
+        float angleToTarget = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
+        currentAngle = angleToTarget;
         if (lockedOn)
         {
-            float angleToTarget = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
-            currentAngle = angleToTarget;
             reticle.transform.localPosition = reticleResetPos;
         }
         else
         {
-            currentAngle += orbitSpeed * Time.deltaTime;
             Vector3 reticlePos = reticle.transform.localPosition;
             // Move the reticle based on the current direction
             if (movingUp)
