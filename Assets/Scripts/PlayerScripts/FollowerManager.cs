@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AbstractClasses;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FollowerManager : MonoBehaviour
 {
@@ -32,15 +33,23 @@ public class FollowerManager : MonoBehaviour
     #region Target Reticle
     private bool aiming;
     private Vector3 targetResetPos;
-    public GameObject targetreticle;
+    public GameObject targetBase;
     private List<GameObject> cachedTargets = new();
     private GameObject nearestTarget;
-    float currentAngle = 0f;
+    private float currentAngle = 0f;
     [SerializeField] private float orbitSpeed = 10f;
     [SerializeField] private float orbitRadius = 2f;
     [SerializeField] private float aimTime;
     private float aimTimeCache;
     private bool lockedOn;
+    
+    
+    public GameObject targetReticle;
+    public float bounceSpeed = 2.0f;  // Speed of bouncing reticle
+    public float initialBounceHeight = 1.0f;
+    private float bounceDirection = 1.0f;  // 1 for upward, -1 for downward
+    private float currentBounceHeight;
+    private Vector3 targetStartPos;
     #endregion
     
     public List<UniqueFollower> uniqueFollowers = new();
@@ -53,10 +62,12 @@ public class FollowerManager : MonoBehaviour
     void Start()
     {
         birbRB = GetComponent<Rigidbody2D>();
-        targetreticle.SetActive(false);
+        targetBase.SetActive(false);
         cachedTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlatformTrigger"));
-        targetResetPos = targetreticle.transform.localPosition;
+        targetResetPos = targetBase.transform.localPosition;
         aimTimeCache = aimTime;
+        currentBounceHeight = initialBounceHeight;
+        targetStartPos = targetReticle.transform.position;
         followers.Clear();
         UpdateActiveFollower();
         for (int i = 0; i < numFollowers; i++)
@@ -106,26 +117,26 @@ public class FollowerManager : MonoBehaviour
 
     private void HandleThrowing()
     {
-        if (Input.GetButton("Fire1") && !targetreticle.activeSelf && followers.Count > 0)
+        if (Input.GetButton("Fire1") && !targetBase.activeSelf && followers.Count > 0)
         {
             grabbedObject = followers[0];
             grabbedObjectRB = grabbedObject.GetComponent<Rigidbody2D>();
-            targetreticle.SetActive(true);
+            targetBase.SetActive(true);
             aiming = true;
         }
             
-        else if (Input.GetButtonUp("Fire1") && targetreticle.activeSelf)
+        else if (Input.GetButtonUp("Fire1") && targetBase.activeSelf)
         {
             grabbedObject.transform.position = transform.position;
-            Vector2 throwDirection = targetreticle.transform.position - transform.position;
-            targetreticle.SetActive(false);
+            Vector2 throwDirection = targetBase.transform.position - transform.position;
+            targetBase.SetActive(false);
             grabbedObjectRB.isKinematic = false;
             //grabbedObjectRB.enabled = true; - Not sure what this is meant to do
             grabbedObjectRB.velocity = throwDirection * throwForceForward;
             grabbedObjectRB.angularVelocity += ringSpin;
             grabbedObject.GetComponent<Collider2D>().enabled = true;
             aiming = false;
-            targetreticle.transform.localPosition = targetResetPos;
+            targetBase.transform.localPosition = targetResetPos;
             followers.RemoveAt(0);
             followerCount = followers.Count;
             grabbedObject = null;
@@ -143,7 +154,6 @@ public class FollowerManager : MonoBehaviour
         if (aimTime <= 0)
         {
             lockedOn = true;
-            Debug.Log("Locked");
         }
         Vector3 targetVector = (GetNearestTarget().transform.position - transform.position).normalized;
         Debug.DrawLine(transform.position, GetNearestTarget().transform.position, Color.red);
@@ -157,7 +167,30 @@ public class FollowerManager : MonoBehaviour
             currentAngle += orbitSpeed * Time.deltaTime;
         }
         Vector3 offset = new Vector3(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad), 0) * orbitRadius;
-        targetreticle.transform.position = transform.position + offset;
+        
+        Quaternion targetRotation = Quaternion.Euler(0, 0, currentAngle);
+        targetBase.transform.rotation = targetRotation;
+        targetBase.transform.position = transform.position + offset;
+        
+        
+        if (!lockedOn)
+        {
+            currentBounceHeight += bounceDirection * bounceSpeed * Time.deltaTime;
+
+            // Reverse direction if it reaches upper or lower boundary
+            if (Mathf.Abs(currentBounceHeight) >= currentBounceHeight)
+            {
+                bounceDirection *= -1.0f;
+            }
+        }
+        else
+        {
+            // Lock reticle with base rotation and position
+            currentBounceHeight = 0.0f;
+        }
+        Vector3 reticleOffset = new Vector3(0, currentBounceHeight, 0);
+        targetReticle.transform.position = targetBase.transform.position + reticleOffset;
+        targetReticle.transform.rotation = targetBase.transform.rotation;
     }
 
     private GameObject GetNearestTarget()
