@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AbstractClasses;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FollowerManager : MonoBehaviour
 {
@@ -32,25 +33,36 @@ public class FollowerManager : MonoBehaviour
     #region Target Reticle
     private bool aiming;
     private Vector3 targetResetPos;
-    public GameObject targetreticle;
-    public float targetMoveSpeed;
+    public GameObject targetBase;
+    private List<GameObject> cachedTargets = new();
+    private GameObject nearestTarget;
+    private float currentAngle = 0f;
+    [SerializeField] private float orbitSpeed = 10f;
+    [SerializeField] private float orbitRadius = 2f;
+    [SerializeField] private float aimTime;
+    private float aimTimeCache;
+    private bool lockedOn;
+    public GameObject reticle;
+    private Vector3 reticleResetPos;
+    private bool movingUp;
     #endregion
     
     public List<UniqueFollower> uniqueFollowers = new();
     private UniqueFollower activeFollower;
     [SerializeField] private GameObject uniqueFollowerPeg;
-    private GameObject followerOne;
-    private GameObject followerTwo;
-    private GameObject followerThree;
-    private GameObject followerFour;
+    
+    public float radius = 5.0f; // Radius of the circular path
+    public float rotationSpeed = 90.0f;
 
     void Start()
     {
         birbRB = GetComponent<Rigidbody2D>();
-        targetreticle.SetActive(false);
-        targetResetPos = targetreticle.transform.localPosition;
+        targetBase.SetActive(false);
+        cachedTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlatformTrigger"));
+        targetResetPos = targetBase.transform.localPosition;
+        reticleResetPos = reticle.transform.localPosition;
+        aimTimeCache = aimTime;
         followers.Clear();
-        AssignFollowerObjects();
         UpdateActiveFollower();
         for (int i = 0; i < numFollowers; i++)
         {
@@ -99,54 +111,107 @@ public class FollowerManager : MonoBehaviour
 
     private void HandleThrowing()
     {
-        if (Input.GetButtonDown("Fire1") && !targetreticle.activeSelf && followers.Count > 0)
+        if (Input.GetButton("Fire1") && !targetBase.activeSelf && followers.Count > 0)
         {
             grabbedObject = followers[0];
             grabbedObjectRB = grabbedObject.GetComponent<Rigidbody2D>();
-            targetreticle.SetActive(true);
+            targetBase.SetActive(true);
             aiming = true;
         }
             
-        else if (Input.GetButtonDown("Fire1") && targetreticle.activeSelf)
+        else if (Input.GetButtonUp("Fire1") && targetBase.activeSelf)
         {
             grabbedObject.transform.position = transform.position;
-            Vector2 throwDirection = targetreticle.transform.position - transform.position;
-            targetreticle.SetActive(false);
+            Vector2 throwDirection = targetBase.transform.position - transform.position;
+            targetBase.SetActive(false);
             grabbedObjectRB.isKinematic = false;
             //grabbedObjectRB.enabled = true; - Not sure what this is meant to do
             grabbedObjectRB.velocity = throwDirection * throwForceForward;
             grabbedObjectRB.angularVelocity += ringSpin;
             grabbedObject.GetComponent<Collider2D>().enabled = true;
             aiming = false;
-            targetreticle.transform.localPosition = targetResetPos;
+            targetBase.transform.localPosition = targetResetPos;
+            reticle.transform.localPosition = reticleResetPos;
             followers.RemoveAt(0);
             followerCount = followers.Count;
             grabbedObject = null;
+            lockedOn = false;
+            aimTime = aimTimeCache;
         }
-
-        if (!aiming) return;
-        if (targetreticle.transform.localPosition.y >= 1)
-        {
-            targetMoveSpeed *= -1;
-        }
-            
-        if (targetreticle.transform.localPosition.y <= -0.65)
-        {
-                
-            targetMoveSpeed *= -1;
-        }
-        targetreticle.transform.RotateAround(transform.position,Vector3.forward,targetMoveSpeed * Time.deltaTime);
+        HandleAim();
     }
-    
-    private void Easythrow()
+
+
+    private void HandleAim()
     {
-        if (!Input.GetButtonDown("Fire1")) return;
-        grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
-        grabbedObject.GetComponent<Collider2D>().isTrigger = false;
-        var velocity = birbRB.velocity;
-        grabbedObject.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x * throwForceForward, velocity.y + throwForceUp);
-        grabbedObject.GetComponent<Rigidbody2D>().angularVelocity += ringSpin;
-        grabbedObject = null;
+        
+        float maxY = 2;
+        float minY = -2;
+        float bounceSpeed = 10f;
+        if (!aiming) return;
+        aimTime -= Time.deltaTime;
+        if (aimTime <= 0)
+        {
+            lockedOn = true;
+        }
+        Vector3 targetVector = (GetNearestTarget().transform.position - transform.position).normalized;
+        Debug.DrawLine(transform.position, GetNearestTarget().transform.position, Color.red);
+        float angleToTarget = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
+        currentAngle = angleToTarget;
+        if (lockedOn)
+        {
+            reticle.transform.localPosition = reticleResetPos;
+        }
+        else
+        {
+            Vector3 reticlePos = reticle.transform.localPosition;
+            // Move the reticle based on the current direction
+            if (movingUp)
+            {
+                reticlePos.y += bounceSpeed * Time.deltaTime;
+
+                // If the reticle reaches the upper bound, change direction
+                if (reticlePos.y >= maxY)
+                {
+                    movingUp = false;
+                }
+            }
+            else
+            {
+                reticlePos.y -= bounceSpeed * Time.deltaTime;
+
+                // If the reticle reaches the lower bound, change direction
+                if (reticlePos.y <= minY)
+                {
+                    movingUp = true;
+                }
+            }
+            
+            reticle.transform.localPosition = reticlePos;
+        }
+        Vector3 offset = new Vector3(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad), 0) * orbitRadius;
+        
+        Quaternion targetRotation = Quaternion.Euler(0, 0, currentAngle);
+        targetBase.transform.rotation = targetRotation;
+        targetBase.transform.position = transform.position + offset;
+    }
+
+    private GameObject GetNearestTarget()
+    {
+        nearestTarget = null;
+        float shortestDistance = float.MaxValue;
+        Vector3 currentPosition = transform.position;
+
+        foreach (var target in cachedTargets)
+        {
+            float distance = Vector3.Distance(currentPosition, target.transform.position);
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                nearestTarget = target;
+            }
+        }
+        return nearestTarget;
     }
 
     #endregion
@@ -195,22 +260,7 @@ public class FollowerManager : MonoBehaviour
             activeFollower = uniqueFollowers[0];
         }
     }
-
-    private void AssignFollowerObjects()
-    {
-        foreach (var follower in uniqueFollowers)
-        {
-            switch (follower.followerName)
-            {
-                case "test1":
-                    followerOne = follower.gameObject;
-                    break;
-                case "test2":
-                    followerTwo = follower.gameObject;
-                    break;
-            }
-        }
-    }
+    
 
     private void CycleFollowerForward()
     {
