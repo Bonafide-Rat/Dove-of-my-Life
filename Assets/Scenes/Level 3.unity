@@ -826,6 +826,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2735902183925791939, guid: 56422b1cdda5f0c459b3a07ff285ee7c, type: 3}
   m_PrefabInstance: {fileID: 295288282}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &297976109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8822157639541563656, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+  m_PrefabInstance: {fileID: 8822157640015966038}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &306524682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108596,6 +108601,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8822157639541563656, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_Name
+      value: Reticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038089, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_Name
       value: Birb
@@ -108643,6 +108684,18 @@ PrefabInstance:
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: reticle
+      value: 
+      objectReference: {fileID: 297976109}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: startingMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: startingMin
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: uniqueFollowers.Array.data[0]

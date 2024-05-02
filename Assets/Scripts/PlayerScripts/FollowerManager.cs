@@ -42,14 +42,9 @@ public class FollowerManager : MonoBehaviour
     [SerializeField] private float aimTime;
     private float aimTimeCache;
     private bool lockedOn;
-    
-    
-    public GameObject targetReticle;
-    public float bounceSpeed = 2.0f;  // Speed of bouncing reticle
-    public float initialBounceHeight = 1.0f;
-    private float bounceDirection = 1.0f;  // 1 for upward, -1 for downward
-    private float currentBounceHeight;
-    private Vector3 targetStartPos;
+    public GameObject reticle;
+    private Vector3 reticleResetPos;
+    private bool movingUp;
     #endregion
     
     public List<UniqueFollower> uniqueFollowers = new();
@@ -65,9 +60,8 @@ public class FollowerManager : MonoBehaviour
         targetBase.SetActive(false);
         cachedTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlatformTrigger"));
         targetResetPos = targetBase.transform.localPosition;
+        reticleResetPos = reticle.transform.localPosition;
         aimTimeCache = aimTime;
-        currentBounceHeight = initialBounceHeight;
-        targetStartPos = targetReticle.transform.position;
         followers.Clear();
         UpdateActiveFollower();
         for (int i = 0; i < numFollowers; i++)
@@ -137,6 +131,7 @@ public class FollowerManager : MonoBehaviour
             grabbedObject.GetComponent<Collider2D>().enabled = true;
             aiming = false;
             targetBase.transform.localPosition = targetResetPos;
+            reticle.transform.localPosition = reticleResetPos;
             followers.RemoveAt(0);
             followerCount = followers.Count;
             grabbedObject = null;
@@ -149,6 +144,10 @@ public class FollowerManager : MonoBehaviour
 
     private void HandleAim()
     {
+        
+        float maxY = 2;
+        float minY = -2;
+        float bounceSpeed = 10f;
         if (!aiming) return;
         aimTime -= Time.deltaTime;
         if (aimTime <= 0)
@@ -161,36 +160,41 @@ public class FollowerManager : MonoBehaviour
         {
             float angleToTarget = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
             currentAngle = angleToTarget;
+            reticle.transform.localPosition = reticleResetPos;
         }
         else
         {
             currentAngle += orbitSpeed * Time.deltaTime;
+            Vector3 reticlePos = reticle.transform.localPosition;
+            // Move the reticle based on the current direction
+            if (movingUp)
+            {
+                reticlePos.y += bounceSpeed * Time.deltaTime;
+
+                // If the reticle reaches the upper bound, change direction
+                if (reticlePos.y >= maxY)
+                {
+                    movingUp = false;
+                }
+            }
+            else
+            {
+                reticlePos.y -= bounceSpeed * Time.deltaTime;
+
+                // If the reticle reaches the lower bound, change direction
+                if (reticlePos.y <= minY)
+                {
+                    movingUp = true;
+                }
+            }
+            
+            reticle.transform.localPosition = reticlePos;
         }
         Vector3 offset = new Vector3(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad), 0) * orbitRadius;
         
         Quaternion targetRotation = Quaternion.Euler(0, 0, currentAngle);
         targetBase.transform.rotation = targetRotation;
         targetBase.transform.position = transform.position + offset;
-        
-        
-        if (!lockedOn)
-        {
-            currentBounceHeight += bounceDirection * bounceSpeed * Time.deltaTime;
-
-            // Reverse direction if it reaches upper or lower boundary
-            if (Mathf.Abs(currentBounceHeight) >= currentBounceHeight)
-            {
-                bounceDirection *= -1.0f;
-            }
-        }
-        else
-        {
-            // Lock reticle with base rotation and position
-            currentBounceHeight = 0.0f;
-        }
-        Vector3 reticleOffset = new Vector3(0, currentBounceHeight, 0);
-        targetReticle.transform.position = targetBase.transform.position + reticleOffset;
-        targetReticle.transform.rotation = targetBase.transform.rotation;
     }
 
     private GameObject GetNearestTarget()
