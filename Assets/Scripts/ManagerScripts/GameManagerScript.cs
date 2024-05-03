@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
+    [SerializeField] GameObject Player;
+
     public GameObject gameOverUi;
     public GameObject levelPassedUi;
     public TextMeshProUGUI scoreText;
@@ -13,9 +15,13 @@ public class GameManagerScript : MonoBehaviour
   
     public static bool playerInCover;
 
+    public Vector2 checkpointPos;
+
     // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.FindWithTag("Player");
+        checkpointPos = transform.position;
         PlayerController.isFacingRight = true;
         playerInCover = false;
         gameOverUi.SetActive(false);
@@ -40,5 +46,16 @@ public class GameManagerScript : MonoBehaviour
             $"Level Complete. You added: {FollowerManager.followerCount} / {maxScore} guests to the Wedding.";
         levelPassedUi.SetActive(true);
         Time.timeScale = 0f;
+    }
+
+    public void UpdateCheckpoint(Vector2 newPos)
+    {
+        checkpointPos = newPos;
+        Debug.Log("Player checkpoint updated. ");
+    }
+
+    public void respawn()
+    {
+        Player.transform.position = checkpointPos;
     }
 }

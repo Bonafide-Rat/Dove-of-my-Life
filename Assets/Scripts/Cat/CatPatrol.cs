@@ -14,8 +14,7 @@ public class CatPatrol : MonoBehaviour
     private Transform currentPoint;
     [SerializeField] public float speed;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         currentPoint = pointB.transform;
@@ -54,7 +53,8 @@ public class CatPatrol : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !GameManagerScript.playerInCover) // Assuming the player has a tag of "Player"
         {
-            gameManager.gameOver();
+            //gameManager.gameOver();
+            gameManager.respawn();
         }
 
         
