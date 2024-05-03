@@ -108686,9 +108686,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: aimTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: reticle
       value: 
       objectReference: {fileID: 297976109}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: shrinkSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: startingMax
       value: 2
@@ -108696,6 +108704,22 @@ PrefabInstance:
     - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: startingMin
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: reticleTopLimit
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: throwForceForward
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: reticleBottomLimit
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: reticleBounceSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038142, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: uniqueFollowers.Array.data[0]

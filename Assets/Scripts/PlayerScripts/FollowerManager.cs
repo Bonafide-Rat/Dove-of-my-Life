@@ -45,15 +45,19 @@ public class FollowerManager : MonoBehaviour
     public GameObject reticle;
     private Vector3 reticleResetPos;
     private bool movingUp;
+    
+    [SerializeField] private float reticleTopLimit = 2;
+    [SerializeField] private float reticleBottomLimit = -2;
+    [SerializeField] private float reticleBounceSpeed = 10f;
+    [SerializeField] private float shrinkSpeed;
+    private float reticleTopResetPos;
+    private float reticleBottomResetPos;
+    
     #endregion
     
     public List<UniqueFollower> uniqueFollowers = new();
     private UniqueFollower activeFollower;
     [SerializeField] private GameObject uniqueFollowerPeg;
-    
-    public float radius = 5.0f; // Radius of the circular path
-    public float rotationSpeed = 90.0f;
-
     void Start()
     {
         birbRB = GetComponent<Rigidbody2D>();
@@ -61,6 +65,8 @@ public class FollowerManager : MonoBehaviour
         cachedTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlatformTrigger"));
         targetResetPos = targetBase.transform.localPosition;
         reticleResetPos = reticle.transform.localPosition;
+        reticleTopResetPos = reticleTopLimit;
+        reticleBottomResetPos = reticleBottomLimit;
         aimTimeCache = aimTime;
         followers.Clear();
         UpdateActiveFollower();
@@ -122,7 +128,7 @@ public class FollowerManager : MonoBehaviour
         else if (Input.GetButtonUp("Fire1") && targetBase.activeSelf)
         {
             grabbedObject.transform.position = transform.position;
-            Vector2 throwDirection = targetBase.transform.position - transform.position;
+            Vector2 throwDirection = reticle.transform.position - transform.position;
             targetBase.SetActive(false);
             grabbedObjectRB.isKinematic = false;
             //grabbedObjectRB.enabled = true; - Not sure what this is meant to do
@@ -132,6 +138,8 @@ public class FollowerManager : MonoBehaviour
             aiming = false;
             targetBase.transform.localPosition = targetResetPos;
             reticle.transform.localPosition = reticleResetPos;
+            reticleTopLimit = reticleTopResetPos;
+            reticleBottomLimit = reticleBottomResetPos;
             followers.RemoveAt(0);
             followerCount = followers.Count;
             grabbedObject = null;
@@ -144,10 +152,6 @@ public class FollowerManager : MonoBehaviour
 
     private void HandleAim()
     {
-        
-        float maxY = 2;
-        float minY = -2;
-        float bounceSpeed = 10f;
         if (!aiming) return;
         aimTime -= Time.deltaTime;
         if (aimTime <= 0)
@@ -168,26 +172,32 @@ public class FollowerManager : MonoBehaviour
             // Move the reticle based on the current direction
             if (movingUp)
             {
-                reticlePos.y += bounceSpeed * Time.deltaTime;
+                reticlePos.y += reticleBounceSpeed * Time.deltaTime;
 
                 // If the reticle reaches the upper bound, change direction
-                if (reticlePos.y >= maxY)
+                if (reticlePos.y >= reticleTopLimit)
                 {
                     movingUp = false;
                 }
             }
             else
             {
-                reticlePos.y -= bounceSpeed * Time.deltaTime;
+                reticlePos.y -= reticleBounceSpeed * Time.deltaTime;
 
                 // If the reticle reaches the lower bound, change direction
-                if (reticlePos.y <= minY)
+                if (reticlePos.y <= reticleBottomLimit)
                 {
                     movingUp = true;
                 }
             }
             
             reticle.transform.localPosition = reticlePos;
+
+            if (reticleTopLimit > 0 && reticleBottomLimit < 0)
+            {
+                reticleTopLimit -= shrinkSpeed * Time.deltaTime;
+                reticleBottomLimit += shrinkSpeed * Time.deltaTime;
+            }
         }
         Vector3 offset = new Vector3(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad), 0) * orbitRadius;
         
