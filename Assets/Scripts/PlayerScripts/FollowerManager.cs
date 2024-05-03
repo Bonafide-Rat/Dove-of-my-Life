@@ -36,22 +36,29 @@ public class FollowerManager : MonoBehaviour
     public GameObject targetBase;
     private List<GameObject> cachedTargets = new();
     private GameObject nearestTarget;
-    private float currentAngle = 0f;
-    [SerializeField] private float orbitSpeed = 10f;
-    [SerializeField] private float orbitRadius = 2f;
+    private float currentAngle;
+    [SerializeField] private float targeterOrbitRadius = 2f;
     [SerializeField] private float aimTime;
     private float aimTimeCache;
     private bool lockedOn;
     public GameObject reticle;
     private Vector3 reticleResetPos;
     private bool movingUp;
+    private bool lastFacingRight = true;
     
-    [SerializeField] private float reticleTopLimit = 2;
-    [SerializeField] private float reticleBottomLimit = -2;
-    [SerializeField] private float reticleBounceSpeed = 10f;
+    [SerializeField] private float reticleTopLimit;
+    [SerializeField] private float reticleBottomLimit;
+    [SerializeField] private float reticleBounceSpeed;
     [SerializeField] private float shrinkSpeed;
+    [SerializeField] private GameObject topBumper;
+    [SerializeField] private GameObject bottomBumper;
     private float reticleTopResetPos;
     private float reticleBottomResetPos;
+
+    private Quaternion initialTopRotation;
+    private Quaternion initialBottomRotation;
+    private Vector3 initialTopPosition;
+    private Vector3 initialBottomPosition;
     
     #endregion
     
@@ -67,6 +74,10 @@ public class FollowerManager : MonoBehaviour
         reticleResetPos = reticle.transform.localPosition;
         reticleTopResetPos = reticleTopLimit;
         reticleBottomResetPos = reticleBottomLimit;
+        initialTopRotation = topBumper.transform.rotation;
+        initialBottomRotation = bottomBumper.transform.rotation;
+        initialTopPosition = topBumper.transform.localPosition;
+        initialBottomPosition = bottomBumper.transform.localPosition;
         aimTimeCache = aimTime;
         followers.Clear();
         UpdateActiveFollower();
@@ -148,6 +159,19 @@ public class FollowerManager : MonoBehaviour
         }
         HandleAim();
     }
+    
+    private void AdjustTargetScale()
+    {
+        // Explicitly set scale based on the facing direction
+        if (PlayerController.isFacingRight)
+        {
+            targetBase.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f); // Reset to normal scale
+        }
+        else
+        {
+            targetBase.transform.localScale = new Vector3(-0.2f, 0.2f, 0.2f); // Flip horizontally
+        }
+    }
 
 
     private void HandleAim()
@@ -161,6 +185,13 @@ public class FollowerManager : MonoBehaviour
         Vector3 targetVector = (GetNearestTarget().transform.position - transform.position).normalized;
         Debug.DrawLine(transform.position, GetNearestTarget().transform.position, Color.red);
         float angleToTarget = Mathf.Atan2(targetVector.y, targetVector.x) * Mathf.Rad2Deg;
+        
+        if (PlayerController.isFacingRight != lastFacingRight)
+        {
+            AdjustTargetScale();
+            lastFacingRight = PlayerController.isFacingRight; // Update the last known direction
+        }
+        Debug.Log(angleToTarget);
         currentAngle = angleToTarget;
         if (lockedOn)
         {
@@ -192,18 +223,38 @@ public class FollowerManager : MonoBehaviour
             }
             
             reticle.transform.localPosition = reticlePos;
-
-            if (reticleTopLimit > 0 && reticleBottomLimit < 0)
-            {
-                reticleTopLimit -= shrinkSpeed * Time.deltaTime;
-                reticleBottomLimit += shrinkSpeed * Time.deltaTime;
-            }
+            HandleShrink(topBumper,bottomBumper);
+            
         }
-        Vector3 offset = new Vector3(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad), 0) * orbitRadius;
-        
+        Vector3 offset = new Vector3(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad), 0) * targeterOrbitRadius;
         Quaternion targetRotation = Quaternion.Euler(0, 0, currentAngle);
         targetBase.transform.rotation = targetRotation;
         targetBase.transform.position = transform.position + offset;
+    }
+
+    private void HandleShrink(GameObject topBumper, GameObject bottomBumper)
+    {
+
+        if (reticleTopLimit > 0 && reticleBottomLimit < 0)
+        {
+            float shrinkProgress = Mathf.InverseLerp(aimTimeCache, 0f, aimTime);
+            reticleTopLimit = Mathf.Lerp(reticleTopResetPos, 0f, shrinkProgress);
+            reticleBottomLimit = Mathf.Lerp(reticleBottomResetPos, 0f, shrinkProgress);
+            Quaternion targetRotation = Quaternion.identity; // Zero degrees rotation
+            Vector3 targetPosition = new Vector3(initialTopPosition.x, 0, initialTopPosition.z);
+            topBumper.transform.localRotation = Quaternion.Lerp(
+                initialTopRotation,
+                targetRotation,
+                shrinkProgress);
+
+            bottomBumper.transform.localRotation = Quaternion.Lerp(
+                initialBottomRotation,
+                targetRotation,
+                shrinkProgress);
+
+            topBumper.transform.localPosition = Vector3.Lerp(initialTopPosition, targetPosition, shrinkProgress);
+            bottomBumper.transform.localPosition = Vector3.Lerp(initialBottomPosition, targetPosition, shrinkProgress);
+        }
     }
 
     private GameObject GetNearestTarget()
