@@ -10,8 +10,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject levelPassedUi;
     public TextMeshProUGUI scoreText;
     private int maxScore;
-    
-
+  
     public static bool playerInCover;
 
     // Start is called before the first frame update

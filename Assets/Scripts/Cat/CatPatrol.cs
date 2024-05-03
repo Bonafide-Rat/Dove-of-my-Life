@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CatPatrol : MonoBehaviour
 {
+    public GameManagerScript gameManager;
 
     public GameObject pointA;
     public GameObject pointB;
@@ -53,7 +54,7 @@ public class CatPatrol : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !GameManagerScript.playerInCover) // Assuming the player has a tag of "Player"
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reloads the current scene
+            gameManager.gameOver();
         }
 
         

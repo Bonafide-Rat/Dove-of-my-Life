@@ -8,8 +8,9 @@ public class LevelManager : MonoBehaviour
     public static int TargetScore;
     [SerializeField]private int setTargetScore;
     [SerializeField] private TextMeshProUGUI scoretext;
-
     public static int CurrentScore;
+
+
     // Start is called before the first frame update
     void Start()
     {

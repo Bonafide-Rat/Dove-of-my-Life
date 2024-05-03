@@ -11,6 +11,7 @@ TagManager:
   - MagpieBoundary
   - PlatformTrigger
   - WindZone
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
