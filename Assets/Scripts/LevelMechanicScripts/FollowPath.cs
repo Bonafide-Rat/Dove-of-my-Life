@@ -20,8 +20,9 @@ public class FollowPath : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     // Use this for initialization
-    private void Start()
+    private void Awake()
     {
+        gameObject.SetActive(false); // Will be set to true once player enters its spawn region
         // Set position of Enemy as position of the first waypoint
         transform.position = waypoints[waypointIndex].transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();

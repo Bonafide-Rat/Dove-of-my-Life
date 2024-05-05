@@ -22,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
+
         checkpointPos = transform.position;
         PlayerController.isFacingRight = true;
         playerInCover = false;
@@ -61,4 +62,6 @@ public class GameManagerScript : MonoBehaviour
         // FollowPathObject.ResetToLastWaypoint(); // Reset the path of the following object
         FollowPathObject.ResetToInitialWaypoint(checkpointPos);
     }
+
+
 }
