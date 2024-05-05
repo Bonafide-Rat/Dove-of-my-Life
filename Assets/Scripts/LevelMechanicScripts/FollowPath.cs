@@ -63,6 +63,13 @@ public class FollowPath : MonoBehaviour
         transform.position = waypoints[waypointIndex].position; // Reset position to the last visited waypoint
     }
 
+    public void ResetToInitialWaypoint(Vector2 playerPosition)
+    {
+        waypointIndex = 0; // Reset the waypoint index to the beginning
+        transform.position = new Vector2(playerPosition.x - 10, playerPosition.y); // Position 10 units to the left of the player
+        Debug.Log("Respawning enemy at last checkpoint");
+    }
+
     private void Flip()
     {
         if (waypointIndex < waypoints.Length - 1)

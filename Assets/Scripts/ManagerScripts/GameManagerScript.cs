@@ -52,12 +52,13 @@ public class GameManagerScript : MonoBehaviour
     public void UpdateCheckpoint(Vector2 newPos)
     {
         checkpointPos = newPos;
-        Debug.Log("Player checkpoint updated. ");
+        // Debug.Log("Player checkpoint updated. ");
     }
 
     public void respawn()
     {
         Player.transform.position = checkpointPos;
-        FollowPathObject.ResetToLastWaypoint(); // Reset the path of the following object
+        // FollowPathObject.ResetToLastWaypoint(); // Reset the path of the following object
+        FollowPathObject.ResetToInitialWaypoint(checkpointPos);
     }
 }
