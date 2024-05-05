@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CameraResize : MonoBehaviour
 {
-    public float zoomOutSize = 10f;
+    public float zoomOutSize = 20f;
     public float zoomSpeed = 5f;
     public Camera mainCamera;
 
     private bool playerEntered = false;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !playerEntered)
         {
@@ -19,7 +19,7 @@ public class CameraResize : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -39,5 +39,10 @@ public class CameraResize : MonoBehaviour
             mainCamera.orthographicSize += zoomSpeed * Time.deltaTime;
             yield return null;
         }
+        while (mainCamera.orthographicSize > zoomOutSize)
+        {
+            mainCamera.orthographicSize -= zoomSpeed * Time.deltaTime;
+            yield return null;
+        } 
     }
 }
