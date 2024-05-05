@@ -1,3 +1,4 @@
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,11 +17,14 @@ public class FollowPath : MonoBehaviour
     // to the next one
     private int waypointIndex = 0;
 
+    private SpriteRenderer spriteRenderer;
+
     // Use this for initialization
     private void Start()
     {
         // Set position of Enemy as position of the first waypoint
         transform.position = waypoints[waypointIndex].transform.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -28,6 +32,7 @@ public class FollowPath : MonoBehaviour
     {
         // Move Enemy
         Move();
+        Flip();
     }
 
     // Method that actually make Enemy walk
@@ -56,5 +61,20 @@ public class FollowPath : MonoBehaviour
     public void ResetToLastWaypoint()
     {
         transform.position = waypoints[waypointIndex].position; // Reset position to the last visited waypoint
+    }
+
+    private void Flip()
+    {
+        if (waypointIndex < waypoints.Length - 1)
+        {
+            // Determine if the target waypoint is to the left or right of the current position
+            bool shouldFlip = (waypoints[waypointIndex + 1].position.x < transform.position.x && !spriteRenderer.flipX) ||
+                              (waypoints[waypointIndex + 1].position.x > transform.position.x && spriteRenderer.flipX);
+            if (shouldFlip)
+            {
+                // Flip the sprite by toggling the flipX property
+                spriteRenderer.flipX = !spriteRenderer.flipX;
+            }
+        }
     }
 }
