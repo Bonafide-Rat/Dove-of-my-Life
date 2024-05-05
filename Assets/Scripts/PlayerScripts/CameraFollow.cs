@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
     public float minCameraY = -10f; // Minimum Y position of the camera
 
     private float moveInput;
-    
+    private float yPosition;
 
 
     [SerializeField] private Rigidbody2D rb;
@@ -25,6 +25,7 @@ public class CameraFollow : MonoBehaviour
     private void Update()
     {
         moveInput = Input.GetAxisRaw("Vertical");
+        yPosition = target.position.y;
 
         if (moveInput == 0){
             CameraUpdate();
@@ -35,6 +36,10 @@ public class CameraFollow : MonoBehaviour
             ManualLook();
         }
     }
+
+
+
+
 
     private void CameraUpdate() 
     {
@@ -55,7 +60,9 @@ public class CameraFollow : MonoBehaviour
     private void ManualLook()
     {
         Vector3 newPosition = transform.position + Vector3.up * moveInput * moveSpeed * Time.deltaTime;
-        newPosition.y = Mathf.Clamp(newPosition.y, minCameraY, maxCameraY);
+        if (moveInput != 0){
+            newPosition.y = Mathf.Clamp(newPosition.y, yPosition + minCameraY, yPosition + maxCameraY);
+        }
         transform.position = newPosition;
     }
 
