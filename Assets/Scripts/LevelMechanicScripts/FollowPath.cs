@@ -26,6 +26,7 @@ public class FollowPath : MonoBehaviour
         // Set position of Enemy as position of the first waypoint
         transform.position = waypoints[waypointIndex].transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        // spriteRenderer.flipX = false;
     }
 
     // Update is called once per frame
