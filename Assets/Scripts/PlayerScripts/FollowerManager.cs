@@ -5,6 +5,8 @@ using System.Linq;
 using AbstractClasses;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
+
 
 public class FollowerManager : MonoBehaviour
 {
@@ -140,7 +142,7 @@ public class FollowerManager : MonoBehaviour
             grabbedObject.GetComponent<Collider2D>().enabled = true;
             aiming = false;
             targetBase.transform.localPosition = targetResetPos;
-            reticle.transform.localPosition = reticleResetPos;
+            reticle.transform.localPosition = new Vector3(reticle.transform.localPosition.x,Random.Range(reticleBottomLimit,reticleTopLimit),0);
             reticleTopLimit = reticleTopResetPos;
             reticleBottomLimit = reticleBottomResetPos;
             followers.RemoveAt(0);
