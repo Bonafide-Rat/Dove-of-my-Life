@@ -6,6 +6,6 @@ PhysicsMaterial2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BouncyBird
-  friction: 0.4
-  bounciness: 0.6
+  m_Name: Anti-Bounce
+  friction: 5
+  bounciness: 0
