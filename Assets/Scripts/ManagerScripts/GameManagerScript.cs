@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameManagerScript : MonoBehaviour
 {
     [SerializeField] GameObject Player;
+    [SerializeField] FollowPath FollowPathObject;
 
     public GameObject gameOverUi;
     public GameObject levelPassedUi;
@@ -57,5 +58,6 @@ public class GameManagerScript : MonoBehaviour
     public void respawn()
     {
         Player.transform.position = checkpointPos;
+        FollowPathObject.ResetToLastWaypoint(); // Reset the path of the following object
     }
 }

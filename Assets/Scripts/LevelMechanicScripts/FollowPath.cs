@@ -39,18 +39,22 @@ public class FollowPath : MonoBehaviour
         {
             // Move Enemy from current waypoint to the next one
             // using MoveTowards method
-            transform.position = Vector2.MoveTowards(transform.position,
-               waypoints[waypointIndex + 1].transform.position,
-               moveSpeed * Time.deltaTime);
+            transform.position = 
+                Vector2.MoveTowards(transform.position, waypoints[waypointIndex + 1].transform.position, moveSpeed * Time.deltaTime);
 
             // If Enemy reaches position of waypoint he walked towards
             // then waypointIndex is increased by 1
             // and Enemy starts to walk to the next waypoint
             if (Vector2.Distance(transform.position, waypoints[waypointIndex + 1].position) < 0.5f)
             {
-                Debug.Log("Pos reached.");
+                // Debug.Log("Pos reached.");
                 waypointIndex += 1;
             }
         }
+    }
+
+    public void ResetToLastWaypoint()
+    {
+        transform.position = waypoints[waypointIndex].position; // Reset position to the last visited waypoint
     }
 }
