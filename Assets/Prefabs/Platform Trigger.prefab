@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6529567527531909360}
   m_Layer: 0
   m_Name: Platform Trigger
-  m_TagString: Untagged
+  m_TagString: PlatformTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,8 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platforms:
   - {fileID: 0}
+  - {fileID: 0}
   timer: 3
   isTimed: 0
+  isMakeAppear: 1
 --- !u!61 &6367887115892657155
 BoxCollider2D:
   m_ObjectHideFlags: 0

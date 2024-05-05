@@ -61,10 +61,6 @@ public class FollowerManager : MonoBehaviour
     private Vector3 initialBottomPosition;
     
     #endregion
-    
-    public List<UniqueFollower> uniqueFollowers = new();
-    private UniqueFollower activeFollower;
-    [SerializeField] private GameObject uniqueFollowerPeg;
     void Start()
     {
         birbRB = GetComponent<Rigidbody2D>();
@@ -80,7 +76,6 @@ public class FollowerManager : MonoBehaviour
         initialBottomPosition = bottomBumper.transform.localPosition;
         aimTimeCache = aimTime;
         followers.Clear();
-        UpdateActiveFollower();
         for (int i = 0; i < numFollowers; i++)
         {
             AddFollower();
@@ -90,8 +85,6 @@ public class FollowerManager : MonoBehaviour
     private void Update()
     {
         HandleThrowing();
-        HandleUseAbility();
-        HandleCycleFollowers();
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             AddFollower();
@@ -101,7 +94,6 @@ public class FollowerManager : MonoBehaviour
     void FixedUpdate()
     {
         HandleLeadFollow();
-        HandleFollowBird();
     }
 
 
@@ -191,7 +183,6 @@ public class FollowerManager : MonoBehaviour
             AdjustTargetScale();
             lastFacingRight = PlayerController.isFacingRight; // Update the last known direction
         }
-        Debug.Log(angleToTarget);
         currentAngle = angleToTarget;
         if (lockedOn)
         {
@@ -275,83 +266,5 @@ public class FollowerManager : MonoBehaviour
         return nearestTarget;
     }
 
-    #endregion
-
-    #region Unique Follower Methods
-
-    private void HandleUseAbility()
-    {
-        if (Input.GetButtonDown("Fire2") && activeFollower != null)
-        {
-            activeFollower.UseAbility();
-            StartCoroutine(Cooldown(activeFollower.cooldown, activeFollower));
-            uniqueFollowers.Remove(activeFollower);
-            activeFollower = null;
-            if (uniqueFollowers.Any())
-            {
-                UpdateActiveFollower();
-            }
-        }
-    }
-
-    private void HandleFollowBird()
-    {
-        if (uniqueFollowers.Any() && uniqueFollowers[^1].transform.position != uniqueFollowerPeg.transform.position)
-        {
-            foreach (var uniqueFollower in uniqueFollowers)
-            {
-                var targetPos = new Vector3(uniqueFollowerPeg.transform.position.x - uniqueFollowers.IndexOf(uniqueFollower), uniqueFollowerPeg.transform.position.y,0);
-                //var targetPos = transform.position;
-                uniqueFollower.transform.position = Vector2.Lerp(uniqueFollower.transform.position, targetPos, lerpTime);
-            }
-        }
-    }
-
-    private void HandleCycleFollowers()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            CycleFollowerForward();
-        }
-    }
-    private void UpdateActiveFollower()
-    {
-        if (uniqueFollowers.Any())
-        {
-            activeFollower = uniqueFollowers[0];
-        }
-    }
-    
-
-    private void CycleFollowerForward()
-    {
-        int lastIndex = uniqueFollowers.Count - 1;
-        UniqueFollower lastItem = uniqueFollowers[lastIndex]; // Store the last item
-
-        for (int i = lastIndex; i > 0; i--)
-        {
-            uniqueFollowers[i] = uniqueFollowers[i - 1]; // Shift elements forward by one
-        }
-
-        uniqueFollowers[0] = lastItem;
-        UpdateActiveFollower();
-    }
-
-    private void SpawnUniqueFollowers()
-    {
-        foreach (var follower in uniqueFollowers)
-        {
-            Instantiate(follower);
-        }
-    }
-
-    IEnumerator Cooldown(float waitTime, UniqueFollower followerToAdd)
-    {
-        yield return new WaitForSeconds(waitTime);
-        followerToAdd.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        uniqueFollowers.Add(followerToAdd);
-        UpdateActiveFollower();
-        followerToAdd.DisableRbAndCollider();
-    }
     #endregion
 }
