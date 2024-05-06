@@ -192,7 +192,17 @@ public class PlayerController : MonoBehaviour
     #region Gravity
     private void HandleGravity()
     {
-        // Case 1 - Gravity when grounded:
+        // Case 1 - In wind zone
+        if (insideAreaEffector)
+        {
+            // When inside a WindZone, neutralize downward velocity
+            if (rb.velocity.y < 0) // Check if falling
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0); // Stop downward movement
+            }
+        }
+
+        // Case 2 - Gravity when grounded:
         if (birdGrounded && rb.velocity.y <= 0f)
         {
             // When grounded and not moving upwards, apply a grounding force to keep the player on the ground.
@@ -201,12 +211,12 @@ public class PlayerController : MonoBehaviour
             // Reset gravity scale once grounded
             rb.gravityScale = 1;
         }
-        // Case 2 - Gravity when gliding:
+        // Case 3 - Gravity when gliding:
         else if (isGliding)
         {
             rb.velocity = new Vector2(rb.velocity.x, -stats.GlideFallSpeed);
         }
-        // Case 3 - Gravity when jump is released early (short jumps):
+        // Case 4 - Gravity when jump is released early (short jumps):
         else
         {
             float inAirGravity = fallAcceleration;
@@ -234,6 +244,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("WindZone"))
         {
             insideAreaEffector = true;
+            jumpCount = 0;
         }
     }
 
