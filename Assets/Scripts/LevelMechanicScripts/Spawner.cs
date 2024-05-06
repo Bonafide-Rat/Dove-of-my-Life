@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] FollowPath FollowPathObject;
+    [SerializeField] Transform spawnPosition;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,7 +13,8 @@ public class Spawner : MonoBehaviour
         {
             //Debug.Log("Entering trigger..");
             FollowPathObject.gameObject.SetActive(true);
-            FollowPathObject.ResetToInitialWaypoint(other.transform.position);
+            // FollowPathObject.ResetToInitialWaypoint(other.transform.position);
+            FollowPathObject.ResetToInitialWaypoint(spawnPosition.position);
         }
     }
 }
