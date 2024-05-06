@@ -18,6 +18,7 @@ public class FollowPath : MonoBehaviour
     private int waypointIndex = 0;
 
     private SpriteRenderer spriteRenderer;
+    public GameManagerScript gameManager;
 
     // Use this for initialization
     private void Awake()
@@ -84,6 +85,16 @@ public class FollowPath : MonoBehaviour
                 // Flip the sprite by toggling the flipX property
                 spriteRenderer.flipX = !spriteRenderer.flipX;
             }
+        }
+    }
+
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player") && !GameManagerScript.playerInCover) // Assuming the player has a tag of "Player"
+        {
+            //gameManager.gameOver();
+            gameManager.respawn();
         }
     }
 }
