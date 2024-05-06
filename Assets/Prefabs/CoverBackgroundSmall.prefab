@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 2425846892854137483}
   m_Layer: 7
   m_Name: CoverBackgroundSmall
-  m_TagString: Untagged
+  m_TagString: TriggerZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -436,7 +436,7 @@ Transform:
   m_Children:
   - {fileID: 3827429552173169760}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2425846892854137480
 BoxCollider2D:

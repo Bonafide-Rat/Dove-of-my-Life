@@ -26,6 +26,8 @@ public class FollowPath : MonoBehaviour
 
     [HideInInspector]public bool doMoveChaser;
 
+    private int resetIndex;
+
     // Use this for initialization
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class FollowPath : MonoBehaviour
         // Set position of Enemy as position of the first waypoint
         transform.position = waypoints[waypointIndex].transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        resetIndex = 0;
         // spriteRenderer.flipX = false;
     }
 
@@ -76,6 +79,7 @@ public class FollowPath : MonoBehaviour
             {
                 if (waypoint.gameObject == waypoints[waypointIndex].gameObject)
                 {
+                    resetIndex = waypointIndex;
                     doMoveChaser = false;
                     paused = true;
                 }
@@ -90,8 +94,16 @@ public class FollowPath : MonoBehaviour
 
     public void ResetToInitialWaypoint(Vector2 playerPosition)
     {
-        waypointIndex = 0; // Reset the waypoint index to the beginning
-        transform.position = new Vector2(playerPosition.x - 35, playerPosition.y); // Position 35 units to the left of the player
+        waypointIndex = resetIndex;
+        if (paused)
+        {
+            transform.position = waypoints[waypointIndex].transform.position;
+        }
+        else
+        {
+            transform.position = new Vector2(playerPosition.x - 10, playerPosition.y);
+        }
+         // Position 10 units to the left of the player
         Debug.Log("Respawning enemy at last checkpoint");
     }
 
