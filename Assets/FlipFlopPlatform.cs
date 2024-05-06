@@ -7,15 +7,20 @@ public class FlipFlopPlatform : MonoBehaviour
 {
 
     [SerializeField] private HingeJoint2D joint2D;
+    [SerializeField] private GameManagerScript gameManager;
     private JointMotor2D jointMotor;
     [SerializeField] private float switchBuffer;
     private bool isPlayerOffPlatform;
     private float switchBufferCache;
+    private float startMotorSpeed;
     // Start is called before the first frame update
+
     void Start()
     {
         jointMotor = joint2D.motor;
+        startMotorSpeed = jointMotor.motorSpeed;
         switchBufferCache = switchBuffer;
+        gameManager.OnRespawn += ResetPlatforms;
     }
 
     // Update is called once per frame
@@ -25,6 +30,7 @@ public class FlipFlopPlatform : MonoBehaviour
         {
             HandleMotor();
         }
+        Debug.Log(startMotorSpeed + "/" + jointMotor.motorSpeed);
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -49,6 +55,20 @@ public class FlipFlopPlatform : MonoBehaviour
     {
         switchBuffer -= Time.deltaTime;
         if (!(switchBuffer <= 0)) return;
+        jointMotor.motorSpeed *= -1;
+        joint2D.motor = jointMotor;
+        isPlayerOffPlatform = false;
+        switchBuffer = switchBufferCache;
+    }
+
+    private void ResetPlatforms()
+    {
+        if (jointMotor.motorSpeed == startMotorSpeed) return;
+        FlipPlatform();
+    }
+
+    private void FlipPlatform()
+    {
         jointMotor.motorSpeed *= -1;
         joint2D.motor = jointMotor;
         isPlayerOffPlatform = false;

@@ -15,10 +15,7 @@ public class SceneManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ReloadScene();
-        }
+        
     }
 
 

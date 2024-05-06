@@ -56,8 +56,6 @@ public class CatPatrol : MonoBehaviour
             //gameManager.gameOver();
             gameManager.respawn();
         }
-
-        
     }
 
 
