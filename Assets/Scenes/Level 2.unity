@@ -268,7 +268,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -395,8 +395,8 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: cb337326f5ebf7742be7b12704d88697, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 1099292806, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 900854400, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
   - m_RefCount: 1
@@ -409,8 +409,8 @@ Tilemap:
     m_Data: {fileID: 802833346, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -810082628, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1099292806, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -143053634, guid: 7e04e5098e3cd384d95f0506eee9b817, type: 3}
   m_TileMatrixArray:
@@ -5857,6 +5857,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 953521667486270098, guid: 2810b030806139f438672625e1aba40e, type: 3}
+      propertyPath: m_Size.x
+      value: 1.3884277
+      objectReference: {fileID: 0}
+    - target: {fileID: 953521667486270098, guid: 2810b030806139f438672625e1aba40e, type: 3}
+      propertyPath: m_Size.y
+      value: 1.921135
+      objectReference: {fileID: 0}
+    - target: {fileID: 953521667486270098, guid: 2810b030806139f438672625e1aba40e, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 953521667486270098, guid: 2810b030806139f438672625e1aba40e, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.46056747
+      objectReference: {fileID: 0}
     - target: {fileID: 953521667486270099, guid: 2810b030806139f438672625e1aba40e, type: 3}
       propertyPath: gameManager
       value: 
@@ -5907,7 +5923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953521667486270101, guid: 2810b030806139f438672625e1aba40e, type: 3}
       propertyPath: m_Name
-      value: EndZome
+      value: EndZone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25703,7 +25719,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints:
   - {fileID: 1015343934}
+  pauseWaypoints: []
   moveSpeed: 2
+  gameManager: {fileID: 0}
+  doMoveChaser: 0
 --- !u!1001 &3138235351972312776
 PrefabInstance:
   m_ObjectHideFlags: 0
