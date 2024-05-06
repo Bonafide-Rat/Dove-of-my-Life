@@ -26,7 +26,6 @@ public class GameManagerScript : MonoBehaviour
     {
         Player = GameObject.FindWithTag("Player");
         checkpointPos = transform.position;
-        Debug.Log("Player pos: " + Player.transform.position + " Checkpoint Pos: " + checkpointPos);
         PlayerController.isFacingRight = true;
         playerInCover = false;
         gameOverUi.SetActive(false);
@@ -59,7 +58,6 @@ public class GameManagerScript : MonoBehaviour
     public void UpdateCheckpoint(Vector2 newPos)
     {
         checkpointPos = newPos;
-        // Debug.Log("Player checkpoint updated. ");
     }
 
     public void respawn()

@@ -35,7 +35,6 @@ public class FollowPath : MonoBehaviour
         transform.position = waypoints[waypointIndex].transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         resetIndex = 0;
-        // spriteRenderer.flipX = false;
     }
 
     // Update is called once per frame
@@ -86,24 +85,33 @@ public class FollowPath : MonoBehaviour
         }
     }
 
-    public void ResetToLastWaypoint()
+    public void ResetToLastWaypoint(int index)
     {
-        transform.position = waypoints[waypointIndex].position; // Reset position to the last visited waypoint
+        Debug.Log(index);
+        transform.position = waypoints[index - 4].position; // Spawn back a few points
     }
 
     public void ResetToInitialWaypoint(Vector2 playerPosition)
     {
+        int lastIndex = waypointIndex;
         waypointIndex = resetIndex;
+
+        // Case 1 - Paused
         if (paused)
         {
             transform.position = waypoints[waypointIndex].transform.position;
         }
+        // Case 2 - Game object is currently active and chasing player, so reset it to the last waypoint it has visited.
+        /* if (lastIndex > 0) //
+        {
+            Debug.Log("Resetting to last waypoint...");
+            ResetToLastWaypoint(lastIndex);
+        } */
+        // Else, spawn it a fixed distance away from the player.
         else
         {
             transform.position = new Vector2(playerPosition.x - 35, playerPosition.y);
         }
-         // Position 35 units to the left of the player
-        // Debug.Log("Respawning enemy at last checkpoint");
     }
 
     private void Flip()
