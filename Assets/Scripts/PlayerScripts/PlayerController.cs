@@ -214,7 +214,7 @@ public class PlayerController : MonoBehaviour
         // Case 3 - Gravity when gliding:
         else if (isGliding)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -stats.GlideFallSpeed);
+            rb.velocity = new Vector2(0.8f * rb.velocity.x, -stats.GlideFallSpeed);
         }
         // Case 4 - Gravity when jump is released early (short jumps):
         else
