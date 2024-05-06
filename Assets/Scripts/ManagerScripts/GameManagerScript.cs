@@ -59,12 +59,11 @@ public class GameManagerScript : MonoBehaviour
     public void UpdateCheckpoint(Vector2 newPos)
     {
         checkpointPos = newPos;
-        Debug.Log("Player checkpoint updated. ");
+        // Debug.Log("Player checkpoint updated. ");
     }
 
     public void respawn()
     {
-        Debug.Log("R key pressed. ");
         Player.transform.position = checkpointPos;
 
         if (OnRespawn != null)

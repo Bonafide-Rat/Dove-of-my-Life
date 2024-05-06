@@ -102,8 +102,8 @@ public class FollowPath : MonoBehaviour
         {
             transform.position = new Vector2(playerPosition.x - 35, playerPosition.y);
         }
-         // Position 10 units to the left of the player
-        Debug.Log("Respawning enemy at last checkpoint");
+         // Position 35 units to the left of the player
+        // Debug.Log("Respawning enemy at last checkpoint");
     }
 
     private void Flip()

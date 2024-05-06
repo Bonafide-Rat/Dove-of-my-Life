@@ -7923,7 +7923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3939349249690968099, guid: b6e626dd088e97e4b880392592ef035c, type: 3}
       propertyPath: m_ForceMagnitude
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 7339587928196444328, guid: b6e626dd088e97e4b880392592ef035c, type: 3}
       propertyPath: m_Name
