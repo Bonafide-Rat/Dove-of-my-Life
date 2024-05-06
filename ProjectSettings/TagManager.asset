@@ -12,6 +12,7 @@ TagManager:
   - PlatformTrigger
   - WindZone
   - Checkpoint
+  - TriggerZone
   layers:
   - Default
   - TransparentFX

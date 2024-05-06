@@ -12,7 +12,6 @@ public class GameManagerScript : MonoBehaviour
     public GameObject gameOverUi;
     public GameObject levelPassedUi;
     public TextMeshProUGUI scoreText;
-    private int maxScore;
   
     public static bool playerInCover;
 
@@ -51,7 +50,7 @@ public class GameManagerScript : MonoBehaviour
     public void LevelPassed()
     {
         scoreText.text =
-            $"Level Complete. You added: {FollowerManager.followerCount} / {maxScore} guests to the Wedding.";
+            $"Level Complete. {LevelManager.CurrentScore} / {LevelManager.TargetScore} flowers pollinated.";
         levelPassedUi.SetActive(true);
         Time.timeScale = 0f;
     }

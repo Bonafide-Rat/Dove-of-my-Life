@@ -28,12 +28,20 @@ public class FollowersScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
+        if (!other.CompareTag("TriggerZone"))
+        {
+            Debug.Log(other.gameObject.name);
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject);
+        if (!other.gameObject.CompareTag("TriggerZone"))
+        {
+            Debug.Log(other.gameObject.name);
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
