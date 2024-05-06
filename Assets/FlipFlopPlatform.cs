@@ -26,11 +26,15 @@ public class FlipFlopPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    private void FixedUpdate()
+    {
         if (isPlayerOffPlatform)
         {
             HandleMotor();
         }
-        Debug.Log(startMotorSpeed + "/" + jointMotor.motorSpeed);
     }
 
     private void OnCollisionExit2D(Collision2D other)

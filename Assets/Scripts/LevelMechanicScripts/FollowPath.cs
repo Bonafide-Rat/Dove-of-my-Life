@@ -40,7 +40,6 @@ public class FollowPath : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Debug.Log(doMoveChaser);
         // Move Enemy
         if (doMoveChaser)
         {

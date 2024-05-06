@@ -30,7 +30,6 @@ public class FollowersScript : MonoBehaviour
     {
         if (!other.CompareTag("TriggerZone"))
         {
-            Debug.Log(other.gameObject.name);
             Destroy(gameObject);
         }
     }
@@ -39,7 +38,6 @@ public class FollowersScript : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("TriggerZone"))
         {
-            Debug.Log(other.gameObject.name);
             Destroy(gameObject);
         }
     }
