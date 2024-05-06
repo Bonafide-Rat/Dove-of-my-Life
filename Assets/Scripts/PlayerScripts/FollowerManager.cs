@@ -38,6 +38,7 @@ public class FollowerManager : MonoBehaviour
     public GameObject targetBase;
     private List<GameObject> cachedTargets = new();
     private GameObject nearestTarget;
+    [SerializeField] private float distanceLimit;
     private float currentAngle;
     [SerializeField] private float targeterOrbitRadius = 2f;
     [SerializeField] private float aimTime;
@@ -122,7 +123,7 @@ public class FollowerManager : MonoBehaviour
 
     private void HandleThrowing()
     {
-        if (Input.GetButton("Fire1") && !targetBase.activeSelf && followers.Count > 0)
+        if (Input.GetButton("Fire1") && !targetBase.activeSelf && followers.Count > 0 && GetNearestTarget() is not null)
         {
             grabbedObject = followers[0];
             grabbedObjectRB = grabbedObject.GetComponent<Rigidbody2D>();
@@ -253,6 +254,7 @@ public class FollowerManager : MonoBehaviour
     private GameObject GetNearestTarget()
     {
         nearestTarget = null;
+        UpdateCachedTargets();
         float shortestDistance = float.MaxValue;
         Vector3 currentPosition = transform.position;
 
@@ -266,6 +268,17 @@ public class FollowerManager : MonoBehaviour
             }
         }
         return nearestTarget;
+    }
+
+    private void UpdateCachedTargets()
+    {
+        for (int i = 0; i < cachedTargets.Count -1; i++)
+        {
+            if (!cachedTargets[i])
+            {
+                cachedTargets.RemoveAt(i);
+            }
+        }
     }
 
     #endregion

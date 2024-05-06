@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1969441761393237567}
   - component: {fileID: 1969441761393237566}
   - component: {fileID: 1969441761393237562}
-  - component: {fileID: 1969441761393237564}
-  - component: {fileID: 2737200549411419263}
+  - component: {fileID: 7663892828714079955}
+  - component: {fileID: -4968960335193844154}
   m_Layer: 0
-  m_Name: Magpie
+  m_Name: BigChaseEnemy
   m_TagString: Magpie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.705526, y: 1.203233}
   m_EdgeRadius: 0
---- !u!114 &1969441761393237564
+--- !u!114 &7663892828714079955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,13 +141,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1969441761393237536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fff1059642e2db47b93f018696aa3e7, type: 3}
+  m_Script: {fileID: 11500000, guid: bc9f9df7b61c28e45b58409297510936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  gameManager: {fileID: 0}
-  startPos: {fileID: 0}
---- !u!114 &2737200549411419263
+  waypoints: []
+  moveSpeed: 2
+--- !u!114 &-4968960335193844154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

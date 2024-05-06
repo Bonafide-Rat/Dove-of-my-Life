@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,6 +10,9 @@ public class FollowPath : MonoBehaviour
     [SerializeField]
     private Transform[] waypoints;
 
+    [SerializeField]private Transform[] pauseWaypoints;
+    private bool paused;
+
     // Walk speed that can be set in Inspector
     [SerializeField]
     private float moveSpeed = 2f;
@@ -18,6 +22,8 @@ public class FollowPath : MonoBehaviour
     private int waypointIndex = 0;
 
     private SpriteRenderer spriteRenderer;
+
+    [HideInInspector]public bool doMoveChaser;
 
     // Use this for initialization
     private void Awake()
@@ -32,8 +38,12 @@ public class FollowPath : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Debug.Log(doMoveChaser);
         // Move Enemy
-        Move();
+        if (doMoveChaser)
+        {
+            Move();
+        }
         Flip();
     }
 
@@ -42,7 +52,7 @@ public class FollowPath : MonoBehaviour
     {
         // If Enemy didn't reach last waypoint it can move
         // If enemy reached last waypoint then it stops
-        if (waypointIndex <= waypoints.Length - 1)
+        if (waypointIndex < waypoints.Length - 1)
         {
             // Move Enemy from current waypoint to the next one
             // using MoveTowards method
@@ -56,6 +66,18 @@ public class FollowPath : MonoBehaviour
             {
                 // Debug.Log("Pos reached.");
                 waypointIndex += 1;
+            }
+        }
+
+        if (pauseWaypoints.Any() && !paused)
+        {
+            foreach (var waypoint in pauseWaypoints)
+            {
+                if (waypoint.gameObject == waypoints[waypointIndex].gameObject)
+                {
+                    doMoveChaser = false;
+                    paused = true;
+                }
             }
         }
     }

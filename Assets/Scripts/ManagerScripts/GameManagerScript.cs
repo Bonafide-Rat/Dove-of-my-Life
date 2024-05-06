@@ -18,11 +18,14 @@ public class GameManagerScript : MonoBehaviour
 
     public Vector2 checkpointPos;
 
+    public delegate void OnRespawnDelegate();
+
+    public event OnRespawnDelegate OnRespawn;
+
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
-
         checkpointPos = transform.position;
         PlayerController.isFacingRight = true;
         playerInCover = false;
@@ -34,7 +37,10 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            respawn();
+        }
     }
 
     public void gameOver(){
@@ -59,6 +65,10 @@ public class GameManagerScript : MonoBehaviour
     public void respawn()
     {
         Player.transform.position = checkpointPos;
+        if (OnRespawn != null)
+        {
+            OnRespawn();
+        }
         // FollowPathObject.ResetToLastWaypoint(); // Reset the path of the following object
         FollowPathObject.ResetToInitialWaypoint(checkpointPos);
     }
