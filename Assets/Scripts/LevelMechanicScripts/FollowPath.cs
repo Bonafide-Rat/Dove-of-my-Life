@@ -7,7 +7,7 @@ public class FollowPath : MonoBehaviour
 
     // Array of waypoints to walk from one to the next one
     [SerializeField]
-    private Transform[] waypoints;
+    public Transform[] waypoints;
 
     [SerializeField]private Transform[] pauseWaypoints;
     private bool paused;
@@ -18,14 +18,14 @@ public class FollowPath : MonoBehaviour
 
     // Index of current waypoint from which Enemy walks
     // to the next one
-    private int waypointIndex = 0;
+    public int waypointIndex = 0;
 
     private SpriteRenderer spriteRenderer;
     public GameManagerScript gameManager;
 
     [HideInInspector]public bool doMoveChaser;
 
-    private int resetIndex;
+    public int resetIndex;
 
     // Use this for initialization
     private void Awake()
@@ -96,7 +96,7 @@ public class FollowPath : MonoBehaviour
 
     public void ResetToInitialWaypoint(Vector2 playerPosition)
     {
-        int lastIndex = waypointIndex;
+        //int lastIndex = waypointIndex; (For Case 2)
         waypointIndex = resetIndex;
 
         // Case 1 - Paused
