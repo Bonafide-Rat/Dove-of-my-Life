@@ -51,6 +51,10 @@ public class FollowPath : MonoBehaviour
     // Method that actually make Enemy walk
     private void Move()
     {
+        if (paused)
+        {
+            paused = false;
+        }
         // If Enemy didn't reach last waypoint it can move
         // If enemy reached last waypoint then it stops
         if (waypointIndex < waypoints.Length - 1)
