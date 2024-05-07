@@ -58,6 +58,7 @@ public class GameManagerScript : MonoBehaviour
     public void UpdateCheckpoint(Vector2 newPos)
     {
         checkpointPos = newPos;
+        FollowPathObject.resetIndex = FollowPathObject.waypointIndex;
     }
 
     public void respawn()
