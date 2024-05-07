@@ -42,8 +42,8 @@ public class FlipFlopPlatform : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        Debug.Log(joint2D.limitState);
-        if (other.gameObject.CompareTag("Player") && (joint2D.jointAngle <= 0 || Mathf.Approximately(joint2D.jointAngle, 180)))
+        Debug.Log(joint2D.jointAngle);
+        if (other.gameObject.CompareTag("Player") && (joint2D.jointAngle <= 1 || Mathf.Approximately(joint2D.jointAngle, 180)))
         {
             Debug.Log("OffSuccess");
             isPlayerOffPlatform = true;
@@ -87,7 +87,6 @@ public class FlipFlopPlatform : MonoBehaviour
         isResetting = true;
         yield return new WaitForSeconds(0.5f);
         ResetPlatform();
-        SetJointLimits(0,180);
         isResetting = false;
     }
 

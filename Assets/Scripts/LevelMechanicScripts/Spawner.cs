@@ -1,25 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] FollowPath FollowPathObject;
+    [SerializeField] FollowPath followPathObject;
     [SerializeField] Transform spawnPosition;
     private bool isTriggered;
     void OnTriggerEnter2D(Collider2D other)
-    {
+    {    
+        Debug.Log(isTriggered);
         if (!other.CompareTag("Player")) return;
-        if (!FollowPathObject.gameObject.activeSelf)
+        if (!followPathObject.gameObject.activeSelf)
         {
             //Debug.Log("Entering trigger..");
-            FollowPathObject.gameObject.SetActive(true);
-            FollowPathObject.ResetToInitialWaypoint(spawnPosition.position);
+            followPathObject.gameObject.SetActive(true);
+            followPathObject.ResetToInitialWaypoint(spawnPosition.position);
         }
-        if (!isTriggered)
-        {
-            FollowPathObject.doMoveChaser = !FollowPathObject.doMoveChaser;
-            isTriggered = true;
-        }
+
+        if (isTriggered) return;
+        followPathObject.doMoveChaser = !followPathObject.doMoveChaser;
+        //followPathObject.paused = false;
+        isTriggered = true;
+        Debug.Log(followPathObject.doMoveChaser  + " " + followPathObject.paused);
     }
 }

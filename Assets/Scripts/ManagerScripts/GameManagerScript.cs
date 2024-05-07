@@ -50,7 +50,7 @@ public class GameManagerScript : MonoBehaviour
     public void LevelPassed()
     {
         scoreText.text =
-            $"Level Complete. {LevelManager.CurrentScore} / {LevelManager.TargetScore} flowers pollinated.";
+            $"Level Complete. \n {LevelManager.CurrentScore} / {LevelManager.TargetScore} flowers pollinated.";
         levelPassedUi.SetActive(true);
         Time.timeScale = 0f;
     }

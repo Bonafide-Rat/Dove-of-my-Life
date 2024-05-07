@@ -10,7 +10,7 @@ public class FollowPath : MonoBehaviour
     private Transform[] waypoints;
 
     [SerializeField]private Transform[] pauseWaypoints;
-    private bool paused;
+    
 
     // Walk speed that can be set in Inspector
     [SerializeField]
@@ -23,7 +23,8 @@ public class FollowPath : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public GameManagerScript gameManager;
 
-    [HideInInspector]public bool doMoveChaser;
+    public bool doMoveChaser;
+    public bool paused;
 
     private int resetIndex;
 
@@ -51,10 +52,6 @@ public class FollowPath : MonoBehaviour
     // Method that actually make Enemy walk
     private void Move()
     {
-        if (paused)
-        {
-            paused = false;
-        }
         // If Enemy didn't reach last waypoint it can move
         // If enemy reached last waypoint then it stops
         if (waypointIndex < waypoints.Length - 1)
@@ -71,6 +68,7 @@ public class FollowPath : MonoBehaviour
             {
                 // Debug.Log("Pos reached.");
                 waypointIndex += 1;
+                paused = false;
             }
         }
 
