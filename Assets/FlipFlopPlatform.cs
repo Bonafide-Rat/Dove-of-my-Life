@@ -7,7 +7,6 @@ public class FlipFlopPlatform : MonoBehaviour
 {
 
     [SerializeField] private HingeJoint2D joint2D;
-    [SerializeField] private GameManagerScript gameManager;
     private JointMotor2D jointMotor;
     [SerializeField] private float switchBuffer;
     private bool isPlayerOffPlatform;
@@ -23,7 +22,7 @@ public class FlipFlopPlatform : MonoBehaviour
         jointMotor = joint2D.motor;
         startMotorSpeed = jointMotor.motorSpeed;
         switchBufferCache = switchBuffer;
-        gameManager.OnRespawn += StartReset;
+        GameManagerScript.OnRespawn += StartReset;
     }
 
     // Update is called once per frame

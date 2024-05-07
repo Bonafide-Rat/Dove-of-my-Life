@@ -83,6 +83,8 @@ public class FollowerManager : MonoBehaviour
         {
             AddFollower();
         }
+
+        GameManagerScript.OnRespawn += ResetFollowers;
     }
 
     private void Update()
@@ -279,6 +281,16 @@ public class FollowerManager : MonoBehaviour
                 cachedTargets.RemoveAt(i);
             }
         }
+    }
+
+    private void ResetFollowers()
+    {
+        foreach (var follower in followers)
+        {
+            Destroy(follower);
+        }
+        followers.Clear();
+        followerCount = 0;
     }
 
     #endregion

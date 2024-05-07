@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        gameManager.OnRespawn += ResetTrigger;
+        GameManagerScript.OnRespawn += ResetTrigger;
     }
 
     void OnTriggerEnter2D(Collider2D other)

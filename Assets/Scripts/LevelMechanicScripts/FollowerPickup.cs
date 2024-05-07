@@ -11,6 +11,7 @@ public class FollowerPickup : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        GameManagerScript.OnRespawn += Reset;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -29,6 +30,13 @@ public class FollowerPickup : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         yield return new WaitForSeconds(audioSource.clip.length);
         other.GetComponent<FollowerManager>().AddFollower();
-        Destroy(gameObject);
+        GetComponent<AudioSource>().enabled = false;
+    }
+
+    private void Reset()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<AudioSource>().enabled = true;
     }
 }

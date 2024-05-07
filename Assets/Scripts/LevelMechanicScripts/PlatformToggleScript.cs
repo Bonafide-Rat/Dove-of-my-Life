@@ -31,6 +31,11 @@ public class PlatformToggleScript : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        GameManagerScript.OnRespawn += Reset;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Follower"))
@@ -105,5 +110,13 @@ public class PlatformToggleScript : MonoBehaviour
             animator.SetBool("UndoPlatform", true);
             Invoke(nameof(TogglePlatforms), timer);
         isTriggered = true;
+    }
+
+    private void Reset()
+    {
+        if (isTimed) return;
+        animator.SetBool("UndoPlatform", true);
+        TogglePlatforms();
+        isTriggered = false;
     }
 }

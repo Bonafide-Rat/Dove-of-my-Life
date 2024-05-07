@@ -19,7 +19,7 @@ public class GameManagerScript : MonoBehaviour
 
     public delegate void OnRespawnDelegate();
 
-    public event OnRespawnDelegate OnRespawn;
+    public static event OnRespawnDelegate OnRespawn;
 
     // Start is called before the first frame update
     void Start()
