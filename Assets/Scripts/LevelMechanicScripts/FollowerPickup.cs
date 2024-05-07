@@ -15,7 +15,7 @@ public class FollowerPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.GetComponent<FollowerManager>() != null)
         {
             StartCoroutine(Pickup(other));
         }
