@@ -62,6 +62,9 @@ public class GameManagerScript : MonoBehaviour
     public void UpdateCheckpoint(Vector2 newPos, bool updateNextPause)
     {
         checkpointPos = newPos;
+
+        FollowPathObject.resetIndex = FollowPathObject.waypointIndex;
+        
         if (FollowPathObject.pauseWaypoints.Any() && !FollowPathObject.paused)
         {
             Debug.Log("Old NextPause: " + FollowPathObject.nextPauseWaypoint);
