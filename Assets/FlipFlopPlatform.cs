@@ -52,7 +52,7 @@ public class FlipFlopPlatform : MonoBehaviour
         
         if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck"))
         {
-            Debug.Log("EnterSuccess");
+            //Debug.Log("EnterSuccess");
             switchBuffer = switchBufferCache;
             isPlayerOffPlatform = false;
         }
@@ -62,7 +62,7 @@ public class FlipFlopPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck"))
         {
-            Debug.Log("EnterSuccess");
+            //Debug.Log("EnterSuccess");
             switchBuffer = switchBufferCache;
             isPlayerOffPlatform = false;
         }

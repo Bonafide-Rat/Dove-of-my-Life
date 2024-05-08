@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,10 +59,20 @@ public class GameManagerScript : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void UpdateCheckpoint(Vector2 newPos)
+    public void UpdateCheckpoint(Vector2 newPos, bool updateNextPause)
     {
         checkpointPos = newPos;
-        FollowPathObject.resetIndex = FollowPathObject.waypointIndex;
+        if (FollowPathObject.pauseWaypoints.Any() && !FollowPathObject.paused)
+        {
+            Debug.Log("Old NextPause: " + FollowPathObject.nextPauseWaypoint);
+            if (FollowPathObject.nextPauseWaypoint != FollowPathObject.pauseWaypoints.Length - 1 && updateNextPause)
+            {
+                FollowPathObject.nextPauseWaypoint += 1;
+            }
+            FollowPathObject.resetIndex = Array.IndexOf(FollowPathObject.waypoints, FollowPathObject.pauseWaypoints[FollowPathObject.nextPauseWaypoint]);
+            FollowPathObject.transform.position = FollowPathObject.waypoints[FollowPathObject.resetIndex].transform.position;
+            Debug.Log("New NextPause: " + FollowPathObject.nextPauseWaypoint);
+        }
     }
 
     public void respawn()

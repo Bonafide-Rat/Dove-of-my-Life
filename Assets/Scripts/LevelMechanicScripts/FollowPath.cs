@@ -9,7 +9,7 @@ public class FollowPath : MonoBehaviour
     [SerializeField]
     public Transform[] waypoints;
 
-    [SerializeField]private Transform[] pauseWaypoints;
+    public Transform[] pauseWaypoints;
     
 
     // Walk speed that can be set in Inspector
@@ -25,7 +25,7 @@ public class FollowPath : MonoBehaviour
 
     public bool doMoveChaser;
     public bool paused;
-
+    public int nextPauseWaypoint;
     public int resetIndex;
 
     // Use this for initialization
@@ -36,6 +36,7 @@ public class FollowPath : MonoBehaviour
         transform.position = waypoints[waypointIndex].transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         resetIndex = 0;
+        nextPauseWaypoint = 0;
     }
 
     // Update is called once per frame
