@@ -144,7 +144,7 @@ namespace PlayerScripts
                 aiming = true;
             }
             
-            else if (Input.GetButtonUp("Fire1") && targetBase.activeSelf)
+            else if (Input.GetButtonUp("Fire1") && targetBase.activeSelf || (targetBase.activeSelf && GetNearestTarget() == null))
             {
                 audioSource.Stop();
                 grabbedObject.transform.position = transform.position;
@@ -274,12 +274,13 @@ namespace PlayerScripts
             UpdateCachedTargets();
             float shortestDistance = float.MaxValue;
             Vector3 currentPosition = transform.position;
+            float maxDistance = 30;
             if (!cachedTargets.Any()) return null;
             foreach (var target in cachedTargets)
             {
                 if(target == null) continue;
                 float distance = Vector3.Distance(currentPosition, target.transform.position);
-                if (!(distance < shortestDistance)) continue;
+                if ((distance > shortestDistance) || distance > maxDistance) continue;
                 shortestDistance = distance;
                 nearestTarget = target;
             }
