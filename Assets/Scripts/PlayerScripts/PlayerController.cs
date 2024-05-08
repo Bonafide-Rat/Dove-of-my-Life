@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour
         airDeceleration = stats.AirDeceleration;
         fallAcceleration = stats.FallAcceleration;
         jumpEndEarlyGravity = stats.JumpEndEarlyGravityModifier;
+        if (groundCheck == null) {
+            Debug.LogError("GroundCheck is not assigned.", this);
+        }
     }
 
     void Update()

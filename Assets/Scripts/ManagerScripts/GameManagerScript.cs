@@ -31,6 +31,8 @@ public class GameManagerScript : MonoBehaviour
         gameOverUi.SetActive(false);
         levelPassedUi.SetActive(false);
         Time.timeScale = 1;
+        
+        Debug.Log(GameObject.FindGameObjectsWithTag("Player").Length);
     }
 
     // Update is called once per frame

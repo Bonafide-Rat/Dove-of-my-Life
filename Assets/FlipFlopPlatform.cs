@@ -41,7 +41,7 @@ public class FlipFlopPlatform : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && (joint2D.jointAngle <= 1 || Mathf.Approximately(joint2D.jointAngle, 180)))
+        if ((other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck")) && (joint2D.jointAngle <= 1 || Mathf.Approximately(joint2D.jointAngle, 180)))
         {
             isPlayerOffPlatform = true;
         }
@@ -50,7 +50,7 @@ public class FlipFlopPlatform : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck"))
         {
             Debug.Log("EnterSuccess");
             switchBuffer = switchBufferCache;
@@ -60,7 +60,7 @@ public class FlipFlopPlatform : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck"))
         {
             Debug.Log("EnterSuccess");
             switchBuffer = switchBufferCache;
@@ -70,7 +70,7 @@ public class FlipFlopPlatform : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && (joint2D.jointAngle <= 1 || Mathf.Approximately(joint2D.jointAngle, 180)))
+        if ((other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck") && (joint2D.jointAngle <= 1 || Mathf.Approximately(joint2D.jointAngle, 180))))
         {
             isPlayerOffPlatform = true;
         }
