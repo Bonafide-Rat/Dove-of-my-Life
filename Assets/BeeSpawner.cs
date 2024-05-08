@@ -38,6 +38,7 @@ public class BeeSpawner : MonoBehaviour
         if (spawnedPickup == null && currentTimeLeft <= 0)
         {
             spawnedPickup = Instantiate(pickupToSpawn, spawnPos, Quaternion.identity);
+            spawnedPickup.GetComponent<FollowerPickup>().destroyOnPickup = true;
             currentTimeLeft = spawnTimeBetween;
         }
     }

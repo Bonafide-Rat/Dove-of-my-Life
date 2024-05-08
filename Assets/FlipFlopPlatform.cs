@@ -7,7 +7,6 @@ public class FlipFlopPlatform : MonoBehaviour
 {
 
     [SerializeField] private HingeJoint2D joint2D;
-    [SerializeField] private GameManagerScript gameManager;
     private JointMotor2D jointMotor;
     [SerializeField] private float switchBuffer;
     private bool isPlayerOffPlatform;
@@ -23,13 +22,13 @@ public class FlipFlopPlatform : MonoBehaviour
         jointMotor = joint2D.motor;
         startMotorSpeed = jointMotor.motorSpeed;
         switchBufferCache = switchBuffer;
-        gameManager.OnRespawn += StartReset;
+        GameManagerScript.OnRespawn += StartReset;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("CurrAngle: " + joint2D.jointAngle + " startAngle: " + startAngle);
+        
     }
 
     private void FixedUpdate()
@@ -42,20 +41,38 @@ public class FlipFlopPlatform : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        Debug.Log(joint2D.jointAngle);
-        if (other.gameObject.CompareTag("Player") && (joint2D.jointAngle <= 1 || Mathf.Approximately(joint2D.jointAngle, 180)))
+        if ((other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck")) && (joint2D.jointAngle <= 1 || Mathf.Approximately(joint2D.jointAngle, 180)))
         {
-            Debug.Log("OffSuccess");
             isPlayerOffPlatform = true;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        
+        if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck"))
         {
+            //Debug.Log("EnterSuccess");
             switchBuffer = switchBufferCache;
             isPlayerOffPlatform = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck"))
+        {
+            //Debug.Log("EnterSuccess");
+            switchBuffer = switchBufferCache;
+            isPlayerOffPlatform = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if ((other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("GroundCheck") && (joint2D.jointAngle <= 1 || Mathf.Approximately(joint2D.jointAngle, 180))))
+        {
+            isPlayerOffPlatform = true;
         }
     }
 

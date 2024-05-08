@@ -1005,11 +1005,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.8
+      value: -15.5
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: -2.8
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1887,6 +1887,10 @@ PrefabInstance:
     - target: {fileID: 4199899657698502383, guid: aef36c18295040a41bb7487576d02d12, type: 3}
       propertyPath: m_Name
       value: Platform Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367887115892657152, guid: aef36c18295040a41bb7487576d02d12, type: 3}
+      propertyPath: platforms.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6367887115892657152, guid: aef36c18295040a41bb7487576d02d12, type: 3}
       propertyPath: platforms.Array.data[0]

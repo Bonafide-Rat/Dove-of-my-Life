@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +21,7 @@ public class GameManagerScript : MonoBehaviour
 
     public delegate void OnRespawnDelegate();
 
-    public event OnRespawnDelegate OnRespawn;
+    public static event OnRespawnDelegate OnRespawn;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,8 @@ public class GameManagerScript : MonoBehaviour
         gameOverUi.SetActive(false);
         levelPassedUi.SetActive(false);
         Time.timeScale = 1;
+        
+        Debug.Log(GameObject.FindGameObjectsWithTag("Player").Length);
     }
 
     // Update is called once per frame
@@ -55,21 +59,32 @@ public class GameManagerScript : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void UpdateCheckpoint(Vector2 newPos)
+    public void UpdateCheckpoint(Vector2 newPos, bool updateNextPause)
     {
         checkpointPos = newPos;
+        if (FollowPathObject.pauseWaypoints.Any() && !FollowPathObject.paused)
+        {
+            Debug.Log("Old NextPause: " + FollowPathObject.nextPauseWaypoint);
+            if (FollowPathObject.nextPauseWaypoint != FollowPathObject.pauseWaypoints.Length - 1 && updateNextPause)
+            {
+                FollowPathObject.nextPauseWaypoint += 1;
+            }
+            FollowPathObject.resetIndex = Array.IndexOf(FollowPathObject.waypoints, FollowPathObject.pauseWaypoints[FollowPathObject.nextPauseWaypoint]);
+            FollowPathObject.transform.position = FollowPathObject.waypoints[FollowPathObject.resetIndex].transform.position;
+            Debug.Log("New NextPause: " + FollowPathObject.nextPauseWaypoint);
+        }
     }
 
     public void respawn()
     {
         Player.transform.position = checkpointPos;
 
-        if (OnRespawn != null)
-        {
-            OnRespawn();
-        }
+        OnRespawn?.Invoke();
         // FollowPathObject.ResetToLastWaypoint(); // Reset the path of the following object
-        FollowPathObject.ResetToInitialWaypoint(checkpointPos);
+        if (FollowPathObject != null)
+        {
+            FollowPathObject.ResetToInitialWaypoint(checkpointPos);
+        }
     }
 
 

@@ -10,6 +10,7 @@ public class PlatformToggleScript : MonoBehaviour
     [SerializeField] private List<GameObject> platforms;
     [SerializeField] private float timer;
     [SerializeField] private bool isTimed;
+    private AudioSource audioSource;
     private bool isTriggered;
     [SerializeField]private bool isMakeAppear;
     private Animator animator;
@@ -31,10 +32,20 @@ public class PlatformToggleScript : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        GameManagerScript.OnRespawn += Reset;
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Follower"))
         {
+            if (!isTriggered)
+            {
+                audioSource.Play();
+            }
             if (isTimed && !animator.GetBool("UndoPlatform"))
             {
                 TimerTogglePlatforms();
@@ -105,5 +116,16 @@ public class PlatformToggleScript : MonoBehaviour
             animator.SetBool("UndoPlatform", true);
             Invoke(nameof(TogglePlatforms), timer);
         isTriggered = true;
+    }
+
+    private void Reset()
+    {
+        if (isTimed) return;
+        if (isTriggered)
+        {
+            TogglePlatforms();
+        }
+        animator.SetBool("UndoPlatform", true);
+        isTriggered = false;
     }
 }

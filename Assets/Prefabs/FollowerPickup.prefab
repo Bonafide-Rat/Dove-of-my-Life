@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8137530638129262651}
   - component: {fileID: -7489471793018033055}
   - component: {fileID: 1432671137668570495}
+  - component: {fileID: 5593239410832154362}
   m_Layer: 0
   m_Name: FollowerPickup
   m_TagString: Follower
@@ -142,7 +143,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 633af7016b5668442bc9996403cb515a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ea754da7eff6eb34aa47ec245c05537c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.6
   m_Pitch: 1
@@ -240,3 +241,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36dc069e3e7bd94f94942377239fdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnPickup: 0
+--- !u!95 &5593239410832154362
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137530638129262648}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 708055fd35234c9499a50ed0d662582c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

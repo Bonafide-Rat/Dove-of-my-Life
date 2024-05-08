@@ -5,6 +5,8 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
     public GameManagerScript gameManager;
+    public bool isUpdateNextEnemyResetPoint;
+    private bool isTriggered;
 
     private void Awake()
     {
@@ -14,9 +16,10 @@ public class CheckpointManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isTriggered)
         {
-            gameManager.UpdateCheckpoint(transform.position);
+            gameManager.UpdateCheckpoint(transform.position, isUpdateNextEnemyResetPoint);
+            isTriggered = true;
         }
     }
 

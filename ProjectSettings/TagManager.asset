@@ -13,6 +13,7 @@ TagManager:
   - WindZone
   - Checkpoint
   - TriggerZone
+  - GroundCheck
   layers:
   - Default
   - TransparentFX

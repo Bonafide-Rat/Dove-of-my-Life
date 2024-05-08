@@ -207,7 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joint2D: {fileID: 3180249631032321225}
   gameManager: {fileID: 0}
-  switchBuffer: 0.1
+  switchBuffer: 0.05
 --- !u!1 &5145729260798357151
 GameObject:
   m_ObjectHideFlags: 0
