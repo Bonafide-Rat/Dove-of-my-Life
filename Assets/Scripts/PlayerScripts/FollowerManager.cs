@@ -64,7 +64,7 @@ namespace PlayerScripts
         private Vector3 initialBottomPosition;
 
         [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip lockedOnSound;
+        [SerializeField] private AudioClip firingSound;
     
         #endregion
         
@@ -146,7 +146,8 @@ namespace PlayerScripts
             
             else if (Input.GetButtonUp("Fire1") && targetBase.activeSelf || (targetBase.activeSelf && GetNearestTarget() == null))
             {
-                audioSource.Stop();
+                audioSource.PlayOneShot(firingSound, 0.7f);
+                audioSource.pitch = Random.Range(0.7f, 0.9f);
                 grabbedObject.transform.position = transform.position;
                 Vector2 throwDirection = reticle.transform.position - transform.position;
                 targetBase.SetActive(false);
