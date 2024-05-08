@@ -23,31 +23,16 @@ public class CatPatrol : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 point = currentPoint.position - transform.position;
+        // Move towards the current target point.
+        transform.position = Vector2.MoveTowards(transform.position, currentPoint.position, speed * Time.fixedDeltaTime);
 
-        if (currentPoint == pointB.transform)
+        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f)
         {
-            rb.velocity = new Vector2(speed, 0);
-
-            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f)
-            {
-                flip();
-                currentPoint = pointA.transform;
-            }
-        }
-        else // This is where you check if the cat is at point A
-        {
-            rb.velocity = new Vector2(-speed, 0);
-
-            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f)
-            {
-                flip();
-                currentPoint = pointB.transform;
-            }
+            flip();
+            // Toggle between point A and point B
+            currentPoint = (currentPoint == pointB.transform) ? pointA.transform : pointB.transform;
         }
     }
-    
-    
 
     void OnTriggerEnter2D(Collider2D other)
     {
