@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
@@ -61,8 +62,13 @@ namespace PlayerScripts
         private Quaternion initialBottomRotation;
         private Vector3 initialTopPosition;
         private Vector3 initialBottomPosition;
+
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip lockedOnSound;
     
         #endregion
+        
+        
 
         private void Awake()
         {
@@ -133,11 +139,14 @@ namespace PlayerScripts
                 grabbedObject = followers[0];
                 grabbedObjectRB = grabbedObject.GetComponent<Rigidbody2D>();
                 targetBase.SetActive(true);
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
+                audioSource.Play();
                 aiming = true;
             }
             
             else if (Input.GetButtonUp("Fire1") && targetBase.activeSelf)
             {
+                audioSource.Stop();
                 grabbedObject.transform.position = transform.position;
                 Vector2 throwDirection = reticle.transform.position - transform.position;
                 targetBase.SetActive(false);
@@ -165,11 +174,11 @@ namespace PlayerScripts
             // Explicitly set scale based on the facing direction
             if (PlayerController.isFacingRight)
             {
-                targetBase.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f); // Reset to normal scale
+                targetBase.transform.localScale = new Vector3(0.14f, 0.14f, 0.14f); // Reset to normal scale
             }
             else
             {
-                targetBase.transform.localScale = new Vector3(-0.2f, 0.2f, 0.2f); // Flip horizontally
+                targetBase.transform.localScale = new Vector3(-0.14f, 0.14f, 0.14f); // Flip horizontally
             }
         }
 
@@ -196,6 +205,7 @@ namespace PlayerScripts
             currentAngle = angleToTarget;
             if (lockedOn)
             {
+                //audio.PlayOneShot(lockedOnSound);
                 reticle.transform.localPosition = reticleResetPos;
             }
             else
@@ -289,12 +299,35 @@ namespace PlayerScripts
 
         private void ResetFollowers()
         {
+            if (targetBase.activeSelf)
+            {
+                audioSource.Stop();
+                grabbedObject.transform.position = transform.position;
+                Vector2 throwDirection = reticle.transform.position - transform.position;
+                targetBase.SetActive(false);
+                grabbedObjectRB.isKinematic = false;
+                //grabbedObjectRB.enabled = true; - Not sure what this is meant to do
+                grabbedObjectRB.velocity = throwDirection * throwForceForward;
+                grabbedObjectRB.angularVelocity += ringSpin;
+                grabbedObject.GetComponent<Collider2D>().enabled = true;
+                aiming = false;
+                targetBase.transform.localPosition = targetResetPos;
+                reticle.transform.localPosition = new Vector3(reticle.transform.localPosition.x,Random.Range(reticleBottomLimit,reticleTopLimit),0);
+                reticleTopLimit = reticleTopResetPos;
+                reticleBottomLimit = reticleBottomResetPos;
+                followers.RemoveAt(0);
+                followerCount = followers.Count;
+                grabbedObject = null;
+                lockedOn = false;
+                aimTime = aimTimeCache;
+            }
             foreach (var follower in followers)
             {
                 Destroy(follower);
             }
             followers.Clear();
             followerCount = 0;
+            
         }
 
         #endregion
