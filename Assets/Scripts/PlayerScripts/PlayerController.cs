@@ -222,6 +222,7 @@ public class PlayerController : MonoBehaviour
         // Case 4 - Gravity when jump is released early (short jumps):
         else
         {
+            Debug.Log("Case 4");
             float inAirGravity = fallAcceleration;
 
             // Check if the jump has ended early (the player has released the jump button before reaching the apex of the jump).
@@ -255,9 +256,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("WindZone"))
         {
+            Debug.Log("Exiting wind zone");
             insideAreaEffector = false;
-            float inAirGravity = fallAcceleration;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.MoveTowards(rb.velocity.y, -stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime));
         }
     }
 
