@@ -256,6 +256,8 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("WindZone"))
         {
             insideAreaEffector = false;
+            float inAirGravity = fallAcceleration;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.MoveTowards(rb.velocity.y, -stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime));
         }
     }
 
