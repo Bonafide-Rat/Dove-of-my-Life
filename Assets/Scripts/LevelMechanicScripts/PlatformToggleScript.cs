@@ -115,8 +115,11 @@ public class PlatformToggleScript : MonoBehaviour
     private void Reset()
     {
         if (isTimed) return;
+        if (isTriggered)
+        {
+            TogglePlatforms();
+        }
         animator.SetBool("UndoPlatform", true);
-        TogglePlatforms();
         isTriggered = false;
     }
 }

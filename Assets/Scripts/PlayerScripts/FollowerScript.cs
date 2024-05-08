@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PlayerScripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,6 +20,14 @@ public class FollowersScript : MonoBehaviour
         mainScript = GameObject.FindWithTag("Player").GetComponent<FollowerManager>();
         followers = FollowerManager.followers;
         myIndex = followers.IndexOf(gameObject);
+        if (mainScript == null)
+        {
+            Debug.LogError("FollowerScript: MainScript is null. Check the Player tag or component setup.");
+        }
+        if (followers == null)
+        {
+            Debug.LogError("FollowerScript: Followers list is null. Check FollowerManager initialization.");
+        }
     }
 
     private void Update()
@@ -46,7 +55,7 @@ public class FollowersScript : MonoBehaviour
     void FixedUpdate()
     {
         if (followers.Count <= 0) return;
-        if (myIndex > 0)
+        if (myIndex > 0 && followers != null && followers.Count > myIndex - 1 && followers[myIndex - 1] != null)
         {
             transform.position = Vector2.Lerp(transform.position,followers[myIndex - 1].transform.position + new Vector3(Random.Range(-jitterMagnitude, jitterMagnitude),Random.Range(-jitterMagnitude, jitterMagnitude) ),mainScript.lerpTime);
         }

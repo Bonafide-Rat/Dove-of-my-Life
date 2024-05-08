@@ -1,17 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PlayerScripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class FollowerPickup : MonoBehaviour
 {
     private AudioSource audioSource;
+    [HideInInspector] public bool destroyOnPickup;
+
+
+    private void Awake()
+    {
+        GameManagerScript.OnRespawn += Reset;
+    }
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        GameManagerScript.OnRespawn += Reset;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -31,6 +38,11 @@ public class FollowerPickup : MonoBehaviour
         yield return new WaitForSeconds(audioSource.clip.length);
         other.GetComponent<FollowerManager>().AddFollower();
         GetComponent<AudioSource>().enabled = false;
+        if (destroyOnPickup)
+        {
+            GameManagerScript.OnRespawn -= Reset;
+            Destroy(gameObject);
+        }
     }
 
     private void Reset()

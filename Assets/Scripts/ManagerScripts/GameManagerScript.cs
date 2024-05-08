@@ -65,12 +65,12 @@ public class GameManagerScript : MonoBehaviour
     {
         Player.transform.position = checkpointPos;
 
-        if (OnRespawn != null)
-        {
-            OnRespawn();
-        }
+        OnRespawn?.Invoke();
         // FollowPathObject.ResetToLastWaypoint(); // Reset the path of the following object
-        FollowPathObject.ResetToInitialWaypoint(checkpointPos);
+        if (FollowPathObject != null)
+        {
+            FollowPathObject.ResetToInitialWaypoint(checkpointPos);
+        }
     }
 
 

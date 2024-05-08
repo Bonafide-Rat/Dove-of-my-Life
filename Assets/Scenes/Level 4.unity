@@ -269,8 +269,11 @@ MonoBehaviour:
   - {fileID: 216693714}
   pauseWaypoints: []
   moveSpeed: 14
+  waypointIndex: 0
   gameManager: {fileID: 327651261}
   doMoveChaser: 0
+  paused: 0
+  resetIndex: 0
 --- !u!4 &30351265
 Transform:
   m_ObjectHideFlags: 0
@@ -7036,11 +7039,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 141.17
+      value: 11.8
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 134.36
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54164,7 +54167,15 @@ PrefabInstance:
       value: -3.86
       objectReference: {fileID: 0}
     - target: {fileID: 1419141991211714127, guid: 8783609b369266648b792cda0f9949c0, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 327651261}
+    - target: {fileID: 1419141991211714127, guid: 8783609b369266648b792cda0f9949c0, type: 3}
       propertyPath: FollowPathObject
+      value: 
+      objectReference: {fileID: 30351263}
+    - target: {fileID: 1419141991211714127, guid: 8783609b369266648b792cda0f9949c0, type: 3}
+      propertyPath: followPathObject
       value: 
       objectReference: {fileID: 30351263}
     - target: {fileID: 4776943992927372406, guid: 8783609b369266648b792cda0f9949c0, type: 3}
