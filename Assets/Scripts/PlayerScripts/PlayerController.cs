@@ -255,8 +255,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("WindZone"))
         {
-            Debug.Log("Exiting wind zone");
             insideAreaEffector = false;
+            float inAirGravity = fallAcceleration * stats.JumpEndEarlyGravityModifier;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.MoveTowards(rb.velocity.y, -stats.MaxFallSpeed * 3.0f, inAirGravity * Time.fixedDeltaTime));
         }
     }
 
