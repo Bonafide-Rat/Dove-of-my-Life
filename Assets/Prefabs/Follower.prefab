@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5958045405753542320}
   - component: {fileID: 3936578752688637742}
   - component: {fileID: 762427361038466547}
+  - component: {fileID: 7146806839758180085}
   m_Layer: 0
   m_Name: Follower
   m_TagString: Follower
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ce54ea0b0e02a44a5d952976e5cfa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 0}
 --- !u!50 &3936578752688637742
 Rigidbody2D:
   serializedVersion: 4
@@ -161,3 +163,23 @@ CapsuleCollider2D:
   m_Offset: {x: 0.1313122, y: -0.032048892}
   m_Size: {x: 1.9062041, y: 1.5186381}
   m_Direction: 0
+--- !u!95 &7146806839758180085
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2225453488117378758}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 708055fd35234c9499a50ed0d662582c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
