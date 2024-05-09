@@ -11280,6 +11280,7 @@ MonoBehaviour:
   gameManager: {fileID: 1689121424}
   doMoveChaser: 0
   paused: 0
+  nextPauseWaypoint: 0
   resetIndex: 0
 --- !u!1 &705897876
 GameObject:
@@ -14639,6 +14640,7 @@ MonoBehaviour:
   FollowPathObject: {fileID: 703548910}
   gameOverUi: {fileID: 1681213567}
   levelPassedUi: {fileID: 1325149691}
+  pausedUI: {fileID: 1778153860}
   scoreText: {fileID: 1193448419}
   checkpointPos: {x: 0, y: 0}
 --- !u!4 &1689121425
@@ -14760,6 +14762,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 240145186, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 449652789, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 640653432, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1420209148}
+    - target: {fileID: 640653432, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 812464318, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1689121424}
+    - target: {fileID: 812464318, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseUnpauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724716280, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1420209148}
+    - target: {fileID: 1724716280, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 3766860902786778552, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -14894,6 +14928,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+--- !u!1 &1778153860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 240145186, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+  m_PrefabInstance: {fileID: 1778153859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1783194368
 GameObject:
   m_ObjectHideFlags: 0
@@ -33907,6 +33946,7 @@ MonoBehaviour:
   gameManager: {fileID: 1689121424}
   doMoveChaser: 0
   paused: 0
+  nextPauseWaypoint: 0
   resetIndex: 0
 --- !u!1 &2056090690
 GameObject:
@@ -34041,6 +34081,7 @@ MonoBehaviour:
   gameManager: {fileID: 1689121424}
   doMoveChaser: 0
   paused: 0
+  nextPauseWaypoint: 0
   resetIndex: 0
 --- !u!4 &2120211038 stripped
 Transform:

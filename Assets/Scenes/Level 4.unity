@@ -1517,6 +1517,7 @@ MonoBehaviour:
   FollowPathObject: {fileID: 30351263}
   gameOverUi: {fileID: 1737312682}
   levelPassedUi: {fileID: 1737312681}
+  pausedUI: {fileID: 1737312680}
   scoreText: {fileID: 491625394}
   checkpointPos: {x: 0, y: 0}
 --- !u!4 &327651262
@@ -8461,6 +8462,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 240145186, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 640653432, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 519420034}
+    - target: {fileID: 640653432, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 812464318, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 327651261}
+    - target: {fileID: 812464318, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseUnpauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724716280, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 519420034}
+    - target: {fileID: 1724716280, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 3766860902786778552, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -8598,6 +8627,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+--- !u!1 &1737312680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 240145186, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+  m_PrefabInstance: {fileID: 1737312679}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1737312681 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3766860903443968419, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}

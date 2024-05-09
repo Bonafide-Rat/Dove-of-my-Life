@@ -70,7 +70,7 @@ public class GameManagerScript : MonoBehaviour
         if (FollowPathObject.pauseWaypoints.Any() && !FollowPathObject.paused)
         {
             Debug.Log("PauseCheck");
-            if (FollowPathObject.nextPauseWaypoint != FollowPathObject.pauseWaypoints.Length - 1 && updateNextPause)
+            if (FollowPathObject.nextPauseWaypoint != FollowPathObject.pauseWaypoints.Length && updateNextPause)
             {
                 FollowPathObject.nextPauseWaypoint += 1;
             }
