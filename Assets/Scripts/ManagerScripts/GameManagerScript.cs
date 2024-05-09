@@ -56,15 +56,18 @@ public class GameManagerScript : MonoBehaviour
 
     public void LevelPassed()
     {
+        if (LevelManager.TargetScore > 0){
         scoreText.text =
             $"Level Complete. \n {LevelManager.CurrentScore} / {LevelManager.TargetScore} flowers pollinated.";
         levelPassedUi.SetActive(true);
         Time.timeScale = 0f;
+        }
     }
 
     public void UpdateCheckpoint(Vector2 newPos, bool updateNextPause)
     {
         checkpointPos = newPos;
+        FollowPathObject.resetIndex = FollowPathObject.waypointIndex;
         if (FollowPathObject.pauseWaypoints.Any() && !FollowPathObject.paused)
         {
             Debug.Log("PauseCheck");
