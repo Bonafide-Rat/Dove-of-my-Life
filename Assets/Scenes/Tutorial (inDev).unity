@@ -488,6 +488,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115530042}
   m_CullTransparentMesh: 1
+--- !u!114 &145738313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 145738313, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+  m_PrefabInstance: {fileID: 694994645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &174903743
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,17 +979,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c9534a638c13d4e818a93c640ce79a, type: 3}
---- !u!114 &449652791 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 449652791, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
-  m_PrefabInstance: {fileID: 694994645}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &461395717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1275,7 +1275,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setTargetScore: 5
-  scoretext: {fileID: 449652791}
+  scoreFillbar: {fileID: 145738313}
+  scoreBorder: {fileID: 2121669379}
+  maxScoreBorder: {fileID: -1339584489, guid: 71895739f066462458e8fa43a4f16499, type: 3}
 --- !u!114 &519420037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3378,6 +3380,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c9534a638c13d4e818a93c640ce79a, type: 3}
+--- !u!1 &1674261576 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8822157640279038089, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+  m_PrefabInstance: {fileID: 461395717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1680510730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 551906311917545959, guid: 16721b103b6fbce42a3ada27476be99a, type: 3}
@@ -3520,7 +3527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47af911bb1aec1e459b1ab9e75fa903c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 1674261576}
   FollowPathObject: {fileID: 0}
   gameOverUi: {fileID: 694994648}
   levelPassedUi: {fileID: 694994647}
@@ -66266,6 +66273,17 @@ Transform:
   m_Father: {fileID: 1402006288}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2121669379 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2121669379, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+  m_PrefabInstance: {fileID: 694994645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2139713415
 GameObject:
   m_ObjectHideFlags: 0
