@@ -150,6 +150,7 @@ namespace PlayerScripts
                 audioSource.pitch = Random.Range(0.7f, 0.9f);
                 grabbedObject.transform.position = transform.position;
                 Vector2 throwDirection = reticle.transform.position - transform.position;
+                reticle.GetComponent<SpriteRenderer>().enabled = true;
                 targetBase.SetActive(false);
                 grabbedObjectRB.isKinematic = false;
                 //grabbedObjectRB.enabled = true; - Not sure what this is meant to do
@@ -191,6 +192,7 @@ namespace PlayerScripts
             if (aimTime <= 0)
             {
                 lockedOn = true;
+                reticle.GetComponent<SpriteRenderer>().enabled = false;
             }
 
             if (GetNearestTarget() == null) return;
