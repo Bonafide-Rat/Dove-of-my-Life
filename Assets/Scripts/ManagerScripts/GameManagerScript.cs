@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
@@ -13,8 +14,9 @@ public class GameManagerScript : MonoBehaviour
 
     public GameObject gameOverUi;
     public GameObject levelPassedUi;
+    public GameObject pausedUI;
     public TextMeshProUGUI scoreText;
-  
+    public static bool GamePaused;
     public static bool playerInCover;
 
     public Vector2 checkpointPos;
@@ -44,6 +46,9 @@ public class GameManagerScript : MonoBehaviour
         {
             respawn();
         }
+
+        if (!Input.GetKeyDown(KeyCode.Escape) || SceneManager.GetActiveScene().buildIndex == 0) return;
+        PauseUnpauseGame();
     }
 
     public void gameOver(){
@@ -64,14 +69,13 @@ public class GameManagerScript : MonoBehaviour
         checkpointPos = newPos;
         if (FollowPathObject.pauseWaypoints.Any() && !FollowPathObject.paused)
         {
-            Debug.Log("Old NextPause: " + FollowPathObject.nextPauseWaypoint);
+            Debug.Log("PauseCheck");
             if (FollowPathObject.nextPauseWaypoint != FollowPathObject.pauseWaypoints.Length - 1 && updateNextPause)
             {
                 FollowPathObject.nextPauseWaypoint += 1;
             }
             FollowPathObject.resetIndex = Array.IndexOf(FollowPathObject.waypoints, FollowPathObject.pauseWaypoints[FollowPathObject.nextPauseWaypoint]);
             FollowPathObject.transform.position = FollowPathObject.waypoints[FollowPathObject.resetIndex].transform.position;
-            Debug.Log("New NextPause: " + FollowPathObject.nextPauseWaypoint);
         }
     }
 
@@ -85,6 +89,23 @@ public class GameManagerScript : MonoBehaviour
         {
             FollowPathObject.ResetToInitialWaypoint(checkpointPos);
         }
+    }
+
+    public void PauseUnpauseGame()
+    {
+        if (GamePaused == false)
+        {
+            Time.timeScale = 0;
+            pausedUI.SetActive(true);
+            GamePaused = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pausedUI.SetActive(false);
+            GamePaused = false;
+        }
+        
     }
 
 
