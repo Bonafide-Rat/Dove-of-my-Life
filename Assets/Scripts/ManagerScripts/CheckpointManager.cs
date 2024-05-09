@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CheckpointManager : MonoBehaviour
 {
     public GameManagerScript gameManager;
     public bool isUpdateNextEnemyResetPoint;
     private bool isTriggered;
+    public bool setsMusic;
+    public MusicManager musicManager;
+    public AudioClip musicToPlay;
 
     private void Awake()
     {
@@ -20,6 +24,10 @@ public class CheckpointManager : MonoBehaviour
         {
             gameManager.UpdateCheckpoint(transform.position, isUpdateNextEnemyResetPoint);
             isTriggered = true;
+            if (setsMusic)
+            {
+                StartCoroutine(musicManager.SetMusic(musicToPlay, 3f));
+            }
         }
     }
 

@@ -9,6 +9,7 @@ public class FlipFlopPlatform : MonoBehaviour
     [SerializeField] private HingeJoint2D joint2D;
     private JointMotor2D jointMotor;
     [SerializeField] private float switchBuffer;
+    private Collider2D platCollider;
     private bool isPlayerOffPlatform;
     private float switchBufferCache;
     private float startMotorSpeed;
@@ -18,6 +19,7 @@ public class FlipFlopPlatform : MonoBehaviour
 
     void Start()
     {
+        platCollider = GetComponent<Collider2D>();
         startAngle = joint2D.jointAngle;
         jointMotor = joint2D.motor;
         startMotorSpeed = jointMotor.motorSpeed;
@@ -81,6 +83,11 @@ public class FlipFlopPlatform : MonoBehaviour
         switchBuffer -= Time.deltaTime;
         if (!(switchBuffer <= 0)) return;
         FlipPlatform();
+    }
+
+    private void HandleCollisions()
+    {
+        platCollider.enabled = joint2D.jointAngle <= 1 || Mathf.Approximately(joint2D.jointAngle, 180);
     }
 
     private void ResetPlatform()
