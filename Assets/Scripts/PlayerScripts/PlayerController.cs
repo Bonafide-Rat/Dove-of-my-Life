@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
 
     private bool insideAreaEffector = false;
 
+    private Animator playerAnimator;
+    private PlayerAudioController audioController;
+
     // Assign values from stats script
     private void Awake()
     {
@@ -57,6 +60,9 @@ public class PlayerController : MonoBehaviour
         if (groundCheck == null) {
             Debug.LogError("GroundCheck is not assigned.", this);
         }
+
+        playerAnimator = GetComponent<Animator>();
+        audioController = GetComponent<PlayerAudioController>();
     }
 
     void Update()
@@ -64,6 +70,18 @@ public class PlayerController : MonoBehaviour
         getInput();
         handleJump();
         Flip();
+        
+        playerAnimator.SetBool("Moving", (Input.GetAxisRaw("Horizontal") != 0));
+        playerAnimator.SetBool("Jumping", !IsGrounded());
+
+        if (IsGrounded() && (Input.GetAxisRaw("Horizontal") != 0))
+        {
+            audioController.PlayAudio();
+        }
+        else
+        {
+            audioController.StopAudio();
+        }
     }
 
     private void FixedUpdate()
@@ -186,6 +204,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Not a Jump");
                 break;
         }
+        audioController.Jump();
         jumpCount = jumpType;
         isGliding = false;
     }

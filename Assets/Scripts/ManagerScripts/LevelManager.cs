@@ -2,27 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public static int TargetScore;
+    public static float TargetScore;
     [SerializeField]private int setTargetScore;
-    [SerializeField] private TextMeshProUGUI scoretext;
-    public static int CurrentScore;
+    [SerializeField] private Image scoreFillbar;
+    [SerializeField] private Image scoreBorder;
+    [SerializeField] private Sprite maxScoreBorder;
+    private bool maxScoreReached;
+    public static Image PollinationBar;
+    public static float CurrentScore;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        PollinationBar = scoreFillbar;
         TargetScore = setTargetScore;
         CurrentScore = 0;
+        scoreFillbar.fillAmount = CurrentScore;
         UpdateUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateUI();
+        if (!maxScoreReached && CurrentScore >= TargetScore)
+        {
+            scoreBorder.sprite = maxScoreBorder;
+            maxScoreReached = true;
+        }
     }
 
     public static void AddScore(int amount)
@@ -30,11 +41,13 @@ public class LevelManager : MonoBehaviour
         if (CurrentScore < TargetScore)
         {
             CurrentScore += amount;
+            UpdateUI();
         }
     }
 
-    private void UpdateUI()
+    public static void UpdateUI()
     {
-        scoretext.text = $"{CurrentScore}/{TargetScore}";
+        Debug.Log(CurrentScore);
+        PollinationBar.fillAmount = CurrentScore / TargetScore;
     }
 }
