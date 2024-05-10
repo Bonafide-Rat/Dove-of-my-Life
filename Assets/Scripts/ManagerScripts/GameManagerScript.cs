@@ -18,7 +18,8 @@ public class GameManagerScript : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public static bool GamePaused;
     public static bool playerInCover;
-
+    private bool playerIsResetting;
+    public float timeToResetPosition;
     public Vector2 checkpointPos;
 
     public delegate void OnRespawnDelegate();
@@ -82,14 +83,50 @@ public class GameManagerScript : MonoBehaviour
 
     public void respawn()
     {
-        Player.transform.position = checkpointPos;
-
+        //Player.transform.position = checkpointPos;
+        if (playerIsResetting) return;
         OnRespawn?.Invoke();
+
+        
+        
+        StartCoroutine(MovePlayerToCheckpoint());
         // FollowPathObject.ResetToLastWaypoint(); // Reset the path of the following object
         if (FollowPathObject != null)
         {
             FollowPathObject.ResetToInitialWaypoint(checkpointPos);
         }
+    }
+
+    IEnumerator MovePlayerToCheckpoint()
+    {
+        if (Player == null) yield break;
+        playerIsResetting = true;
+        Collider2D[] playerColliders = Player.GetComponentsInChildren<Collider2D>();
+
+        foreach (var collider in playerColliders)
+        {
+            collider.enabled = false;
+        }
+
+        Vector3 playerInitalPosition = Player.transform.position;
+        float resetProgress = 0f;
+
+        while (resetProgress < timeToResetPosition)
+        {
+            resetProgress += Time.deltaTime;
+            Player.transform.position =
+                Vector3.Lerp(playerInitalPosition, checkpointPos, resetProgress / timeToResetPosition);
+            yield return null;
+        }
+
+        Player.transform.position = checkpointPos;
+        foreach (var collider in playerColliders)
+        {
+            collider.enabled = true;
+        }
+
+        playerIsResetting = false;
+
     }
 
     public void PauseUnpauseGame()
