@@ -26,6 +26,11 @@ public class FlipFlopPlatform : MonoBehaviour
         switchBufferCache = switchBuffer;
         GameManagerScript.OnRespawn += StartReset;
     }
+    private void OnDestroy()
+    {
+        GameManagerScript.OnRespawn -= StartReset;
+    }
+    
 
     // Update is called once per frame
     void Update()

@@ -74,6 +74,11 @@ namespace PlayerScripts
         {
             GameManagerScript.OnRespawn += ResetFollowers;
         }
+        
+        private void OnDestroy()
+        {
+            GameManagerScript.OnRespawn -= ResetFollowers;
+        }
 
         void Start()
         {

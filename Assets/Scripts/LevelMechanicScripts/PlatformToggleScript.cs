@@ -37,6 +37,11 @@ public class PlatformToggleScript : MonoBehaviour
         GameManagerScript.OnRespawn += Reset;
         audioSource = GetComponent<AudioSource>();
     }
+    
+    private void OnDestroy()
+    {
+        GameManagerScript.OnRespawn -= Reset;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -124,6 +129,7 @@ public class PlatformToggleScript : MonoBehaviour
         if (isTriggered)
         {
             TogglePlatforms();
+            LevelManager.AddScore(-1);
         }
         animator.SetBool("UndoPlatform", true);
         isTriggered = false;
