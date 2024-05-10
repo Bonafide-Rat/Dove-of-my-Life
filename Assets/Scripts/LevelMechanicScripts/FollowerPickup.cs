@@ -16,6 +16,11 @@ public class FollowerPickup : MonoBehaviour
         GameManagerScript.OnRespawn += Reset;
     }
 
+    private void OnDestroy()
+    {
+        GameManagerScript.OnRespawn -= Reset;
+    }
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
