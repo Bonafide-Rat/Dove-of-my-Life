@@ -33,7 +33,7 @@ public class MusicManager : MonoBehaviour
         StartCoroutine(Fade(duration, isFadeIn));
     }
 
-    public IEnumerator SetMusic(AudioClip track, float fadeDuration)
+    public IEnumerator SetMusic(AudioClip track, float fadeDuration, float volume)
     {
         if (audioPlayer.isPlaying)
         {
@@ -42,6 +42,7 @@ public class MusicManager : MonoBehaviour
             audioPlayer.clip = track;
             Debug.Log("starting Fade In");
             HandleFade(fadeDuration,true);
+            audioPlayer.volume = volume;
             audioPlayer.Play();
         }
     }

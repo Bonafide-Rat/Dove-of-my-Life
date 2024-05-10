@@ -11,6 +11,9 @@ public class CheckpointManager : MonoBehaviour
     public bool setsMusic;
     public MusicManager musicManager;
     public AudioClip musicToPlay;
+    [SerializeField] private float musicTransitionTime;
+    [Range(0,1)]
+    [SerializeField] private float musicVolumeSet;
 
     private void Awake()
     {
@@ -26,7 +29,7 @@ public class CheckpointManager : MonoBehaviour
             isTriggered = true;
             if (setsMusic)
             {
-                StartCoroutine(musicManager.SetMusic(musicToPlay, 3f));
+                StartCoroutine(musicManager.SetMusic(musicToPlay, musicTransitionTime / 2,musicVolumeSet));
             }
         }
     }

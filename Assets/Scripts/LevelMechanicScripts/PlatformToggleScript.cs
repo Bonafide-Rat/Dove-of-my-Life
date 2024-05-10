@@ -12,6 +12,7 @@ public class PlatformToggleScript : MonoBehaviour
     [SerializeField] private bool isTimed;
     private AudioSource audioSource;
     private bool isTriggered;
+    private bool hasAwardedPoint;
     [SerializeField]private bool isMakeAppear;
     private Animator animator;
     void Awake()
@@ -74,7 +75,11 @@ public class PlatformToggleScript : MonoBehaviour
             TogglePlatforms();
             animator.SetTrigger("Triggered");
             animator.SetBool("BasicPlatform", true);
-            LevelManager.AddScore(1);
+            if (!hasAwardedPoint)
+            {
+                LevelManager.AddScore(1);
+                hasAwardedPoint = true;
+            }
         }
     }
 
@@ -129,7 +134,6 @@ public class PlatformToggleScript : MonoBehaviour
         if (isTriggered)
         {
             TogglePlatforms();
-            LevelManager.AddScore(-1);
         }
         animator.SetBool("UndoPlatform", true);
         isTriggered = false;
