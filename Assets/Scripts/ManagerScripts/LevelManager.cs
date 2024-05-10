@@ -47,7 +47,6 @@ public class LevelManager : MonoBehaviour
 
     public static void UpdateUI()
     {
-        Debug.Log(CurrentScore);
         PollinationBar.fillAmount = CurrentScore / TargetScore;
     }
 }
