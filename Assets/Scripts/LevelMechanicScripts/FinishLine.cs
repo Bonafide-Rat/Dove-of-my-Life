@@ -5,22 +5,19 @@ using UnityEngine;
 public class FinishLine : MonoBehaviour
 {
     public GameManagerScript gameManager;
+
+    private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     { 
         if (collider.CompareTag("Player") && LevelManager.CurrentScore == LevelManager.TargetScore)
         {
+            audioManager.PlaySFX(audioManager.levelComplete);
             gameManager.LevelPassed();
         }
         else

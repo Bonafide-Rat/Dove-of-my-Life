@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
     private void PerformJump(int jumpType)
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-
+        
         switch (jumpType)
         {
             case 1: // Standard Jump
