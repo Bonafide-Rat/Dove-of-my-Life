@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator playerAnimator;
     private PlayerAudioController audioController;
+    private AudioManager audioManager;
 
     // Assign values from stats script
     private void Awake()
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerAnimator = GetComponent<Animator>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         audioController = GetComponent<PlayerAudioController>();
     }
 
@@ -114,6 +116,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && !birdGrounded)
         {
             isGliding = !isGliding; // Toggle gliding state
+            if (isGliding) {audioManager.PlaySFX(audioManager.glide);}
         }
 
         // Optionally, reset gliding when grounded or under other conditions
@@ -204,7 +207,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Not a Jump");
                 break;
         }
-        audioController.Jump();
+        audioManager.PlaySFX(audioManager.jump);
         jumpCount = jumpType;
         isGliding = false;
     }
@@ -267,6 +270,7 @@ public class PlayerController : MonoBehaviour
         {
             insideAreaEffector = true;
             jumpCount = 0;
+            audioManager.PlaySFX(audioManager.windWoosh);
         }
     }
 
