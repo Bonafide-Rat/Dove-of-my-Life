@@ -22,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
     public float timeToResetPosition;
     public Vector2 checkpointPos;
 
+    private AudioManager audioManager;
     public delegate void OnRespawnDelegate();
 
     public static event OnRespawnDelegate OnRespawn;
@@ -30,6 +31,7 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         checkpointPos = transform.position;
         PlayerController.isFacingRight = true;
         playerInCover = false;
@@ -84,6 +86,7 @@ public class GameManagerScript : MonoBehaviour
 
     public void respawn()
     {
+        audioManager.PlaySFX(audioManager.respawn);
         //Player.transform.position = checkpointPos;
         if (playerIsResetting) return;
         OnRespawn?.Invoke();

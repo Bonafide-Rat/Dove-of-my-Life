@@ -50,8 +50,8 @@ MonoBehaviour:
   SFXSource: {fileID: 9107893588118270562}
   bgm: {fileID: 0}
   chaseBGM: {fileID: 0}
-  respawn: {fileID: 0}
-  checkpoint: {fileID: 8300000, guid: ccad6238b3ccc4e45a903d0d0a267601, type: 3}
+  respawn: {fileID: 8300000, guid: a93a7892537748e4eb02f5856b80dd78, type: 3}
+  checkpoint: {fileID: 8300000, guid: 9693d41b2279bdd408dabcea3c6a8ef8, type: 3}
   jump: {fileID: 8300000, guid: b0d774ff78dc2764e85107bc1adbc412, type: 3}
   glide: {fileID: 8300000, guid: 84741a3c2e9319f44b23afe25013b9da, type: 3}
   windWoosh: {fileID: 8300000, guid: 8c743dcccfa86f5458e283d4cfceb7d6, type: 3}

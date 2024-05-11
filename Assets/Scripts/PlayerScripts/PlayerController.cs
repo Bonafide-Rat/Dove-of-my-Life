@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
         // Record the time when jump button is pressed for the jump buffer
         if (Input.GetButtonDown("Jump"))
         {
+            audioManager.PlaySFX(audioManager.jump);
             lastJumpTime = Time.time;
             isGliding = false;
         }
@@ -207,7 +208,6 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Not a Jump");
                 break;
         }
-        audioManager.PlaySFX(audioManager.jump);
         jumpCount = jumpType;
         isGliding = false;
     }

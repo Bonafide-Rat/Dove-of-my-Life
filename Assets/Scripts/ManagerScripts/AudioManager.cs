@@ -28,6 +28,9 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         if (clip == glide){ SFXSource.PlayOneShot(clip, 2.0f);}
+        
+        if (clip == jump){ SFXSource.PlayOneShot(clip, 0.5f);}
+        
         SFXSource.PlayOneShot(clip);
     }
 }
