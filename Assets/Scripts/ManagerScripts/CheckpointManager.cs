@@ -15,9 +15,11 @@ public class CheckpointManager : MonoBehaviour
     [Range(0,1)]
     [SerializeField] private float musicVolumeSet;
 
+    private AudioManager audioManager;
+
     private void Awake()
     {
-        // gameManager = GetComponent<GameManagerScript>(); // not necessary at the moment - do not uncomment.
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
 
@@ -25,6 +27,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !isTriggered)
         {
+            audioManager.PlaySFX(audioManager.checkpoint);
             gameManager.UpdateCheckpoint(transform.position, isUpdateNextEnemyResetPoint);
             isTriggered = true;
             if (setsMusic)

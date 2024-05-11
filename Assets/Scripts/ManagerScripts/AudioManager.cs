@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip jump;
     public AudioClip glide;
     public AudioClip windWoosh;
-    
+    public AudioClip levelComplete;
     
     // Start is called before the first frame update
     void Start()
