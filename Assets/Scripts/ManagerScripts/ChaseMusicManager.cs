@@ -15,7 +15,7 @@ public class ChaseMusicManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Entered Chase Region");
+            // Debug.Log("Entered Chase Region");
             // Pause whatever BGM, and play chase music.
             audioManager.PauseMusic();
             audioManager.PlayMusic(audioManager.chaseBGM);
@@ -26,7 +26,7 @@ public class ChaseMusicManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Exiting and resetting music...");
+            // Debug.Log("Exiting and resetting music...");
             // Stop chase music and play regular BGM.
             audioManager.PauseMusic();
             audioManager.PlayMusic(audioManager.bgm);
