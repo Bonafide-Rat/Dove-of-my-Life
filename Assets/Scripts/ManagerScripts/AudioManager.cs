@@ -21,16 +21,37 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (bgm != null) {musicSource.clip = bgm;}
+        if (bgm != null) { musicSource.clip = bgm; }
         musicSource.Play();
+        musicSource.loop = true;
+    }
+
+    void update()
+    {
+        // If music is no longer playing, play the bgm again.
+        if (!musicSource.isPlaying) { musicSource.clip = bgm; }
+        musicSource.Play();
+        musicSource.loop = true;
     }
 
     public void PlaySFX(AudioClip clip)
     {
+        // Can hard code the volume mixing here
         if (clip == glide){ SFXSource.PlayOneShot(clip, 2.0f);}
         
         if (clip == jump){ SFXSource.PlayOneShot(clip, 0.5f);}
         
         SFXSource.PlayOneShot(clip);
     }
+
+    public void PlayMusic(AudioClip clip)
+    {
+        musicSource.PlayOneShot(clip);
+    }
+
+    public void PauseMusic()
+    {
+        if (musicSource.isPlaying) { musicSource.Stop(); }
+    }
+    
 }

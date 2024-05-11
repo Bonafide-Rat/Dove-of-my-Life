@@ -10,14 +10,16 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform spawnPosition;
     [SerializeField] GameManagerScript gameManager;
     private bool isTriggered;
+    private AudioManager audioManager;
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         GameManagerScript.OnRespawn += ResetTrigger;
     }
 
     void OnTriggerEnter2D(Collider2D other)
-    {    
+    {
         //Debug.Log(isTriggered);
         if (!other.CompareTag("Player")) return;
         if (!followPathObject.gameObject.activeSelf)
