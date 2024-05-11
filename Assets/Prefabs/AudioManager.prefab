@@ -52,7 +52,6 @@ MonoBehaviour:
   chaseBGM: {fileID: 0}
   respawn: {fileID: 0}
   checkpoint: {fileID: 0}
-  beePickup: {fileID: 8300000, guid: ea754da7eff6eb34aa47ec245c05537c, type: 3}
   jump: {fileID: 8300000, guid: 6433640d8a22cab4eb291b5a5c1db86a, type: 3}
   glide: {fileID: 0}
   windWoosh: {fileID: 8300000, guid: 8c743dcccfa86f5458e283d4cfceb7d6, type: 3}
@@ -102,7 +101,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.208
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
