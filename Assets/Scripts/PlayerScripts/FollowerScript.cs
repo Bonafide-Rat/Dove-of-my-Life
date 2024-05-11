@@ -45,7 +45,7 @@ public class FollowersScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("TriggerZone"))
+        if (!other.CompareTag("TriggerZone") || !other.CompareTag("WindZone"))
         {
             Destroy(gameObject);
         }
@@ -53,7 +53,7 @@ public class FollowersScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (!other.gameObject.CompareTag("TriggerZone"))
+        if (!other.gameObject.CompareTag("TriggerZone") || !other.gameObject.CompareTag("WindZone"))
         {
             Destroy(gameObject);
         }
