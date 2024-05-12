@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Image scoreFillbar;
     [SerializeField] private Image scoreBorder;
     [SerializeField] private Sprite maxScoreBorder;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    public static TextMeshProUGUI ScoreText;
     private bool maxScoreReached;
     public static Image PollinationBar;
     public static float CurrentScore;
@@ -20,6 +22,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         PollinationBar = scoreFillbar;
+        ScoreText = scoreText;
         TargetScore = setTargetScore;
         CurrentScore = 0;
         scoreFillbar.fillAmount = CurrentScore;
@@ -48,5 +51,6 @@ public class LevelManager : MonoBehaviour
     public static void UpdateUI()
     {
         PollinationBar.fillAmount = CurrentScore / TargetScore;
+        ScoreText.text = $"{CurrentScore}/{TargetScore}";
     }
 }

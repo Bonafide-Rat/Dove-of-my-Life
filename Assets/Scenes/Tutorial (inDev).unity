@@ -1551,6 +1551,7 @@ MonoBehaviour:
   scoreFillbar: {fileID: 145738313}
   scoreBorder: {fileID: 2121669379}
   maxScoreBorder: {fileID: -1339584489, guid: 71895739f066462458e8fa43a4f16499, type: 3}
+  scoreText: {fileID: 694994650}
 --- !u!114 &519420037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2215,6 +2216,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 240145186, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
   m_PrefabInstance: {fileID: 694994645}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &694994650 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5057495963744460727, guid: ddbfd0461c75bbe448d9938d61a24a9e, type: 3}
+  m_PrefabInstance: {fileID: 694994645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &771979471
 PrefabInstance:
   m_ObjectHideFlags: 0

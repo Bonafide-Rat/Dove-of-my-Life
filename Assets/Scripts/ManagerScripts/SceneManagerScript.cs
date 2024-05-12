@@ -10,6 +10,7 @@ public class SceneManagerScript : MonoBehaviour
     void Start()
     {
         currSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
