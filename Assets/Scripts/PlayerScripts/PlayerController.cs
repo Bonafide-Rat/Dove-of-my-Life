@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAudioController audioController;
     private AudioManager audioManager;
 
+    public ParticleSystem Dust;
     // Assign values from stats script
     private void Awake()
     {
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
         // Record the time when jump button is pressed for the jump buffer
         if (Input.GetButtonDown("Jump"))
         {
+            Dust.Play();
             audioManager.PlaySFX(audioManager.jump);
             lastJumpTime = Time.time;
             isGliding = false;
@@ -294,7 +296,14 @@ public class PlayerController : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+
+            if (IsGrounded())
+            {
+                Dust.Play();
+            }
         }
+
+        
     }
 
 #if UNITY_EDITOR
