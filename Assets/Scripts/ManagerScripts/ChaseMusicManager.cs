@@ -14,25 +14,23 @@ public class ChaseMusicManager : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isChasing)
+        if (other.CompareTag("Player"))
         {
              Debug.Log("Entered Chase Region");
             // Pause whatever BGM, and play chase music.
             audioManager.PauseMusic();
             audioManager.PlayMusic(audioManager.chaseBGM, 1f);
-            isChasing = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && isChasing)
+        if (other.CompareTag("Player"))
         {
              Debug.Log("Exiting and resetting music...");
             // Stop chase music and play regular BGM.
             audioManager.PauseMusic();
             audioManager.PlayMusic(audioManager.bgm, 1f);
-            isChasing = false;
         }
     }
 }

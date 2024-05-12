@@ -14,7 +14,10 @@ public class BackgroundChangerScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             backgroundToActive.SetActive(!backgroundToActive.activeSelf);
-            audioManager.SetSecondBGM();
+            if (audioManager != null)
+            {
+                audioManager.SetSecondBGM();
+            }
         }
     }
 }
