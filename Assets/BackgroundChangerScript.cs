@@ -7,7 +7,9 @@ using UnityEngine.UIElements;
 public class BackgroundChangerScript : MonoBehaviour
 {
     [SerializeField] private GameObject backgroundToActive;
-    [SerializeField] private AudioManager audioManager ;
+
+    [SerializeField] private AudioManager audioManager;
+
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other)
     {

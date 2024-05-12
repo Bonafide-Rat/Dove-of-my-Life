@@ -99,8 +99,8 @@ public class AudioManager : MonoBehaviour
 
     public void SetSecondBGM()
     {
-        bgm = secondBgm;
-        musicSource.clip = bgm;
+        // bgm = secondBgm;
+        musicSource.clip = secondBgm;
         musicSource.Play();
     }
     
