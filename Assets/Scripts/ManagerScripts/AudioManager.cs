@@ -18,12 +18,19 @@ public class AudioManager : MonoBehaviour
     public AudioClip windWoosh;
     public AudioClip levelComplete;
     
+    private bool isFading;
+
+    private float fadeProgress;
+    
+    private float targetVolume;
+    
     // Start is called before the first frame update
     void Start()
     {
         if (bgm != null) { musicSource.clip = bgm; }
         musicSource.Play();
         musicSource.loop = true;
+        targetVolume = musicSource.volume;
     }
 
     void update()
@@ -44,14 +51,49 @@ public class AudioManager : MonoBehaviour
         SFXSource.PlayOneShot(clip);
     }
 
-    public void PlayMusic(AudioClip clip)
+    public void PlayMusic(AudioClip clip, float fadeDuration)
     {
-        musicSource.PlayOneShot(clip);
+        StartCoroutine(SetMusic(clip, fadeDuration, targetVolume));
+        //musicSource.PlayOneShot(clip);
     }
 
     public void PauseMusic()
     {
         if (musicSource.isPlaying) { musicSource.Stop(); }
+    }
+    
+    
+    private void HandleFade(float duration, bool isFadeIn)
+    {
+        if (isFading) return;
+        fadeProgress = 0f;
+        isFading = true;
+        StartCoroutine(Fade(duration, isFadeIn));
+    }
+
+    public IEnumerator SetMusic(AudioClip track, float fadeDuration, float volume)
+    {
+            HandleFade(fadeDuration, false);
+            yield return new WaitForSeconds(fadeDuration);
+            musicSource.clip = track;
+            HandleFade(fadeDuration,true);
+            musicSource.volume = volume;
+            musicSource.Play();
+    }
+
+    private IEnumerator Fade(float duration, bool isFadeIn)
+    {
+        float startVolume = musicSource.volume;
+        float endVolume = isFadeIn ? targetVolume : 0.0f;
+
+        while (fadeProgress < 1.0f)
+        {
+            fadeProgress += Time.deltaTime / duration;
+            musicSource.volume = Mathf.Lerp(startVolume, endVolume, fadeProgress);
+            yield return null;
+        }
+        musicSource.volume = endVolume;
+        isFading = false;
     }
     
 }

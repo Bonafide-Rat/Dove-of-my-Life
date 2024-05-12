@@ -30,10 +30,6 @@ public class CheckpointManager : MonoBehaviour
             audioManager.PlaySFX(audioManager.checkpoint);
             gameManager.UpdateCheckpoint(transform.position, isUpdateNextEnemyResetPoint);
             isTriggered = true;
-            if (setsMusic)
-            {
-                StartCoroutine(musicManager.SetMusic(musicToPlay, musicTransitionTime / 2,musicVolumeSet));
-            }
         }
     }
 
