@@ -17171,7 +17171,7 @@ MonoBehaviour:
   levelPassedUi: {fileID: 1325149691}
   pausedUI: {fileID: 1778153860}
   scoreText: {fileID: 1778153863}
-  timeToResetPosition: 0.5
+  timeToResetPosition: 0.05
   checkpointPos: {x: 0, y: 0}
 --- !u!4 &1689121425
 Transform:
