@@ -12438,7 +12438,7 @@ PrefabInstance:
       objectReference: {fileID: 1420209145}
     - target: {fileID: 3138235352212586844, guid: abc1f77456816a44c9ac43c78369f03a, type: 3}
       propertyPath: zoomOutSize
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3138235352212586845, guid: abc1f77456816a44c9ac43c78369f03a, type: 3}
       propertyPath: m_RootOrder
