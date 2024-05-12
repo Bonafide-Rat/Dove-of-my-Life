@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip glide;
     public AudioClip windWoosh;
     public AudioClip levelComplete;
+    public AudioClip secondBgm;
     
     private bool isFading;
 
@@ -94,6 +95,13 @@ public class AudioManager : MonoBehaviour
         }
         musicSource.volume = endVolume;
         isFading = false;
+    }
+
+    public void SetSecondBGM()
+    {
+        bgm = secondBgm;
+        musicSource.clip = bgm;
+        musicSource.Play();
     }
     
 }
