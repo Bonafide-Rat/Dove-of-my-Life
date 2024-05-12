@@ -1340,6 +1340,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1360474647, guid: caaeb550d697d1244b9508d14e628243, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.2
@@ -1354,11 +1358,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.6
+      value: -19.2
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038128, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_LocalPosition.z
