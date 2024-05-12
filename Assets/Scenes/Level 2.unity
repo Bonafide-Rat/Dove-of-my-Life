@@ -34518,6 +34518,10 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 9107893586862722105, guid: 62a7ab3cfb6270c4391b188ad0b5de4d, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107893586862722105, guid: 62a7ab3cfb6270c4391b188ad0b5de4d, type: 3}
       propertyPath: m_Volume
       value: 0.12
       objectReference: {fileID: 0}
@@ -34526,8 +34530,12 @@ PrefabInstance:
       value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 9107893588118270562, guid: 62a7ab3cfb6270c4391b188ad0b5de4d, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107893588118270562, guid: 62a7ab3cfb6270c4391b188ad0b5de4d, type: 3}
       propertyPath: m_Volume
-      value: 0.35
+      value: 0.18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

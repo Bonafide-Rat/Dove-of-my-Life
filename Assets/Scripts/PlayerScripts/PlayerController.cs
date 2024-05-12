@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     private bool insideAreaEffector = false;
 
-    private Animator playerAnimator;
+    public Animator playerAnimator;
     private PlayerAudioController audioController;
     private AudioManager audioManager;
 
@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("GroundCheck is not assigned.", this);
         }
 
-        playerAnimator = GetComponent<Animator>();
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         audioController = GetComponent<PlayerAudioController>();
     }
