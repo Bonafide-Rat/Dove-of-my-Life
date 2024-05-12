@@ -1252,22 +1252,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 496560576, guid: caaeb550d697d1244b9508d14e628243, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360474647, guid: caaeb550d697d1244b9508d14e628243, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360474648, guid: caaeb550d697d1244b9508d14e628243, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.541
-      objectReference: {fileID: 0}
-    - target: {fileID: 8822157639541563702, guid: caaeb550d697d1244b9508d14e628243, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.2
-      objectReference: {fileID: 0}
     - target: {fileID: 8822157640279038089, guid: caaeb550d697d1244b9508d14e628243, type: 3}
       propertyPath: m_Name
       value: Birb
@@ -3746,6 +3730,14 @@ PrefabInstance:
     - target: {fileID: 2425846892854137494, guid: 70ea563e2af9d994d8843b6afa47b821, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309725415806016982, guid: 70ea563e2af9d994d8843b6afa47b821, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309725415806016982, guid: 70ea563e2af9d994d8843b6afa47b821, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1693946861
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

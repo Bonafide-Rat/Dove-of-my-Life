@@ -15998,7 +15998,7 @@ MonoBehaviour:
   setTargetScore: 6
   scoreFillbar: {fileID: 1778153862}
   scoreBorder: {fileID: 1778153861}
-  maxScoreBorder: {fileID: 37777049, guid: 71895739f066462458e8fa43a4f16499, type: 3}
+  maxScoreBorder: {fileID: -1339584489, guid: 71895739f066462458e8fa43a4f16499, type: 3}
   scoreText: {fileID: 1545421996}
 --- !u!114 &1420209154
 MonoBehaviour:
