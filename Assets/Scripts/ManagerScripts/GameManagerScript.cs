@@ -5,11 +5,12 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
-    [SerializeField] GameObject Player;
+    [FormerlySerializedAs("Player")] [SerializeField] GameObject player;
     [SerializeField] FollowPath FollowPathObject;
 
     public GameObject gameOverUi;
@@ -27,12 +28,16 @@ public class GameManagerScript : MonoBehaviour
 
     public static event OnRespawnDelegate OnRespawn;
 
+    private void Awake()
+    {
+        player = GameObject.FindWithTag("Player");
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindWithTag("Player");
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        checkpointPos = transform.position;
+        checkpointPos = player.transform.position;
         PlayerController.isFacingRight = true;
         playerInCover = false;
         gameOverUi.SetActive(false);
@@ -103,27 +108,27 @@ public class GameManagerScript : MonoBehaviour
 
     IEnumerator MovePlayerToCheckpoint()
     {
-        if (Player == null) yield break;
+        if (player == null) yield break;
         playerIsResetting = true;
-        Collider2D[] playerColliders = Player.GetComponentsInChildren<Collider2D>();
+        Collider2D[] playerColliders = player.GetComponentsInChildren<Collider2D>();
 
         foreach (var collider in playerColliders)
         {
             collider.enabled = false;
         }
 
-        Vector3 playerInitalPosition = Player.transform.position;
+        Vector3 playerInitalPosition = player.transform.position;
         float resetProgress = 0f;
 
         while (resetProgress < timeToResetPosition)
         {
             resetProgress += Time.deltaTime;
-            Player.transform.position =
+            player.transform.position =
                 Vector3.Lerp(playerInitalPosition, checkpointPos, resetProgress / timeToResetPosition);
             yield return null;
         }
 
-        Player.transform.position = checkpointPos;
+        player.transform.position = checkpointPos;
         foreach (var collider in playerColliders)
         {
             collider.enabled = true;
