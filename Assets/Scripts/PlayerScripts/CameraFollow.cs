@@ -24,17 +24,15 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        moveInput = Input.GetAxisRaw("Vertical");
-        yPosition = target.position.y;
+        //moveInput = Input.GetAxisRaw("Vertical");
+        //yPosition = target.position.y;
 
-        if (moveInput == 0){
-            CameraUpdate();
-        }
+        CameraUpdate();
 
-        if (!IsMoving() && IsGrounded())
+        /*if (!IsMoving() && IsGrounded())
         {
             ManualLook();
-        }
+        }*/
     }
 
 
@@ -48,14 +46,14 @@ public class CameraFollow : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
     }
 
-    private void ManualLook()
+    /*private void ManualLook()
     {
         Vector3 newPosition = transform.position + Vector3.up * moveInput * manualSpeed * Time.deltaTime;
         if (moveInput != 0){
             newPosition.y = Mathf.Clamp(newPosition.y, yPosition + DownManualOffset, yPosition + UpwardsManualOffset);
         }
         transform.position = newPosition;
-    }
+    }*/
 
     private bool IsGrounded() 
     {
