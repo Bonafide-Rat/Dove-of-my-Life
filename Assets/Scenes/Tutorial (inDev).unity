@@ -3689,7 +3689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2425846892854137482, guid: 70ea563e2af9d994d8843b6afa47b821, type: 3}
       propertyPath: m_TagString
-      value: Environment
+      value: TriggerZone
       objectReference: {fileID: 0}
     - target: {fileID: 2425846892854137494, guid: 70ea563e2af9d994d8843b6afa47b821, type: 3}
       propertyPath: m_RootOrder

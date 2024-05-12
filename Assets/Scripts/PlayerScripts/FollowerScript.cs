@@ -68,9 +68,5 @@ public class FollowersScript : MonoBehaviour
         {
             transform.position = Vector2.Lerp(transform.position,followers[myIndex - 1].transform.position + new Vector3(Random.Range(-jitterMagnitude, jitterMagnitude),Random.Range(-jitterMagnitude, jitterMagnitude) ),mainScript.lerpTime);
         }
-        else
-        {
-            Debug.Log(myIndex);
-        }
     }
 }
