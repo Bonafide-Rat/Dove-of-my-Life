@@ -34523,11 +34523,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9107893586862722105, guid: 62a7ab3cfb6270c4391b188ad0b5de4d, type: 3}
       propertyPath: m_Volume
-      value: 0.12
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9107893586862722105, guid: 62a7ab3cfb6270c4391b188ad0b5de4d, type: 3}
       propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
-      value: 0.97
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9107893588118270562, guid: 62a7ab3cfb6270c4391b188ad0b5de4d, type: 3}
       propertyPath: m_Pitch
@@ -34535,7 +34535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9107893588118270562, guid: 62a7ab3cfb6270c4391b188ad0b5de4d, type: 3}
       propertyPath: m_Volume
-      value: 0.18
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
