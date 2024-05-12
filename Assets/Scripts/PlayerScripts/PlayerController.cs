@@ -43,7 +43,8 @@ public class PlayerController : MonoBehaviour
     private PlayerAudioController audioController;
     private AudioManager audioManager;
 
-    public ParticleSystem Dust;
+    public ParticleSystem dust;
+    public ParticleSystem smallerDust;
     // Assign values from stats script
     private void Awake()
     {
@@ -103,11 +104,15 @@ public class PlayerController : MonoBehaviour
     private void getInput()
     {
         movementInput = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y);
-
+        if (Input.GetAxisRaw("Horizontal") != 0 && IsGrounded())
+        {
+            smallerDust.Play();
+}
+        
         // Record the time when jump button is pressed for the jump buffer
         if (Input.GetButtonDown("Jump"))
         {
-            Dust.Play();
+            dust.Play();
             audioManager.PlaySFX(audioManager.jump);
             lastJumpTime = Time.time;
             isGliding = false;
@@ -299,7 +304,7 @@ public class PlayerController : MonoBehaviour
 
             if (IsGrounded())
             {
-                Dust.Play();
+                dust.Play();
             }
         }
 
